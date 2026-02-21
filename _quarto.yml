@@ -1,0 +1,48 @@
+project:
+  type: book
+  output-dir: docs
+
+lang: pt-BR
+
+book:
+  title: "Bases de dados institucionais brasileiras"
+  subtitle: "conceitos, métodos e aplicações em R"
+  author: "Jorge Ubirajara Pedreira Junior"
+  language: pt
+  page-navigation: true
+  search: true
+  chapters:
+    - index.qmd
+
+    - part: "PARTE 1: CENSO DEMOGRÁFICO"
+      chapters:
+        - 1-conceitos-e-metodos.qmd
+        - 2-agregados-setor-censitario.qmd
+        - 3-microdados.qmd
+        - 4-grade-estatistica.qmd
+        - 5-cnefe.qmd
+
+    - references.qmd
+
+format:
+  html:
+    theme: default
+    css: custom.css
+    number-sections: true
+    toc: true
+    toc-depth: 4
+    toc-title: "Índice do Capítulo"
+    link-external-newwindow: true
+
+bibliography: references.bib
+
+crossref:
+  fig-title: "Figura"
+  fig-prefix: "Figura"
+  tbl-title: "Tabela"
+  tbl-prefix: "Tabela"
+  eq-title: "Equação"
+  eq-prefix: "Equação"
+
+execute:
+  freeze: auto

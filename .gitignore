@@ -1,0 +1,16 @@
+# Quarto
+/.quarto/
+/docs/
+/_freeze/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Sources (materiais de aula — não rastreados)
+sources/
+
+# Instruções do Claude (não rastreadas)
+CLAUDE.md
