@@ -1,9 +1,10 @@
 # Quarto
 /.quarto/
 /_freeze/
-*_files/
+/*_files/
 *.html
 !docs/**/*.html
+!docs/**/*_files/
 **/*.quarto_ipynb
 
 # R
