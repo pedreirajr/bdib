@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Conceitos e Métodos – Bases de dados institucionais brasileiras</title>
+<title>1&nbsp; Conceitos e Métodos – Bases de Dados Institucionais Brasileiras</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -101,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <a href="./index.html" class="sidebar-logo-link">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bases de dados institucionais brasileiras</a> 
+      <a href="./">Bases de Dados Institucionais Brasileiras</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -169,8 +224,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice do Capítulo</h2>
+   
+  <ul>
+  <li><a href="#por-que-dados-populacionais-importam" id="toc-por-que-dados-populacionais-importam" class="nav-link active" data-scroll-target="#por-que-dados-populacionais-importam"><span class="header-section-number">1.1</span> Por que dados populacionais importam</a></li>
+  <li><a href="#o-ibge" id="toc-o-ibge" class="nav-link" data-scroll-target="#o-ibge"><span class="header-section-number">1.2</span> O IBGE</a></li>
+  <li><a href="#recortes-geográficos-do-ibge" id="toc-recortes-geográficos-do-ibge" class="nav-link" data-scroll-target="#recortes-geográficos-do-ibge"><span class="header-section-number">1.3</span> Recortes Geográficos do IBGE</a></li>
+  <li><a href="#explorando-recortes-geográficos-com-o-geobr" id="toc-explorando-recortes-geográficos-com-o-geobr" class="nav-link" data-scroll-target="#explorando-recortes-geográficos-com-o-geobr"><span class="header-section-number">1.4</span> Explorando recortes geográficos com o <code>geobr</code></a>
+  <ul>
+  <li><a href="#recortes-supramunicipais-legais" id="toc-recortes-supramunicipais-legais" class="nav-link" data-scroll-target="#recortes-supramunicipais-legais"><span class="header-section-number">1.4.1</span> Recortes supramunicipais legais</a></li>
+  <li><a href="#recortes-supramunicipais-institucionais" id="toc-recortes-supramunicipais-institucionais" class="nav-link" data-scroll-target="#recortes-supramunicipais-institucionais"><span class="header-section-number">1.4.2</span> Recortes supramunicipais institucionais</a></li>
+  <li><a href="#recortes-intramunicipais-legais" id="toc-recortes-intramunicipais-legais" class="nav-link" data-scroll-target="#recortes-intramunicipais-legais"><span class="header-section-number">1.4.3</span> Recortes intramunicipais legais</a></li>
+  <li><a href="#recortes-intramunicipais-institucionais" id="toc-recortes-intramunicipais-institucionais" class="nav-link" data-scroll-target="#recortes-intramunicipais-institucionais"><span class="header-section-number">1.4.4</span> Recortes intramunicipais institucionais</a></li>
+  </ul></li>
+  <li><a href="#o-censo-demográfico" id="toc-o-censo-demográfico" class="nav-link" data-scroll-target="#o-censo-demográfico"><span class="header-section-number">1.5</span> O Censo Demográfico</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -194,8 +265,578 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="por-que-dados-populacionais-importam" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="por-que-dados-populacionais-importam"><span class="header-section-number">1.1</span> Por que dados populacionais importam</h2>
+<p>O território de uma cidade ou região é habitado por pessoas com características sociodemográficas distintas (idade, renda, escolaridade, raça, gênero, composição familiar) que vivem em condições muito variadas de habitação, saneamento, acesso a serviços e mobilidade. Conhecer essas condições permite que entendamos adequadamente suas necessidades, de modo que possamos definir bem as prioridades de planejamento urbano e regional ao longo do país.</p>
+<p>Considere alguns exemplos. A demanda por equipamentos de saúde depende da estrutura etária e das condições de renda da população em cada área da cidade. A escolha dos locais para construção de escolas requer saber onde vivem crianças e adolescentes em idade escolar. O dimensionamento de redes de saneamento básico exige conhecer quantos domicílios existem em cada setor do território e em que condições se encontram. O planejamento dos sistemsa de transporte precisa saber onde moram e trabalham as pessoas, quanto ganham e de que forma se deslocam. Em todos esses casos, a eficácia das políticas públicas depende da qualidade e da granularidade dos dados disponíveis sobre a população.</p>
+<p>Essa necessidade é especialmente crítica em países com grandes desigualdades intraurbanas, como o Brasil. Em uma mesma cidade, bairros vizinhos podem apresentar condições de renda, habitação e acesso a serviços completamente distintas. Sabemos, inclusive, que não é raro que essas diferenças se apresentem dentro de um mesmo bairro! Deste modo, políticas formuladas com base em médias municipais tendem a ignorar essas diferenças e, frequentemente, a aprofundá-las. Dados desagregados em nível intraurbano são, portanto, indispensáveis para um diagnóstico adequado e para o monitoramento dos efeitos de qualquer intervenção.</p>
+<p>No Brasil, a principal fonte de dados populacionais com essa capacidade de desagregação espacial é o <strong>Censo Demográfico</strong>, realizado pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Este capítulo apresenta alguns fundamentos conceituais e metodológicos para compreender e utilizar esses dados: o papel institucional do IBGE, os recortes geográficos que organizam o território para fins estatísticos, as características e o histórico do Censo, a estrutura dos questionários, as unidades de coleta e análise, e as principais formas de acesso não programático aos dados. Os capítulos seguintes desta parte aprofundam cada um dos produtos do Censo: agregados por setor censitário (Cap. 2), microdados (Cap. 3), grade estatística (Cap. 4) e CNEFE (Cap. 5).</p>
+<p>Embora existam ferramentas de acesso não programático aos dados do Censo (a serem apresentadas na seção 1.7), o foco deste livro é a exploração dessas bases em R, o que nos permitirá uma flexibilidade incrível de manipuçação dessas informações. Ao longo dos capítulos, utilizaremos três pacotes principais: o <a href="https://github.com/ipeaGIT/geobr"><code>geobr</code></a>, que permite baixar recortes geográficos oficiais do Brasil diretamente no R; o <a href="https://github.com/ipeaGIT/censobr/"><code>censobr</code></a>, que dá acesso aos dados do Censo Demográfico (agregados por setor censitário e microdados) de forma padronizada; e o <a href="https://github.com/pedreirajr/cnefetools"><code>cnefetools</code></a>, voltado para o processamento e análise do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE).</p>
+</section>
+<section id="o-ibge" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="o-ibge"><span class="header-section-number">1.2</span> O IBGE</h2>
+<p>O Instituto Brasileiro de Geografia e Estatística (IBGE) é o órgão federal responsável pela produção e divulgação das estatísticas oficiais do Brasil. Sua missão institucional é “retratar o Brasil com informações necessárias para conhecer sua realidade e exercer a cidadania” <span class="citation" data-cites="ibge_institucional">(<a href="references.html#ref-ibge_institucional" role="doc-biblioref">IBGE, 2026</a>)</span>. A primeira agência estatística brasileira com caráter permanente foi a Diretoria Geral de Estatística, criada em 1871. Após sucessivas reorganizações, o governo federal criou, em 1934, o Instituto Nacional de Estatística (INE), que iniciou suas operações em maio de 1936. Em 1937, o Conselho Brasileiro de Geografia foi incorporado ao INE, dando origem ao nome atual. Para cumprir sua missão, o IBGE mantém hoje uma rede que abrange 27 superintendências estaduais e mais de 560 agências de coleta distribuídas por todo o território nacional.</p>
+<p>As atividades do Instituto organizam-se em duas frentes. Na de <strong>estatísticas</strong>, o IBGE produz informações em três áreas: (i) sociais e demográficas (idade, sexo, cor ou raça, educação, trabalho, renda, habitação, migração, saúde, saneamento, entre outros temas); (ii) econômicas (produção, comércio, indústria e contas nacionais); e (iii) agropecuárias (estrutura fundiária e produção rural). Na de <strong>geociências</strong>, é o responsável oficial pela organização do território nacional, incluindo o posicionamento geodésico, a cartografia e a definição dos recortes territoriais usados nas pesquisas — aspecto detalhado na seção 1.3. É importante salientar que as estatísticas sociais e demográficas são obtidas por pesquisas domiciliares, registros públicos e levantamentos em estabelecimentos. A <a href="#tbl-pesquisas-ibge" class="quarto-xref">Tabela&nbsp;<span>1.1</span></a> apresenta algumas das principais pesquisas domiciliares realizadas pelo IBGE:</p>
+<div id="tbl-pesquisas-ibge" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pesquisas-ibge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;1.1: Principais pesquisas domiciliares do IBGE. Fonte: <span class="citation" data-cites="ibge_institucional">IBGE (<a href="references.html#ref-ibge_institucional" role="doc-biblioref">2026</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-pesquisas-ibge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Pesquisa</th>
+<th style="text-align: left;">Sigla</th>
+<th style="text-align: left;">Periodicidade</th>
+<th style="text-align: left;">Temas principais</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Censo Demográfico</td>
+<td style="text-align: left;">Censo</td>
+<td style="text-align: left;">Decenal</td>
+<td style="text-align: left;">População, domicílios e condições de vida</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pesquisa Nacional por Amostra de Domicílios Contínua</td>
+<td style="text-align: left;">PNAD-C</td>
+<td style="text-align: left;">Trimestral (desde 2012)</td>
+<td style="text-align: left;">Trabalho, renda e educação</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pesquisa de Orçamentos Familiares</td>
+<td style="text-align: left;">POF</td>
+<td style="text-align: left;">Irregular (Últimas edições: 2002-03, 2008-09, 2017-18, 2024-25)</td>
+<td style="text-align: left;">Consumo, despesas e orçamento familiar</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pesquisa Nacional de Saúde</td>
+<td style="text-align: left;">PNS</td>
+<td style="text-align: left;">Quinquenal (Últimas edições: 2013, 2019)</td>
+<td style="text-align: left;">Saúde e acesso a serviços</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Entre todas essas pesquisas, o Censo Demográfico ocupa uma posição de destaque: é a única que cobre a totalidade da população e permite desagregação espacial em nível intraurbano, a característica que o torna indispensável para o planejamento local e que é detalhada nas seções seguintes. Antes de começarmos a falar especificamente do Censo, entretanto, é importante que entendamos melhor a respeito desses níveis espaciais ou <strong>recortes geográficos</strong> sobre os quais podemos obter informações estatísticas da população.</p>
+</section>
+<section id="recortes-geográficos-do-ibge" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="recortes-geográficos-do-ibge"><span class="header-section-number">1.3</span> Recortes Geográficos do IBGE</h2>
+<p>Para que as estatísticas possam ser associadas a um lugar, o IBGE organiza o território nacional em diferentes tipos de recortes espaciais, sistematizados no <a href="https://mapasinterativos.ibge.gov.br/recestat/"><strong>Quadro Geográfico de Referência para Produção, Análise e Disseminação de Estatísticas</strong></a> <span class="citation" data-cites="ibge_recestat">(<a href="references.html#ref-ibge_recestat" role="doc-biblioref">IBGE, 2024</a>)</span>. Esses recortes dividem-se em duas grandes categorias. Os <strong>recortes legais</strong> são definidos por legislação federal ou estadual e existem independentemente do IBGE, sendo os mais conhecidos os recortes de <strong>país</strong>, <strong>grandes regiões</strong>, <strong>estados</strong>, <strong>regiões metropolitanas</strong> e <strong>municípios</strong>. No nível intraurbano, os recortes legais são os <strong>distritos</strong> e <strong>subdistritos</strong>, subdivisões administrativas dos municípios.</p>
+<p>Os <strong>recortes institucionais</strong>, por sua vez, são criados pelo próprio IBGE para fins de organização operacional e divulgação de dados. Em escala supramunicipal, incluem as <strong>regiões geográficas</strong> <strong>intermediárias</strong> e <strong>imediatas</strong> (que substituíram, respectivamente, as <strong>mesorregiões</strong> e <strong>microrregiões</strong> na classificação de 2017, que veremos mais adiante). No nível intraurbano, os recortes institucionais para a análise de dados do Censo são as <strong>áreas de ponderação</strong>, os <strong>setores censitários</strong> e a <strong>grade estatística</strong>, cada um com características específicas de resolução espacial e riqueza temática.</p>
+<p>Um conceito fundamental para compreender os produtos do Censo é o de <strong>resolução espacial</strong>, que é a medida do nível de detalhe geográfico de um conjunto de dados. Quanto maior a resolução espacial, menores são as unidades representadas e mais precisamente os dados podem ser localizados no território. A grade estatística (células de 200 × 200 metros nas áreas urbanas e 1 × 1 km nas rurais) representa a maior resolução espacial disponível nos produtos do IBGE. Já o país, como um todo, a menor.</p>
+<p>Há, porém, uma relação inversa entre resolução espacial e riqueza temática das informações divulgadas, ou seja, quanto maior a resolução espacial, menor a quantidade de estatísticas divulgadas neste nível. Isso ocorre porque o IBGE é legalmente obrigado a proteger o sigilo das informações individuais coletadas <!-- confirmar -->. Em unidades geográficas muito pequenas, divulgar muitas variáveis aumenta o risco de que uma combinação de características permita identificar um domicílio ou uma pessoa específica. Por essa razão, a grade estatística disponibiliza apenas totais populacionais e de domicílios, enquanto os microdados do questionário da amostra — muito mais ricos tematicamente — são identificados apenas até o nível da área de ponderação, que agrega domicílios em número suficiente para preservar o anonimato. Esse <em>trade-off</em> entre resolução espacial e detalhe temático é central para entender as capacidades e limitações de cada produto do Censo, detalhados nos capítulos seguintes.</p>
+</section>
+<section id="explorando-recortes-geográficos-com-o-geobr" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="explorando-recortes-geográficos-com-o-geobr"><span class="header-section-number">1.4</span> Explorando recortes geográficos com o <code>geobr</code></h2>
+<p>Todos os recortes geográficos do IBGE podem ser explorados interativamente no portal <a href="https://mapasinterativos.ibge.gov.br/recestat/">Recortes Geográficos para Estatísticas - Quadro Geográfico</a> do IBGE <span class="citation" data-cites="ibge_recestat">(<a href="references.html#ref-ibge_recestat" role="doc-biblioref">IBGE, 2024</a>)</span>. Para acesso programático em R, o pacote <code>geobr</code> <span class="citation" data-cites="geobr">(<a href="references.html#ref-geobr" role="doc-biblioref">Pereira &amp; Goncalves, 2025</a>)</span> disponibiliza funções para download direto das malhas oficiais do IBGE, com geometrias simplificadas prontas para análise e visualização. A documentação completa encontra-se em <a href="https://ipeagit.github.io/geobr/">ipeagit.github.io/geobr</a>.</p>
+<p>Vamos começar adicionando as bibliotecas necessárias para processamento e visualização dos dados:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geobr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A <a href="#fig-recortes-legais-institucionais" class="quarto-xref">Figura&nbsp;<span>1.1</span></a> ilustra a diferença entre recortes legais e institucionais para o território brasileiro: os municípios representam a malha legal de base, enquanto as regiões intermediárias agrupam municípios contíguos com similaridades socioeconômicas para fins de organização estatística.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download de municípios e regiões intermediárias</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>municipios   <span class="ot">&lt;-</span> <span class="fu">read_municipality</span>(<span class="at">year =</span> <span class="dv">2020</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mesorregioes <span class="ot">&lt;-</span> <span class="fu">read_intermediate_region</span>(<span class="at">year =</span> <span class="dv">2020</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotando os mapas dos municípios e regiões intermediárias com ggplot:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(municipios) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mesorregioes) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-recortes-legais-institucionais" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-recortes-legais-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.1: Municípios (recorte legal) e regiões intermediárias (recorte institucional) do Brasil.
+</figcaption>
+<div aria-describedby="fig-recortes-legais-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-legais-institucionais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-legais-institucionais-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-legais-institucionais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Os 5.570 municípios brasileiros
+</figcaption>
+<div aria-describedby="fig-recortes-legais-institucionais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-legais-institucionais-1.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-legais-institucionais" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-legais-institucionais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-legais-institucionais-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-legais-institucionais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) As 137 regiões intermediárias brasileiras
+</figcaption>
+<div aria-describedby="fig-recortes-legais-institucionais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-legais-institucionais-2.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-legais-institucionais" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>É possível explorar as malhas geográficas disponibilizadas pelo <code>geobr</code> por meio da função <code>list_geobr()</code>, que retorna um <code>data.frame</code> com todos os conjuntos de dados disponíveis, seus anos e uma breve descrição. É importante destacar além de trazer os recortes geográficos previstos pelo IBGE, o pacote também traz bases espaciais específicas de certos setores, a exemplo das regiões de saúde do DataSUS (<code>read_health_region</code>) e das escolas do INEP (<code>read_schools</code>). Sendo assim, o <code>list_geobr()</code> é um bom ponto de partida para descobrir o que o pacote oferece.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geobr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">list_geobr</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-list-geobr" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-list-geobr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;1.2: Arquivos geográficos disponíveis no pacote <code>geobr</code>.
+</figcaption>
+<div aria-describedby="tbl-list-geobr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 26%">
+<col style="width: 57%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">function</th>
+<th style="text-align: left;">geography</th>
+<th style="text-align: left;">years</th>
+<th style="text-align: left;">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>read_country</code></td>
+<td style="text-align: left;">Country</td>
+<td style="text-align: left;">1872, 1900, 1911, 1920, 1933, 1940, 1950, 1960, 1970, 1980, 1991, 2000, 2001, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_region</code></td>
+<td style="text-align: left;">Region</td>
+<td style="text-align: left;">2000, 2001, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_state</code></td>
+<td style="text-align: left;">States</td>
+<td style="text-align: left;">1872, 1900, 1911, 1920, 1933, 1940, 1950, 1960, 1970, 1980, 1991, 2000, 2001, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_meso_region</code></td>
+<td style="text-align: left;">Meso region</td>
+<td style="text-align: left;">2000, 2001, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_micro_region</code></td>
+<td style="text-align: left;">Micro region</td>
+<td style="text-align: left;">2000, 2001, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_intermediate_region</code></td>
+<td style="text-align: left;">Intermediate region</td>
+<td style="text-align: left;">2017, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_immediate_region</code></td>
+<td style="text-align: left;">Immediate region</td>
+<td style="text-align: left;">2017, 2019, 2020</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_municipality</code></td>
+<td style="text-align: left;">Municipality</td>
+<td style="text-align: left;">1872, 1900, 1911, 1920, 1933, 1940, 1950, 1960, 1970, 1980, 1991, 2000, 2001, 2005, 2007, 2010, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_municipal_seat</code></td>
+<td style="text-align: left;">Municipality seats (sedes municipais)</td>
+<td style="text-align: left;">1872, 1900, 1911, 1920, 1933, 1940, 1950, 1960, 1970, 1980, 1991, 2010</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_weighting_area</code></td>
+<td style="text-align: left;">Census weighting area (área de ponderação)</td>
+<td style="text-align: left;">2010</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_census_tract</code></td>
+<td style="text-align: left;">Census tract (setor censitário)</td>
+<td style="text-align: left;">2000, 2010, 2017, 2019, 2020, 2022</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_statistical_grid</code></td>
+<td style="text-align: left;">Statistical Grid of 200 x 200 meters</td>
+<td style="text-align: left;">2010</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_metro_area</code></td>
+<td style="text-align: left;">Metropolitan areas</td>
+<td style="text-align: left;">1970, 2001, 2002, 2003, 2005, 2010, 2013, 2014, 2015, 2016, 2017, 2018</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_urban_area</code></td>
+<td style="text-align: left;">Urban footprints</td>
+<td style="text-align: left;">2005, 2015</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_amazon</code></td>
+<td style="text-align: left;">Brazil’s Legal Amazon</td>
+<td style="text-align: left;">2012</td>
+<td style="text-align: left;">MMA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_biomes</code></td>
+<td style="text-align: left;">Biomes</td>
+<td style="text-align: left;">2004, 2019</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_conservation_units</code></td>
+<td style="text-align: left;">Environmental Conservation Units</td>
+<td style="text-align: left;">201909</td>
+<td style="text-align: left;">MMA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_disaster_risk_area</code></td>
+<td style="text-align: left;">Disaster risk areas</td>
+<td style="text-align: left;">2010</td>
+<td style="text-align: left;">CEMADEN and IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_indigenous_land</code></td>
+<td style="text-align: left;">Indigenous lands</td>
+<td style="text-align: left;">201907, 202103</td>
+<td style="text-align: left;">FUNAI</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_semiarid</code></td>
+<td style="text-align: left;">Semi Arid region</td>
+<td style="text-align: left;">2005, 2017, 2021, 2022</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_health_facilities</code></td>
+<td style="text-align: left;">Health facilities</td>
+<td style="text-align: left;">201505, 202303</td>
+<td style="text-align: left;">CNES, DataSUS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_health_region</code></td>
+<td style="text-align: left;">Health regions and macro regions</td>
+<td style="text-align: left;">1991, 1994, 1997, 2001, 2005, 2013</td>
+<td style="text-align: left;">DataSUS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_neighborhood</code></td>
+<td style="text-align: left;">Neighborhood limits</td>
+<td style="text-align: left;">2010</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_schools</code></td>
+<td style="text-align: left;">Schools</td>
+<td style="text-align: left;">2020, 2023</td>
+<td style="text-align: left;">INEP</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_comparable_areas</code></td>
+<td style="text-align: left;">Historically comparable municipalities, aka Áreas mínimas comparáveis (AMCs)</td>
+<td style="text-align: left;">1872, 1900, 1911, 1920, 1933, 1940, 1950, 1960, 1970, 1980, 1991, 2000, 2010</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>read_urban_concentrations</code></td>
+<td style="text-align: left;">Urban concentration areas (concentrações urbanas)</td>
+<td style="text-align: left;">2015</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>read_pop_arrangements</code></td>
+<td style="text-align: left;">Population arrangements (arranjos populacionais)</td>
+<td style="text-align: left;">2015</td>
+<td style="text-align: left;">IBGE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>A maioria das funções do <code>geobr</code> compartilha os mesmos parâmetros:</p>
+<ul>
+<li><p><code>year</code>: o ano de referência da malha, no formato YYYY;</p></li>
+<li><p><code>code_*</code>: código IBGE ou sigla do estado com 2 dígitos ou código IBGE do município com 7 dígitos. Em geral, omitir esse parâmetro retorna o Brasil inteiro. Obs.: quando não souber o código IBGE do município, é possível utilizar a função <code>lookup_muni</code>. Para encontrar o código IBGE de Fortaleza, por exemplo, faça <code>lookup_muni(name_muni = 'Fortaleza')$code_muni</code> <!-- Adiconar footnote: ^[Se você fizer somente `lookup_muni(name_muni = 'Feira de Santana')`, sem `$code_muni`, será retornada toda a linha da tabela de municípios do `geobr`. A adição do `$code_muni` retorna somente o valor do código IBGE do município que se encontra na coluna `code_muni`]-->.</p></li>
+<li><p><code>simplified</code>: parâmetro que é <code>TRUE</code> por padrão, retornando uma geometria simplificada de menor tamanho em memória, adequada para processamento dos dados. Se <code>simplified = F</code>, então a malha virá sem imperfeições, mais adequada para visualização (especialmente mais aproximada das fronteiras das feições);</p></li>
+<li><p><code>showProgress</code>: exibe barra de progresso no download;</p></li>
+<li><p><code>cache</code>: parâmero que é <code>TRUE</code> por padrão, reutilizando dados já baixados localmente, evitando downloads repetidos.</p></li>
+</ul>
+<p>Os exemplos a seguir exploram as principais funções, organizados do nível supramunicipal ao intraurbano.</p>
+<section id="recortes-supramunicipais-legais" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="recortes-supramunicipais-legais"><span class="header-section-number">1.4.1</span> Recortes supramunicipais legais</h3>
+<p>Os estados e as regiões metropolitanas são os recortes supramunicipais legais mais utilizados. <code>read_state</code> baixa os limites estaduais, ao passo que <code>read_metro_area</code> baixa os recortes metropolitanos oficiais. Em ambos os casos, omitir o parâmetro <code>code_state</code> retorna o Brasil inteiro (<a href="#fig-recortes-supra-legais" class="quarto-xref">Figura&nbsp;<span>1.2</span></a>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>estados <span class="ot">&lt;-</span> <span class="fu">read_state</span>(<span class="at">year =</span> <span class="dv">2020</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>metros  <span class="ot">&lt;-</span> <span class="fu">read_metro_area</span>(<span class="at">year =</span> <span class="dv">2018</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(estados) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(metros) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-recortes-supra-legais" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-recortes-supra-legais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.2: Recortes supramunicipais legais do Brasil.
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-supra-legais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-supra-legais-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-supra-legais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Estados
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-supra-legais-1.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-supra-legais" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-supra-legais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-supra-legais-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-supra-legais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Regiões Metropolitanas
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-supra-legais-2.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-supra-legais" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Caso você queria somente os estados do Ceará e a Região Metropolitana do Rio de Janeiro, é possível utilizar o <code>code_state</code> no primeiro caso e um <code>filter</code> do pacote <code>dplyr</code> no segundo, conforme a <a href="#fig-recortes-supra-legais-2" class="quarto-xref">Figura&nbsp;<span>1.3</span></a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ceara <span class="ot">&lt;-</span> <span class="fu">read_state</span>(<span class="at">year =</span> <span class="dv">2020</span>, <span class="at">code_state =</span> <span class="st">"CE"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>rmrj  <span class="ot">&lt;-</span> <span class="fu">read_metro_area</span>(<span class="at">year =</span> <span class="dv">2018</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name_metro <span class="sc">==</span> <span class="st">"RM Rio de Janeiro"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ceara) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rmrj) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-recortes-supra-legais-2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-recortes-supra-legais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.3: Recortes supramunicipais legais do Brasil (Ceará e RMRJ).
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-supra-legais-2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-supra-legais-2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-supra-legais-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Estado do Ceará
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-supra-legais-2-1.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-supra-legais-2" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-supra-legais-2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-supra-legais-2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-supra-legais-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Região Metropolitana do Rio de Janeiro
+</figcaption>
+<div aria-describedby="fig-recortes-supra-legais-2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-supra-legais-2-2.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-supra-legais-2" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="recortes-supramunicipais-institucionais" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="recortes-supramunicipais-institucionais"><span class="header-section-number">1.4.2</span> Recortes supramunicipais institucionais</h3>
+<p>As Regiões Geográficas Intermediárias e Imediatas são a classificação institucional vigente, adotada pelo IBGE em 2017 para substituir as mesorregiões e microrregiões. <code>read_intermediate_region()</code> e <code>read_immediate_region()</code> baixam esses recortes, equanto <code>read_meso_region()</code> e <code>read_micro_region()</code> retornam a classificação anterior, ainda amplamente utilizada em estudos e bases de dados mais antigas. Na <a href="#fig-recortes-supra-institucionais" class="quarto-xref">Figura&nbsp;<span>1.4</span></a>, veremos em um único mapa estes dois recortes para o estado de Minas Gerais, distinguindo-os pela coloração e espessura da linha de contorno. Observe que também definimos a cor de preenchimento dos polígonos das regiões intermediárias como vazio (<code>NA</code>), de modo que a camada passada inicialmente (<code>imediatas</code>) não seja sobreposta completamente.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>intermediarias <span class="ot">&lt;-</span> <span class="fu">read_intermediate_region</span>(<span class="at">year =</span> <span class="dv">2020</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">code_intermediate =</span> <span class="st">"MG"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>imediatas      <span class="ot">&lt;-</span> <span class="fu">read_immediate_region</span>(<span class="at">year =</span> <span class="dv">2020</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">code_immediate =</span> <span class="st">"MG"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> imediatas, <span class="at">color =</span> <span class="st">'black'</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> intermediarias, <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-recortes-supra-institucionais" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-recortes-supra-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.4: Recortes supramunicipais institucionais do Brasil.
+</figcaption>
+<div aria-describedby="fig-recortes-supra-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-supra-institucionais-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="recortes-intramunicipais-legais" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="recortes-intramunicipais-legais"><span class="header-section-number">1.4.3</span> Recortes intramunicipais legais</h3>
+<p>No nível intraurbano, <code>read_neighborhood()</code> disponibiliza os limites de bairros. A função não possui parâmetro de filtragem por município, retornando os bairros de todos os 720 municípios cobertos de uma vez, e o filtro é feito depois no <code>data.frame</code> resultante. A cobertura é parcial, uma vez que nem todos os municípios disponibilizaram seus limites oficiais ao IBGE.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>bairros <span class="ot">&lt;-</span> <span class="fu">read_neighborhood</span>(<span class="at">year =</span> <span class="dv">2022</span>, <span class="at">showProgress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bairros <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name_muni <span class="sc">==</span> <span class="st">"Salvador"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-bairros-salvador" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-bairros-salvador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.5: Bairros de Salvador (BA), recorte intraurbano legal.
+</figcaption>
+<div aria-describedby="fig-bairros-salvador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-bairros-salvador-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="recortes-intramunicipais-institucionais" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="recortes-intramunicipais-institucionais"><span class="header-section-number">1.4.4</span> Recortes intramunicipais institucionais</h3>
+<p>Estes são os recortes que mais nos interessam nesse estudo. <code>read_weighting_area()</code> e <code>read_census_tract()</code> baixam, respectivamente, as áreas de ponderação e os setores censitários. Ambos aceitam código de estado (sigla ou 2 dígitos) ou código de município (7 dígitos) nos parâmetros <code>code_weighting</code> e <code>code_tract</code>, o que permite baixar apenas os dados de interesse sem carregar o Brasil inteiro. O mapa a seguir compara os dois recortes para Salvador, antecipando a discussão da seção 1.6.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Código IBGE de Maceió: 2927408</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>areas_pond <span class="ot">&lt;-</span> <span class="fu">read_weighting_area</span>(<span class="at">code_weighting =</span> <span class="dv">2704302</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>setores    <span class="ot">&lt;-</span> <span class="fu">read_census_tract</span>(<span class="at">code_tract =</span> <span class="dv">2704302</span>, <span class="at">year =</span> <span class="dv">2010</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(areas_pond) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(setores) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-recortes-intra-institucionais" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-recortes-intra-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1.6: Recortes intramunicipais institucionais de Maceió (AL) em 2010
+</figcaption>
+<div aria-describedby="fig-recortes-intra-institucionais-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-intra-institucionais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-intra-institucionais-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-intra-institucionais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Áreas de ponderação
+</figcaption>
+<div aria-describedby="fig-recortes-intra-institucionais-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-intra-institucionais-1.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-intra-institucionais" width="672">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-recortes-intra-institucionais" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-recortes-intra-institucionais-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-recortes-intra-institucionais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Setores censitários
+</figcaption>
+<div aria-describedby="fig-recortes-intra-institucionais-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="1-conceitos-e-metodos_files/figure-html/fig-recortes-intra-institucionais-2.png" class="img-fluid figure-img" data-ref-parent="fig-recortes-intra-institucionais" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="o-censo-demográfico" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="o-censo-demográfico"><span class="header-section-number">1.5</span> O Censo Demográfico</h2>
+<p>O Censo Demográfico é o maior e mais complexo levantamento estatístico do Brasil. Diferente das pesquisas por amostragem — como a PNAD-C, a POF ou a PNS, que entrevistam apenas uma fração dos domicílios —, o Censo tem como ambição cobrir todos os domicílios do território nacional, sem exceção. Essa universalidade é o que o torna insubstituível: é a única pesquisa capaz de fornecer informações estatísticas desagregadas em qualquer recorte do território, desde o nível nacional até o setor censitário.</p>
+<p>Os objetivos centrais do Censo são dois: contar todos os habitantes do território nacional e identificar as condições em que vivem, revelando não apenas quantas pessoas moram em cada lugar, mas como é sua moradia, qual é sua renda, qual é seu nível de escolaridade, quais são suas condições de saneamento, entre muitas outras dimensões. O resultado é um retrato estatístico de alta resolução do país inteiro, com um detalhamento espacial que nenhuma outra pesquisa periódica consegue oferecer.</p>
+<p>O primeiro recenseamento do território brasileiro foi realizado em 1872, no Período Imperial. A partir de 1890, o Censo passou a ter periodicidade decenal, embora as edições previstas para 1910 e 1930 não tenham sido realizadas. No século XX, foram realizados Censos em 1940, 1950, 1960, 1970, 1980 e 1991. No século XXI, as edições foram as de 2000, 2010 e 2022. O mais recente ocorreu com um intervalo de doze anos em relação ao anterior, em razão da pandemia de Covid-19, que inviabilizou sua realização no ano previsto de 2020, e de dificuldades no planejamento e financiamento da pesquisa naquele período.</p>
+<p>A data de referência do Censo é o instante que define quem é recenseável. No caso do Censo de 2022, foi a meia-noite do dia 31 de julho de 2022: qualquer pessoa que residia em um domicílio brasileiro nesse momento é, por definição, parte da população recenseada. Moradores que estivessem temporariamente fora de casa na data da visita do recenseador eram registrados normalmente, desde que o domicílio fosse seu local habitual de residência <span class="citation" data-cites="ibge_metodologia2010">(<a href="references.html#ref-ibge_metodologia2010" role="doc-biblioref">IBGE, 2016</a>)</span>.</p>
+<p>Realizar um censo demográfico é uma das operações logísticas mais complexas que um Estado pode empreender. Para o Censo de 2022, o IBGE coordenou centenas de milhares de agentes recenseadores distribuídos por todos os municípios do país, com a missão de visitar individualmente cada domicílio brasileiro, incluindo áreas urbanas densas, zonas rurais isoladas, territórios indígenas e comunidades de difícil acesso. Essa escala exige anos de preparação antes do trabalho de campo e anos de processamento e divulgação de resultados após sua conclusão.</p>
+<p>A importância do Censo ultrapassa sua própria produção de dados. Por oferecer a única contagem exaustiva da população em nível intraurbano, ele fundamenta o funcionamento de todo o sistema de estatísticas nacionais. As pesquisas por amostragem do IBGE utilizam os resultados do Censo para calibrar os pesos de suas amostras, garantindo que os resultados sejam representativos para a população como um todo. Projeções populacionais para os anos entre censos, utilizadas para o planejamento público e a distribuição de recursos entre municípios, também são calculadas com base nas tendências observadas entre edições censitárias. Sem o Censo, o sistema estatístico brasileiro perderia sua referência de ancoragem.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Desafios e limitações do Censo</strong></p>
+<p>A realização de um censo demográfico envolve desafios logísticos e metodológicos consideráveis. O mais fundamental é a impossibilidade de garantir cobertura total da população: parte dos habitantes não é recenseada, fenômeno conhecido como <em>subenumeração</em>. Essa lacuna não se distribui de forma uniforme no território — regiões de difícil acesso, áreas de conflito fundiário e populações em situação de rua tendem a apresentar taxas mais elevadas <span class="citation" data-cites="ibge_metodologia2010">(<a href="references.html#ref-ibge_metodologia2010" role="doc-biblioref">IBGE, 2016</a>)</span>. Populações indígenas com menor contato com a sociedade envolvente representam um desafio adicional. Outro desafio é a periodicidade decenal: com intervalos de dez anos entre censos (doze anos no caso de 2010–2022, em razão da pandemia de Covid-19), os dados envelhecem rapidamente em um país com dinâmica urbana acelerada. Para mitigar essa limitação, o IBGE realiza periodicamente pesquisas amostrais que permitem atualizar estimativas entre censos, mas sem a mesma granularidade espacial.</p>
+<p>A realização de censos demográficos periódicos é prática comum entre os institutos nacionais de estatística ao redor do mundo. Nos Estados Unidos, o <em>Census Bureau</em> conduz um censo decenal desde 1790, complementado pela <em>American Community Survey</em> (ACS), pesquisa amostral anual que fornece estimativas de características socioeconômicas em nível local entre os censos. Em Portugal e Espanha, o Instituto Nacional de Estatística (INE) realiza recenseamentos decenais com estrutura metodológica semelhante à do IBGE. O Statistics Canada conduz o censo a cada cinco anos, alternando entre um recenseamento completo e uma versão com questionário expandido aplicado a uma amostra. Em todos esses casos, a lógica central é a mesma: combinar uma contagem universal da população com a coleta de informações detalhadas sobre suas características, produzindo a base de referência a partir da qual todas as demais pesquisas são calibradas.</p>
+</div>
+</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-ibge_metodologia2010" class="csl-entry" role="listitem">
+IBGE. (2016). <em>Metodologia do Censo Demográfico 2010</em> (2º ed, Vol. 41). IBGE. <a href="https://biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&amp;id=293654">https://biblioteca.ibge.gov.br/index.php/biblioteca-catalogo?view=detalhes&amp;id=293654</a>
+</div>
+<div id="ref-ibge_recestat" class="csl-entry" role="listitem">
+IBGE. (2024). <em>Quadro Geográfico de Referência para Produção, Análise e Disseminação de Estatísticas</em>. <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/divisao-regional/24233-quadro-geografico-de-referencia-para-producao-analise-e-disseminacao-de-estatisticas.html">https://www.ibge.gov.br/geociencias/organizacao-do-territorio/divisao-regional/24233-quadro-geografico-de-referencia-para-producao-analise-e-disseminacao-de-estatisticas.html</a>
+</div>
+<div id="ref-ibge_institucional" class="csl-entry" role="listitem">
+IBGE. (2026). <em>O <span>IBGE</span></em>. <a href="https://www.ibge.gov.br/acesso-informacao/institucional/o-ibge.html">https://www.ibge.gov.br/acesso-informacao/institucional/o-ibge.html</a>
+</div>
+<div id="ref-geobr" class="csl-entry" role="listitem">
+Pereira, R. H. M., &amp; Goncalves, C. N. (2025). <em>geobr: <span>D</span>ownload <span>O</span>fficial <span>S</span>patial <span>D</span>ata <span>S</span>ets of <span>B</span>razil</em>. <a href="https://ipeagit.github.io/geobr/">https://ipeagit.github.io/geobr/</a>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

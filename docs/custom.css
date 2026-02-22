@@ -1,5 +1,12 @@
-/* Centraliza captions de figuras */
-.quarto-figure figcaption {
+/* Centraliza captions de figuras (coluna única e layout múltiplo) */
+.quarto-figure figcaption,
+.quarto-float-caption,
+.quarto-subfloat-caption {
+  text-align: center;
+}
+
+/* Centraliza captions de tabelas */
+caption {
   text-align: center;
 }
 

@@ -5,8 +5,8 @@ project:
 lang: pt-BR
 
 book:
-  title: "Bases de dados institucionais brasileiras"
-  subtitle: "conceitos, métodos e aplicações em R"
+  title: "Bases de Dados Institucionais Brasileiras"
+  subtitle: "Conceitos, métodos e aplicações em R"
   author: "Jorge Ubirajara Pedreira Junior"
   language: pt
   page-navigation: true
@@ -33,8 +33,11 @@ format:
     toc-depth: 4
     toc-title: "Índice do Capítulo"
     link-external-newwindow: true
+    fig-cap-location: top
+    tbl-cap-location: top
 
 bibliography: references.bib
+csl: apa.csl
 
 crossref:
   fig-title: "Figura"
