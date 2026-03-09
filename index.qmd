@@ -1,1 +1,30 @@
 # Prefácio {.unnumbered}
+
+Este livro nasceu de uma necessidade prática vivida ao longo de dez anos ministrando a disciplina [ENGR80 — Levantamentos e Pesquisas em Engenharia de Transportes](https://alunoweb.ufba.br/SiacWWW/ExibirEmentaPublico.do?cdDisciplina=ENGR80&nuPerInicial=20251) (antiga [ENGJ66](https://alunoweb.ufba.br/SiacWWW/ExibirEmentaPublico.do?cdDisciplina=ENGJ66&nuPerInicial=20101)) na Universidade Federal da Bahia (UFBA). Ao longo desse período, ficou evidente a ausência de um material de referência em português que reunisse, de forma integrada, as principais bases de dados institucionais brasileiras e demonstrasse como acessá-las e analisá-las computacionalmente. Esta obra é a resposta a essa lacuna.
+
+O objetivo é oferecer um guia prático e conceitualmente fundamentado para estudantes e pesquisadores que precisam trabalhar com dados produzidos de forma institucional, seja para dissertações, relatórios técnicos, projetos de pesquisa ou análises de políticas públicas. Cada capítulo combina a apresentação conceitual da fonte de dados com exemplos reais de acesso, processamento e visualização em R.
+
+O livro está dividido em seis partes, cada uma dedicada a um conjunto temático de conteúdos.
+
+A **Parte 1** é dedicada à **Análise Exploratória de Dados com R** e serve de base metodológica para todo o restante do livro. São cobertos a introdução à linguagem R, estatística descritiva, manipulação de dados tabulares, visualização de dados e manipulação de dados geográficos. O leitor que já tem experiência com R pode avançar diretamente para as partes seguintes, retornando a esta sempre que necessário.
+
+A **Parte 2** trata do **Censo Demográfico**, a pesquisa de maior capilaridade territorial do país. São abordados desde os conceitos e a estrutura metodológica do censo até formas de acesso a agregados por setor censitário, microdados individuais, a grade estatística do IBGE e o Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE).
+
+A **Parte 3** é dedicada à **Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD-C)**, principal instrumento de acompanhamento das condições de vida e do mercado de trabalho no Brasil entre os censos.
+
+A **Parte 4** aborda fontes de dados sobre **Mercado de Trabalho**, com ênfase na Relação Anual de Informações Sociais (RAIS) e no Cadastro Geral de Empregados e Desempregados (CAGED), que juntos formam a base do registro administrativo do emprego formal no Brasil.
+
+A **Parte 5** explora dados de **Mobilidade Urbana**, com destaque para as pesquisas de origem e destino realizadas nas principais regiões metropolitanas brasileiras, instrumentos essenciais para o planejamento e a modelagem de transportes.
+
+A **Parte 6** apresenta fontes de dados de **Saúde**, incluindo os microdados do Sistema de Informações em Saúde do Ministério da Saúde (DataSUS) e a Pesquisa Nacional de Saúde (PNS) do IBGE.
+
+O livro é razoavelmente autossuficiente em termos de ferramentas. A Parte 1 cobre os fundamentos de R necessários para acompanhar os demais capítulos, de modo que não se exige experiência prévia com a linguagem. Ao longo do texto, são utilizados pacotes do ecossistema *tidyverse* e pacotes especializados para acesso a dados brasileiros, como `censobr`, `geobr`, `cnefetools` e `PNADcIBGE`.
+
+Para quem deseja aprofundar o uso de R com dados brasileiros, recomendo o canal do YouTube [Rocha Data in R](https://www.youtube.com/@RochaDatainR), mantido pelo pesquisador [Fábio Rocha](https://sites.google.com/view/fabio-rocha-economista). O canal oferece tutoriais práticos e atualizados sobre análise de dados com R, com foco em fontes de dados públicas brasileiras, e constitui um excelente complemento a este livro.
+
+## Uma nota sobre este livro
+
+Este material está em permanente construção. Bases de dados institucionais mudam, metodologias são revisadas, plataformas de acesso são reformuladas e novos pacotes surgem. O leitor é encorajado a verificar sempre a documentação oficial de cada fonte e a reportar eventuais desatualizações.
+
+Jorge Ubirajara Pedreira Junior
+Salvador, 2026

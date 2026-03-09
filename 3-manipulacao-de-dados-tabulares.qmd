@@ -1,0 +1,7 @@
+---
+title: "Manipulação de Dados Tabulares"
+---
+
+Neste primeiro momento, disponibilizarei uma *playlist* de videoaulas do meu canal do YouTube sobre Análise Exploratória de Dados com R. Compreende os vídeos 4 a 13 e trata de filtragem, seleção, ordenação de tabelas de dados, criação de variáveis e produção de sumários estatísticos.
+
+[▶️ Abrir playlist no YouTube](https://www.youtube.com/playlist?list=PL_v-tArg0FZhA6dqbGv1uQMQqFOUPlryE)

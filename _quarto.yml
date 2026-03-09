@@ -14,13 +14,21 @@ book:
   chapters:
     - index.qmd
 
-    - part: "PARTE 1: CENSO DEMOGRÁFICO"
+    - part: "PARTE 1: ANÁLISE EXPLORATÓRIA DE DADOS COM R"
       chapters:
-        - 1-conceitos-e-metodos.qmd
-        - 2-agregados-setor-censitario.qmd
-        - 3-microdados.qmd
-        - 4-grade-estatistica.qmd
-        - 5-cnefe.qmd
+        - 1-introducao-ao-r.qmd
+        - 2-estatistica-descritiva.qmd
+        - 3-manipulacao-de-dados-tabulares.qmd
+        - 4-visualizacao-de-dados-tabulares.qmd
+        - 5-dados-geograficos.qmd
+
+    - part: "PARTE 2: CENSO DEMOGRÁFICO"
+      chapters:
+        - 6-conceitos-e-metodos.qmd
+        - 7-agregados-setor-censitario.qmd
+        - 8-microdados.qmd
+        - 9-grade-estatistica.qmd
+        - 10-cnefe.qmd
 
     - references.qmd
 
