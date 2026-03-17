@@ -219,7 +219,7 @@ mean(parada_b)
 mean(parada_c)
 ```
 
-Observe como os valores do atraso médio são idênticos (5 minutos). Note, entretanto, que as experiências dos passageiros nas três paradas são muito diferentes. Enquanto na parada A os atrasos variam pouco, na parada C eles oscilam entre zero e dez minutos, uma diferença não capturada pela média. Podemos avaliar essa diferença no gráfico abaixo, onde cada ponto representa uma parada (eixo y) e seu respectivo valor de atraso (eixo x). No [Capítulo 4](4-visualizacao-de-dados-tabulares.qmd), entenderemos como produzir esse tipo de visualização no R. 
+Observe como os valores do atraso médio são idênticos (5 minutos). Note, entretanto, que as experiências dos passageiros nas três paradas são muito diferentes. Enquanto na parada A os atrasos variam pouco, na parada C eles oscilam entre zero e dez minutos, uma diferença não capturada pela média. Podemos avaliar essa diferença no gráfico abaixo, onde cada ponto representa uma parada (eixo y) e seu respectivo valor de atraso (eixo x). No [Capítulo 4](4-visualizacao-de-dados-tabulares.qmd), entenderemos como produzir visualizações como esta no R. 
 
 ```{r, echo = F}
 #| label: fig-paradas-dotplot
@@ -246,13 +246,13 @@ Em essência, a variância dimensiona o quanto os valores de uma determinada var
 
 **Passo 1:** calcule os desvios de cada observação $i$ ($d_i$) em relação à média, fazendo $d_i = x_i - \bar{x}$. Observe que o conceito de *desvio* é simplesmente a diferença numérica entre um valor específico de uma observação $i$ ($x_i$) e a sua média.
 
-**Passo 2:** eleve cada desvio ao quadrado, $(x_i - \bar{x})^2$. Todos os termos ficam positivos, eliminando o cancelamento entre desvios positivos e negativos.
+**Passo 2:** eleve cada desvio ao quadrado, $(x_i - \bar{x})^2$.
 
 **Passo 3:** calcule a média dos desvios quadráticos. Para uma amostra, divide-se por $n - 1$ (e não por $n$) para obter aquilo que chamamos de um estimador *não-viesado* da variância populacional em Estatística. Não se preocupe com isto agora, pois é tema para o futuro.
 
-Neste momento, você pode estar se perguntando "por que elevar os desvios ao quadrado, ao invés de tomar a sua média diretamente?". Note que a soma desses desvios $\sum_{i=1}^{n} d_i$ é sempre zero, pois os desvios positivos e negativos se cancelam, o que faz com que a média desses desvios, ou seja $\bar{d_i}=\frac{1}{n} \sum_{i=1}^{n} d_i$, seja sempre zero. Uma maneira de contornar essa situação é elevar os desvios ao quadrado antes de calcular a média, pois isso tornam positivos os valores de desvios negativos.
+Neste momento, você pode estar se perguntando "por que elevar os desvios ao quadrado, ao invés de tomar a sua média diretamente?". Note que a soma desses desvios $\sum_{i=1}^{n} d_i$ é sempre zero, pois os desvios positivos e negativos se cancelam, o que faz com que a média desses desvios, ou seja $\bar{d_i}=\frac{1}{n} \sum_{i=1}^{n} d_i$, seja também zero. Uma maneira de contornar essa situação é elevar os desvios ao quadrado antes de calcular a média, pois isso tornam positivos os valores negativos de desvio.
 
-Em uma única fórmula, os passos 1 a 3 do cálculo variância amostral, dada por $s^2$, podem ser representados por:
+Se quisermos representar os passos 1 a 3 do cálculo variância amostral (dada por $s^2$) em uma única fórmula, fazemos então:
 
 $$
 s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
@@ -287,7 +287,7 @@ Obviamente, há uma maneira mais direta, que pode ser realizada com a função `
 var(x)
 ```
 
-Uma limitação da variância é que sua unidade de medida é o quadrado da unidade original. por exemplo, se os tempos são medidos em minutos, a variância é expressa em minutos², o que dificulta sua interpretação direta. Para tanto, temos uma alternativa interessante denominada **Desvio-padrão**.
+Uma limitação da variância é que sua unidade de medida é o quadrado da unidade original. Por exemplo, se os tempos são medidos em minutos, a variância é expressa em minutos ao quadrado ($min^2$, o que dificulta sua interpretação direta. Para tanto, temos uma alternativa interessante denominada **Desvio-padrão**.
 
 ### Desvio-padrão
 
@@ -336,7 +336,11 @@ Uma outra maneira de obter esses resultados é por meio das funções `range()` 
 
 ```{r}
 #| label: amplitude-funcao
-diff(range(parada_c))
+min_max <- range(parada_b)
+min_max
+
+amp <- diff(min_max)
+amp
 ```
 
 A principal limitação da amplitude é sua sensibilidade extrema a valores extremos. Um único valor atípico, muito alto ou muito baixo, pode inflar consideravelmente a amplitude, sem que isso reflita o comportamento da maioria dos dados. É aí que entra em cena o **Intervalo Interquartil**.
@@ -349,12 +353,18 @@ $$
 \text{IQR} = Q_3 - Q_1
 $$
 
-Como ele cobre apenas os 50% centrais dos dados, é muito mais robusto a *outliers* do que a amplitude. Para distribuições assimétricas, o IQR é frequentemente preferível ao desvio-padrão como medida de dispersão.
+Como ele cobre apenas os 50% centrais dos dados, é muito mais robusto a valores extremos do que a amplitude. Para obtê-lo manualmente, fazemos:
 
 ```{r}
 #| label: iqr-bruto
-# Força bruta
-quantile(parada_c, 0.75) - quantile(parada_c, 0.25)
+q1 <- quantile(parada_c, 0.25)
+q1
+
+q3 <- quantile(parada_c, 0.75)
+q3
+
+iqr <- q3 - q1
+iqr # Veja que aparece um 75% acima do valor 8 (herdado de q3), mas que deve ser desconsiderado.
 ```
 
 Assim como as demais estatísticas, também é possível calcular o IQR por meio de uma função pré-definida no R *base*:

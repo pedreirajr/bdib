@@ -568,7 +568,7 @@ window.Quarto = {
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>Observe como os valores do atraso médio são idênticos (5 minutos). Note, entretanto, que as experiências dos passageiros nas três paradas são muito diferentes. Enquanto na parada A os atrasos variam pouco, na parada C eles oscilam entre zero e dez minutos, uma diferença não capturada pela média. Podemos avaliar essa diferença no gráfico abaixo, onde cada ponto representa uma parada (eixo y) e seu respectivo valor de atraso (eixo x). No <a href="./4-visualizacao-de-dados-tabulares.html">Capítulo 4</a>, entenderemos como produzir esse tipo de visualização no R.</p>
+<p>Observe como os valores do atraso médio são idênticos (5 minutos). Note, entretanto, que as experiências dos passageiros nas três paradas são muito diferentes. Enquanto na parada A os atrasos variam pouco, na parada C eles oscilam entre zero e dez minutos, uma diferença não capturada pela média. Podemos avaliar essa diferença no gráfico abaixo, onde cada ponto representa uma parada (eixo y) e seu respectivo valor de atraso (eixo x). No <a href="./4-visualizacao-de-dados-tabulares.html">Capítulo 4</a>, entenderemos como produzir visualizações como esta no R.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-paradas-dotplot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -588,10 +588,10 @@ Figura&nbsp;2.1: Atrasos de ônibus em três paradas com a mesma média (5 min).
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="variância"><span class="header-section-number">2.3.1</span> Variância</h3>
 <p>Em essência, a variância dimensiona o quanto os valores de uma determinada variável se encontram longe da sua média. Para tanto, variância calcula <em>a média dos desvios quadráticos em relação à média dos dados</em>. Se essa descrição não te parece intuitiva, vamos entender, passo a passo, como o cálculo da variância funciona:</p>
 <p><strong>Passo 1:</strong> calcule os desvios de cada observação <span class="math inline">\(i\)</span> (<span class="math inline">\(d_i\)</span>) em relação à média, fazendo <span class="math inline">\(d_i = x_i - \bar{x}\)</span>. Observe que o conceito de <em>desvio</em> é simplesmente a diferença numérica entre um valor específico de uma observação <span class="math inline">\(i\)</span> (<span class="math inline">\(x_i\)</span>) e a sua média.</p>
-<p><strong>Passo 2:</strong> eleve cada desvio ao quadrado, <span class="math inline">\((x_i - \bar{x})^2\)</span>. Todos os termos ficam positivos, eliminando o cancelamento entre desvios positivos e negativos.</p>
+<p><strong>Passo 2:</strong> eleve cada desvio ao quadrado, <span class="math inline">\((x_i - \bar{x})^2\)</span>.</p>
 <p><strong>Passo 3:</strong> calcule a média dos desvios quadráticos. Para uma amostra, divide-se por <span class="math inline">\(n - 1\)</span> (e não por <span class="math inline">\(n\)</span>) para obter aquilo que chamamos de um estimador <em>não-viesado</em> da variância populacional em Estatística. Não se preocupe com isto agora, pois é tema para o futuro.</p>
-<p>Neste momento, você pode estar se perguntando “por que elevar os desvios ao quadrado, ao invés de tomar a sua média diretamente?”. Note que a soma desses desvios <span class="math inline">\(\sum_{i=1}^{n} d_i\)</span> é sempre zero, pois os desvios positivos e negativos se cancelam, o que faz com que a média desses desvios, ou seja <span class="math inline">\(\bar{d_i}=\frac{1}{n} \sum_{i=1}^{n} d_i\)</span>, seja sempre zero. Uma maneira de contornar essa situação é elevar os desvios ao quadrado antes de calcular a média, pois isso tornam positivos os valores de desvios negativos.</p>
-<p>Em uma única fórmula, os passos 1 a 3 do cálculo variância amostral, dada por <span class="math inline">\(s^2\)</span>, podem ser representados por:</p>
+<p>Neste momento, você pode estar se perguntando “por que elevar os desvios ao quadrado, ao invés de tomar a sua média diretamente?”. Note que a soma desses desvios <span class="math inline">\(\sum_{i=1}^{n} d_i\)</span> é sempre zero, pois os desvios positivos e negativos se cancelam, o que faz com que a média desses desvios, ou seja <span class="math inline">\(\bar{d_i}=\frac{1}{n} \sum_{i=1}^{n} d_i\)</span>, seja também zero. Uma maneira de contornar essa situação é elevar os desvios ao quadrado antes de calcular a média, pois isso tornam positivos os valores negativos de desvio.</p>
+<p>Se quisermos representar os passos 1 a 3 do cálculo variância amostral (dada por <span class="math inline">\(s^2\)</span>) em uma única fórmula, fazemos então:</p>
 <p><span class="math display">\[
 s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
 \]</span></p>
@@ -628,7 +628,7 @@ s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
-<p>Uma limitação da variância é que sua unidade de medida é o quadrado da unidade original. por exemplo, se os tempos são medidos em minutos, a variância é expressa em minutos², o que dificulta sua interpretação direta. Para tanto, temos uma alternativa interessante denominada <strong>Desvio-padrão</strong>.</p>
+<p>Uma limitação da variância é que sua unidade de medida é o quadrado da unidade original. Por exemplo, se os tempos são medidos em minutos, a variância é expressa em minutos ao quadrado (<span class="math inline">\(min^2\)</span>, o que dificulta sua interpretação direta. Para tanto, temos uma alternativa interessante denominada <strong>Desvio-padrão</strong>.</p>
 </section>
 <section id="desvio-padrão" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="desvio-padrão"><span class="header-section-number">2.3.2</span> Desvio-padrão</h3>
@@ -683,9 +683,15 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 </div>
 <p>Uma outra maneira de obter esses resultados é por meio das funções <code>range()</code> e <code>diff()</code>. Enquanto a primeira retorna um vetor com os valores mínimo e máximo da base de dados, a segunda calcula a diferença entre a segunda e a primeira observação desse vetor<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(parada_c))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>min_max <span class="ot">&lt;-</span> <span class="fu">range</span>(parada_b)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>min_max</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
+<pre><code>[1] 1 9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>amp <span class="ot">&lt;-</span> <span class="fu">diff</span>(min_max)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>amp</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
 </div>
 </div>
 <p>A principal limitação da amplitude é sua sensibilidade extrema a valores extremos. Um único valor atípico, muito alto ou muito baixo, pode inflar consideravelmente a amplitude, sem que isso reflita o comportamento da maioria dos dados. É aí que entra em cena o <strong>Intervalo Interquartil</strong>.</p>
@@ -696,10 +702,22 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 <p><span class="math display">\[
 \text{IQR} = Q_3 - Q_1
 \]</span></p>
-<p>Como ele cobre apenas os 50% centrais dos dados, é muito mais robusto a <em>outliers</em> do que a amplitude. Para distribuições assimétricas, o IQR é frequentemente preferível ao desvio-padrão como medida de dispersão.</p>
+<p>Como ele cobre apenas os 50% centrais dos dados, é muito mais robusto a valores extremos do que a amplitude. Para obtê-lo manualmente, fazemos:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Força bruta</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(parada_c, <span class="fl">0.75</span>) <span class="sc">-</span> <span class="fu">quantile</span>(parada_c, <span class="fl">0.25</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(parada_c, <span class="fl">0.25</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>q1</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>25% 
+  1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(parada_c, <span class="fl">0.75</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>q3</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>75% 
+  9 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>iqr <span class="co"># Veja que aparece um 75% acima do valor 8 (herdado de q3), mas que deve ser desconsiderado.</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>75% 
   8 </code></pre>
@@ -707,7 +725,7 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 </div>
 <p>Assim como as demais estatísticas, também é possível calcular o IQR por meio de uma função pré-definida no R <em>base</em>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(parada_c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(parada_c)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -719,27 +737,27 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 <p>Para variáveis categóricas, as medidas de posição baseadas em operações aritméticas (como média e mediana) não fazem sentido. Não é possível calcular a “média” de uma variável que represente o modo de transporte que a pessoa utiliza na viagem ao trabalho, por exemplo. O que importa, nesse caso, é conhecer quais categorias existem, com que frequência cada uma aparece e qual delas é a mais comum.</p>
 <p>Considere uma amostra de 20 pessoas pesquisadas sobre o modo de transporte principal utilizado nas viagens ao trabalho:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>modo <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"caminhada"</span>, <span class="st">"automovel"</span>, <span class="st">"bicicleta"</span>,</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"motocicleta"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>,</span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"caminhada"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"bicicleta"</span>, <span class="st">"onibus"</span>,</span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"automovel"</span>, <span class="st">"motocicleta"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"caminhada"</span></span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>modo <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"caminhada"</span>, <span class="st">"automovel"</span>, <span class="st">"bicicleta"</span>,</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"motocicleta"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>,</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"caminhada"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"bicicleta"</span>, <span class="st">"onibus"</span>,</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"automovel"</span>, <span class="st">"motocicleta"</span>, <span class="st">"onibus"</span>, <span class="st">"automovel"</span>, <span class="st">"caminhada"</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Com a função <code>unique()</code>, é possível listar as categorias distintas presentes na variável, sem repetição:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "onibus"      "automovel"   "caminhada"   "bicicleta"   "motocicleta"</code></pre>
 </div>
 </div>
 <p>Vimos anteriormente (<a href="#sec-moda" class="quarto-xref"><span>Seção 2.2.3</span></a>) que a função <code>table()</code> nos ajudou a calcular a moda de uma variável relativa à quantidade de automóveis em cada residência de uma pesquisa. De maneira análoga, vamos utilizá-la aqui para identificar a frequência absoluta de cada nível/categoria da variável categórica <code>modo</code> que criamos acima:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>tab_modo <span class="ot">&lt;-</span> <span class="fu">table</span>(modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>tab_modo <span class="ot">&lt;-</span> <span class="fu">table</span>(modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Para obter as proporções (frequências relativas), aplica-se <code>prop.table()</code> sobre o resultado de <code>table()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(tab_modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(tab_modo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>modo
   automovel   bicicleta   caminhada motocicleta      onibus 
@@ -748,7 +766,7 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 </div>
 <p>Multiplicando por 100, obtemos os percentuais:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(tab_modo) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(tab_modo) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>modo
   automovel   bicicleta   caminhada motocicleta      onibus 
@@ -757,7 +775,7 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 </div>
 <p>Nesse conjunto de dados, o automóvel é o modo mais frequente, com 35% das respostas. Esse é exatamente o conceito de <strong>moda</strong> aplicado a variáveis categóricas: a categoria com maior frequência. Conforme visto anteriormente na seção sobre moda, o R não possui uma função nativa para isso, mas a combinação <code>which.max(table())</code> resolve o caso:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(modo)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(modo)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "automovel"</code></pre>
 </div>
@@ -781,11 +799,11 @@ s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
 <li>Calcule a variância e o desvio-padrão de cada grupo usando “força bruta” e funções pré-definidas. Qual grupo apresenta maior homogeneidade nas notas?</li>
 </ol>
 <p><strong>3.</strong> O vetor abaixo registra o grau de instrução de 15 entrevistados em uma pesquisa domiciliar:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>instrucao <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"fundamental"</span>, <span class="st">"medio"</span>, <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"fundamental"</span>,</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"medio"</span>, <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"fundamental"</span>, <span class="st">"medio"</span>,</span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"sem instrucao"</span>, <span class="st">"fundamental"</span>, <span class="st">"medio"</span></span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>instrucao <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"fundamental"</span>, <span class="st">"medio"</span>, <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"fundamental"</span>,</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"medio"</span>, <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"fundamental"</span>, <span class="st">"medio"</span>,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"superior"</span>, <span class="st">"medio"</span>, <span class="st">"sem instrucao"</span>, <span class="st">"fundamental"</span>, <span class="st">"medio"</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="a">
 <li>Quais são as categorias distintas presentes na variável?</li>
 <li>Monte a tabela de frequências absolutas e relativas. Qual é a categoria mais frequente?</li>
