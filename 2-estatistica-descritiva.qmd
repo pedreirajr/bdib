@@ -8,7 +8,7 @@ title: "Estatística Descritiva"
 library(tidyverse)
 ```
 
-Para quem preferir esta aula em formato audiovisual, há uma *playlist* de videoaulas do meu canal do YouTube sobre Análise Exploratória de Dados com R. O conteúdo deste capítulo está compreendido nos vídeos 02 e 03 da *playlist*.
+Para quem preferir esta aula em formato audiovisual, há uma *playlist* de videoaulas do meu canal do YouTube sobre Análise Exploratória de Dados com R. O conteúdo deste capítulo está compreendido nos vídeos 02 e 03.
 
 [▶️ Abrir playlist no YouTube](https://www.youtube.com/playlist?list=PL_v-tArg0FZhA6dqbGv1uQMQqFOUPlryE)
 
