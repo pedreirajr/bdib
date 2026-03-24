@@ -587,13 +587,13 @@ Figura&nbsp;2.1: Atrasos de ônibus em três paradas com a mesma média (5 min).
 <section id="variância" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="variância"><span class="header-section-number">2.3.1</span> Variância</h3>
 <p>Em essência, a variância dimensiona o quanto os valores de uma determinada variável se encontram longe da sua média. Para tanto, variância calcula <em>a média dos desvios quadráticos em relação à média dos dados</em>. Se essa descrição não te parece intuitiva, vamos entender, passo a passo, como o cálculo da variância funciona:</p>
-<p><strong>Passo 1:</strong> calcule os desvios de cada observação <span class="math inline">\(i\)</span> (<span class="math inline">\(d_i\)</span>) em relação à média, fazendo <span class="math inline">\(d_i = x_i - \bar{x}\)</span>. Observe que o conceito de <em>desvio</em> é simplesmente a diferença numérica entre um valor específico de uma observação <span class="math inline">\(i\)</span> (<span class="math inline">\(x_i\)</span>) e a sua média.</p>
-<p><strong>Passo 2:</strong> eleve cada desvio ao quadrado, <span class="math inline">\((x_i - \bar{x})^2\)</span>.</p>
+<p><strong>Passo 1:</strong> calcule os desvios de cada observação <span class="math inline">\(i\)</span> (<span class="math inline">\(d_i\)</span>) em relação à média, fazendo <span class="math inline">\(d_i = x_i - \bar{X}\)</span>. Observe que o conceito de <em>desvio</em> é simplesmente a diferença numérica entre um valor específico de uma observação <span class="math inline">\(i\)</span> (<span class="math inline">\(x_i\)</span>) e a sua média.</p>
+<p><strong>Passo 2:</strong> eleve cada desvio ao quadrado, <span class="math inline">\((x_i - \bar{X})^2\)</span>.</p>
 <p><strong>Passo 3:</strong> calcule a média dos desvios quadráticos. Para uma amostra, divide-se por <span class="math inline">\(n - 1\)</span> (e não por <span class="math inline">\(n\)</span>) para obter aquilo que chamamos de um estimador <em>não-viesado</em> da variância populacional em Estatística. Não se preocupe com isto agora, pois é tema para o futuro.</p>
 <p>Neste momento, você pode estar se perguntando “por que elevar os desvios ao quadrado, ao invés de tomar a sua média diretamente?”. Note que a soma desses desvios <span class="math inline">\(\sum_{i=1}^{n} d_i\)</span> é sempre zero, pois os desvios positivos e negativos se cancelam, o que faz com que a média desses desvios, ou seja <span class="math inline">\(\bar{d_i}=\frac{1}{n} \sum_{i=1}^{n} d_i\)</span>, seja também zero. Uma maneira de contornar essa situação é elevar os desvios ao quadrado antes de calcular a média, pois isso tornam positivos os valores negativos de desvio.</p>
 <p>Se quisermos representar os passos 1 a 3 do cálculo variância amostral (dada por <span class="math inline">\(s^2\)</span>) em uma única fórmula, fazemos então:</p>
 <p><span class="math display">\[
-s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{X})^2
 \]</span></p>
 <p>Vamos calcular a variância amostral na “força bruta”. Começamos primeiro produzindo os desvios:</p>
 <div class="cell">
@@ -634,7 +634,7 @@ s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="desvio-padrão"><span class="header-section-number">2.3.2</span> Desvio-padrão</h3>
 <p>O desvio-padrão resolve a limitação da variância ao tomar sua raiz quadrada, devolvendo o resultado à unidade de medida original dos dados. Representado por <span class="math inline">\(s\)</span>, o desvio-padrão possui a seguinte formulação:</p>
 <p><span class="math display">\[
-s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{X})^2}
 \]</span></p>
 <p>Calculando, na “força bruta”, temos:</p>
 <div class="cell">

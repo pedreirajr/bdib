@@ -244,9 +244,9 @@ As medidas de dispersão quantificam essa variação em torno da média. Abordar
 
 Em essência, a variância dimensiona o quanto os valores de uma determinada variável se encontram longe da sua média. Para tanto, variância calcula *a média dos desvios quadráticos em relação à média dos dados*. Se essa descrição não te parece intuitiva, vamos entender, passo a passo, como o cálculo da variância funciona:
 
-**Passo 1:** calcule os desvios de cada observação $i$ ($d_i$) em relação à média, fazendo $d_i = x_i - \bar{x}$. Observe que o conceito de *desvio* é simplesmente a diferença numérica entre um valor específico de uma observação $i$ ($x_i$) e a sua média.
+**Passo 1:** calcule os desvios de cada observação $i$ ($d_i$) em relação à média, fazendo $d_i = x_i - \bar{X}$. Observe que o conceito de *desvio* é simplesmente a diferença numérica entre um valor específico de uma observação $i$ ($x_i$) e a sua média.
 
-**Passo 2:** eleve cada desvio ao quadrado, $(x_i - \bar{x})^2$.
+**Passo 2:** eleve cada desvio ao quadrado, $(x_i - \bar{X})^2$.
 
 **Passo 3:** calcule a média dos desvios quadráticos. Para uma amostra, divide-se por $n - 1$ (e não por $n$) para obter aquilo que chamamos de um estimador *não-viesado* da variância populacional em Estatística. Não se preocupe com isto agora, pois é tema para o futuro.
 
@@ -255,7 +255,7 @@ Neste momento, você pode estar se perguntando "por que elevar os desvios ao qua
 Se quisermos representar os passos 1 a 3 do cálculo variância amostral (dada por $s^2$) em uma única fórmula, fazemos então:
 
 $$
-s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{X})^2
 $$
 
 Vamos calcular a variância amostral na "força bruta". Começamos primeiro produzindo os desvios:
@@ -294,7 +294,7 @@ Uma limitação da variância é que sua unidade de medida é o quadrado da unid
 O desvio-padrão resolve a limitação da variância ao tomar sua raiz quadrada, devolvendo o resultado à unidade de medida original dos dados. Representado por $s$, o desvio-padrão possui a seguinte formulação:
 
 $$
-s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{X})^2}
 $$
 
 Calculando, na "força bruta", temos:

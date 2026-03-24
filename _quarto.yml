@@ -7,7 +7,9 @@ lang: pt-BR
 book:
   title: "Bases de Dados Institucionais Brasileiras"
   subtitle: "Conceitos, métodos e aplicações em R"
-  author: "Jorge Ubirajara Pedreira Junior"
+  author:
+    - name: "Jorge Ubirajara Pedreira Junior"
+      url: https://pedreirajr.github.io/website/
   language: pt
   page-navigation: true
   search: true
