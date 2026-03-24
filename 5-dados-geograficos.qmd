@@ -919,12 +919,12 @@ Faça o download dos arquivos abaixo e salve-os na mesma pasta de trabalho:
 
 **Exercício 1.** Carregue os dois arquivos com `st_read()`. Verifique o SRC de cada um com `st_crs()`. Plote ambas as camadas no mesmo mapa: as regiões de saúde como polígonos e os estabelecimentos como pontos.
 
-**Exercício 2.** Reprojeite os dois objetos para SIRGAS 2000 Policônico (EPSG 5880), um SRC projetado adequado para análises em escala do Brasil.
+**Exercício 2.** Reprojete os dois objetos para SIRGAS 2000 Policônico (EPSG 5880), um SRC projetado adequado para análises em escala do Brasil.
 
-**Exercício 3.** Calcule o centroide de cada região de saúde usando `st_point_on_surface()`. Plote os centroides sobre o mapa das regiões.
+**Exercício 3.** Calcule o centroide de cada região de saúde usando duas opções de funções, justificando qual das duas seria mais apropriada. Plote os centroides sobre o mapa das regiões.
 
-**Exercício 4.** Crie um buffer de 20 km ao redor dos centroides das regiões de saúde. Lembre-se de que o SRC já está em metros (EPSG 5880), então o argumento `dist` deve ser `20000`.
+**Exercício 4.** Crie um buffer de 20 km ao redor dos centroides das regiões de saúde.
 
-**Exercício 5.** Use `st_intersection()` para obter os estabelecimentos de saúde que estão dentro do buffer de 20 km de cada centroide. Quantos estabelecimentos existem em cada região?
+**Exercício 5.** Obtenha os estabelecimentos de saúde que estão dentro do buffer de 20 km de cada centroide. Quantos estabelecimentos existem em cada região?
 
-**Exercício 6.** Ordene as regiões de saúde por número de estabelecimentos no buffer (do maior para o menor) e apresente o resultado em uma tabela com `knitr::kable()`.
+**Exercício 6.** Ordene as regiões de saúde por número de estabelecimentos no buffer (do maior para o menor) e apresente o resultado em formato de tabela.
