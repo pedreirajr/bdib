@@ -300,7 +300,7 @@ Os códigos EPSG aparecem frequentemente em arquivos geográficos e funções de
 
 Com os conceitos de SRC estabelecidos, é possível avançar para o lado prático sobre como trabalhar com dados geográficos no R, tema das nossas próximas seções.
 
-## Geoprocessamento com o pacote `sf` para R
+## Dados vetoriais e o pacote `sf` para R
 
 O pacote `sf` (*simple features*) é a principal biblioteca para dados geográficos **vetoriais** no R. Ele implementa o padrão ISO 19125, conhecido como *Simple Features*, que define como representar e operar sobre geometrias vetoriais de forma consistente. Internamente, o `sf` se apoia em quatro bibliotecas escritas em C++:
 
@@ -628,7 +628,7 @@ Geoprocessamento é qualquer transformação lógica ou matemática que extraia,
 
 As seções a seguir percorrem as operações mais frequentes, na ordem em que naturalmente se encadeiam: reprojeção primeiro (pré-requisito para operações métricas), depois as operações geométricas propriamente ditas.
 
-### Reprojeção — `st_transform()`
+### Reprojeção
 
 Como visto na seção sobre SRC, análises que envolvam distâncias, áreas ou zonas de influência exigem um SRC projetado com unidades métricas. A função `st_transform()` converte um objeto `sf` de um SRC para outro, recebendo como argumento o código EPSG do sistema de destino.
 
@@ -761,8 +761,7 @@ inter_metro_bairros <- st_intersection(bff_estacoes, bairros_utm)
 
 ggplot() +
   geom_sf(data = bairros_utm, fill = "gray92", color = "gray70", linewidth = 0.2) +
-  geom_sf(data = inter_metro_bairros, fill = "steelblue", alpha = 0.6, color = NA) +
-  geom_sf(data = est_metro_utm, color = "white", size = 1.5) +
+  geom_sf(data = inter_metro_bairros, fill = "steelblue", alpha = 0.6, color = 'black') +
   theme_minimal()
 ```
 
