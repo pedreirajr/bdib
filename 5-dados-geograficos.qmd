@@ -2,6 +2,8 @@
 title: "Dados Geográficos"
 ---
 
+<!-- Capítulo de agradecimentos colocar Pati, que ajudou demais!!! -->
+
 Praticamente toda questão relevante em política pública, planejamento urbano ou ciências sociais tem uma dimensão espacial. Precisamos saber onde as pessoas moram, se as escolas estão bem distribuídas no território ou quais bairros têm mais acesso a serviços de saúde. Incorporar essa dimensão à análise de dados exige um conjunto de conceitos e ferramentas específicos para trabalhar com dados geográficos.
 
 Este capítulo é uma introdução ao tema. Há livros e disciplinas inteiras dedicados a geoprocessamento utilizando o R, a exemplo do [*Geocomputation with R*](https://r.geocompx.org/) [@lovelace_geocomputation_2025] e do [*Spatial Statistics for Data Science*](https://www.paulamoraga.com/book-spatial/) [@moraga_spatial_2023]. Temos um objetivo mais modesto por aqui, que é o de consolidar os requisitos teóricos mínimos para trabalharmos com os dados geográficos das bases que ocupam os demais capítulos.
@@ -257,8 +259,8 @@ muni_ba <- muni_ba |>
   ))
 
 # Bbox geográfico centrado em Vitória da Conquista
-xlim_geo <- c(-42.5, -39.0)
-ylim_geo <- c(-16.5, -13.0)
+xlim_geo <- c(-42, -40.0)
+ylim_geo <- c(-16, -14.0)
 
 bbox_utm <- st_bbox(
   st_transform(
@@ -561,7 +563,7 @@ ggplot() +
 
 Dois aspectos merecem atenção. Primeiro, o SRC é definido no momento da criação (`crs = 4674`). Sem ele, o objeto `sf` existiria, mas seria espacialmente indefinido. Segundo, a estrutura resultante é um *data frame* comum: `estacoes_hip` tem linhas (uma por estação), colunas de atributos (`nome`) e uma coluna de geometria.
 
-### Lendo Arquivos Geográficos com `st_read()`
+### Lendo Arquivos Geográficos
 
 Mais comum do que criarmos arquivos geográficos do zero é lermos arquivos existentes de alguma base de dados. Eles podem assumir diversos formatos (extensões) predefinidos, como GeoPackage (`.gpkg`), GeoJSON (`.geojson`), Shapefile (`.shp`), entre outros. A função `st_read()` lê qualquer um desses formatos e devolve um objeto `sf`.
 
@@ -741,9 +743,46 @@ As seções a seguir percorrem as operações mais frequentes, na ordem em que n
 
 ### Reprojeção
 
-Como visto na seção sobre SRC, análises que envolvam distâncias, áreas ou zonas de influência exigem um SRC projetado com unidades métricas. A função `st_transform()` converte um objeto `sf` de um SRC para outro, recebendo como argumento o código EPSG do sistema de destino.
+Como visto na seção sobre SRC, para análises que envolvam distâncias, áreas ou zonas de influência é interessante que as operações sejam realizadas em um SRC projetado com unidades métricas. Para tanto, a função `st_transform()` converte um objeto `sf` de um SRC para outro, recebendo como argumento o código EPSG do sistema de destino.
 
-Antes de criar buffers de 600 metros ao redor das estações de metrô, por exemplo, é necessário reprojetar as estações de SIRGAS 2000 geográfico (EPSG 4674) para SIRGAS 2000 UTM fuso 24S (EPSG 31984), o SRC projetado adequado para Salvador:
+O primeiro passo antes de reprojetar é identificar o fuso UTM correto para a área de estudo. O sistema UTM divide o globo em 60 fusos de 6° de largura, numerados de 1 a 60 a partir do antimeridiano (longitude 180° O) em direção ao leste. Para descobrir a qual fuso pertence uma determinada longitude, some 180° à longitude e divida por 6, arredondando o resultado para cima.
+
+Por exemplo, o fuso que cobre o Rio de Janeiro abrange as longitudes de −48° a −42°. Tomando a longitude −42°, a operação fica [180 + (−42)] / 6 = 138 / 6 = 23. Como o Rio de Janeiro fica ao sul do Equador, o fuso é 23 S. Para Salvador, em vez de estimar a longitude de cabeça, extraímos essa informação diretamente dos dados. A função `st_bbox()` retorna o *bounding box* de um objeto `sf`, um retângulo definido por quatro valores: `xmin` e `xmax` (longitudes extremas) e `ymin` e `ymax` (latitudes extremas). O trecho abaixo extrai o bounding box dos bairros de Salvador:
+
+```{r}
+#| label: bbox-bairros
+bbox <- st_bbox(bairros)
+bbox
+```
+
+Com as quatro coordenadas em mãos, aplicamos a fórmula do fuso separadamente a `xmin` e `xmax`, o que permite verificar se toda a área cabe em um único fuso ou se cruza a fronteira entre dois. O hemisfério é derivado de `ymin` e `ymax`, cobrindo toda a extensão latitudinal da área. A função `ceiling()` arredonda para cima em cada cálculo:
+
+```{r}
+#| label: calculo-fuso-utm
+fuso_oeste <- ceiling((180 + bbox["xmin"]) / 6)
+fuso_leste <- ceiling((180 + bbox["xmax"]) / 6)
+hemi_min   <- if (bbox["ymin"] >= 0) "N" else "S"
+hemi_max   <- if (bbox["ymax"] >= 0) "N" else "S"
+```
+
+Deste modo, temos os seguintes resultados para cada coordenada:
+```{r}
+cat("Fuso (xmin):", fuso_oeste, hemi_min, "\n")
+cat("Fuso (xmax):", fuso_leste, hemi_max, "\n")
+cat("Hemisfério (ymin):", hemi_min,       "\n")
+cat("Hemisfério (ymax):", hemi_max,       "\n")
+```
+
+
+Os quatro valores confirmam que todos os bairros de Salvador estão inteiramente no fuso 24 S. Os fusos calculados a partir de `xmin` e `xmax` coincidem, e toda a extensão da cidade fica ao sul do Equador. Para o datum SIRGAS 2000, os códigos EPSG dos fusos UTM no hemisfério sul seguem o padrão 319XX, onde XX é o número do fuso. O fuso 23 S corresponde ao EPSG 31983, o fuso 24 S ao EPSG 31984, e assim por diante. Essa relação pode ser calculada diretamente:
+
+```{r}
+#| label: epsg-sirgas-utm
+epsg_sirgas_utm_s <- 31960 + fuso_leste
+cat("EPSG (SIRGAS 2000 UTM fuso", fuso_leste, hemi_max, "):", epsg_sirgas_utm_s)
+```
+
+Com o código EPSG em mãos, a reprojeção com `st_transform()` é imediata. Antes de criar buffers de 600 metros ao redor das estações de metrô (mais adiante), por exemplo, é interessante reprojetar as estações de SIRGAS 2000 geográfico (EPSG 4674) para SIRGAS 2000 UTM fuso 24S (EPSG 31984), o SRC projetado adequado para Salvador:
 
 ```{r}
 #| label: reprojecao-metro
@@ -754,6 +793,14 @@ st_crs(est_metro_utm)$epsg
 ```
 
 Sempre que for criar buffers, calcular áreas ou medir distâncias, verifique o SRC com `st_crs()` e reprojeite se necessário.
+
+::: {.callout-note}
+## Quando a área de estudo cobre dois fusos UTM
+
+Áreas extensas, como estados de grande amplitude longitudinal, podem cruzar a fronteira entre dois fusos UTM. Nesse caso, `fuso_oeste` e `fuso_leste` retornarão valores diferentes. Reprojetar para qualquer um dos dois fusos introduz distorções crescentes nas feições que se afastam do meridiano central escolhido.
+
+Para essas situações, a alternativa mais indicada é adotar uma projeção que cubra toda a área de interesse de maneira uniforme. Para o Brasil, as opções mais comuns são o SIRGAS 2000 / Brazil Polyconic (EPSG 5880), adequado para análises que abranjam o território nacional inteiro, e o SIRGAS 2000 / Brazil Albers (EPSG 10857), indicado quando o objetivo é preservar e comparar áreas entre regiões. Para análises municipais ou estaduais de menor extensão longitudinal, o UTM é suficiente e deve ser preferido pela sua precisão local.
+:::
 
 ### Centroides
 
