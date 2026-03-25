@@ -4,7 +4,7 @@ title: "Dados Geográficos"
 
 Praticamente toda questão relevante em política pública, planejamento urbano ou ciências sociais tem uma dimensão espacial: onde as pessoas moram, onde estão as escolas, quais bairros têm mais acesso a serviços de saúde. Incorporar essa dimensão à análise de dados exige um conjunto de conceitos e ferramentas específicos para trabalhar com dados geográficos.
 
-Este capítulo é uma introdução ao tema. Há livros e disciplinas inteiras dedicados à análise espacial e ao geoprocessamento, a exemplo de [*Geocomputation with R*](https://r.geocompx.org/) [@lovelace_geocomputation_2025] e [*Spatial Statistics for Data Science*](https://www.paulamoraga.com/book-spatial/) [@moraga_spatial_2023]. Temos um objetivo mais modesto por aqui, que é o de apresentar os conceitos teóricos mínimos necessários para operar com dados geográficos em R e demonstrar as operações de geoprocessamento mais úteis no contexto das bases de dados brasileiras que ocupam os demais capítulos.
+Este capítulo é uma introdução ao tema. Há livros e disciplinas inteiras dedicados a geoprocessamento utilizando R, a exemplo de [*Geocomputation with R*](https://r.geocompx.org/) [@lovelace_geocomputation_2025] e [*Spatial Statistics for Data Science*](https://www.paulamoraga.com/book-spatial/) [@moraga_spatial_2023]. Temos um objetivo mais modesto por aqui, que é o de apresentar os conceitos teóricos mínimos necessários para operar com dados geográficos em R e demonstrar as operações de geoprocessamento mais úteis no contexto das bases de dados brasileiras que ocupam os demais capítulos.
 
 O foco recai inteiramente sobre dados vetoriais e como processá-los com o pacote `sf` (*simple features*), que é a principal biblioteca para esse tipo de dado no ecossistema R. Trabalharemos com diversos arquivos para executar as atividades ao longo do capítulo, que seguem abaixo. Desde já, recomendo que você faça o *donwload* dos mesmos para uma pasta em seu computador, crie um arquivo de projeto do R neste mesmo local e de um *script* `.R` para explorá-los conforme vá desenvolvendo a leitura do capítulo.
 
@@ -21,7 +21,6 @@ O foco recai inteiramente sobre dados vetoriais e como processá-los com o pacot
 #| include: false
 library(tidyverse)
 library(sf)
-library(spData)
 library(terra)
 library(patchwork)
 ```
@@ -89,11 +88,11 @@ p_vetor <- ggplot() +
   annotate("text", x = 2.3, y = 0.1,
            label = "Polígono", color = "steelblue4",
            size = 3.8, fontface = "bold") +
-  annotate("text", x = 4.8, y = 9.5,
+  annotate("text", x = 4.8, y = 8.5,
            label = "Linha", color = "tomato",
            size = 3.8, fontface = "bold") +
   annotate("text", x = 7.5, y = 5.3,
-           label = "Pontos", color = "#2e7d32",
+           label = "Ponto", color = "#2e7d32",
            size = 3.8, fontface = "bold") +
   coord_cartesian(xlim = c(0, 10), ylim = c(0, 10)) +
   labs(title = "Vetorial") +
@@ -130,7 +129,7 @@ p_raster <- ggplot(r_df, aes(x = x, y = y, fill = valor)) +
 p_vetor + p_raster + plot_layout(widths = c(1, 1))
 ```
 
-A divisão entre os dois modelos acompanha, em geral, a natureza das perguntas de pesquisa. As ciências sociais, em geral, ao trabalhar com assentamentos humanos, redes de transporte e divisões administrativas, fazem uso intensivo de dados vetoriais. As ciências ambientais e o sensoriamento remoto se apoiam predominantemente em dados *raster*. Neste capítulo, teremos um foco em operações de geoprocessamento mais voltadas para dados vetoriais.
+A divisão entre os dois modelos acompanha, em geral, a natureza das perguntas de pesquisa. As ciências sociais, em geral, ao trabalhar com assentamentos humanos, redes de transporte e divisões administrativas, fazem uso intensivo de dados vetoriais. As ciências ambientais se apoiam predominantemente em dados *raster*, especialmente aqueles advindos de sensoriamento remoto. Neste capítulo, teremos um foco em operações de geoprocessamento mais voltadas para dados vetoriais.
 
 ### Sistema de Referência de Coordenadas (SRC)
 
@@ -227,16 +226,15 @@ Vale salientar que o sistema oficial de referência no Brasil é o SIRGAS 2000 (
 
 O sistema de coordenadas define os eixos e as unidades que permitem localizar pontos dentro do *datum*, podendo ser de dois tipos principais: **geográfico** e **projetado**. Um sistema de coordenadas **geográfico** expressa a posição em latitude e longitude, medidas em graus. A latitude varia de −90° (polo sul) a +90° (polo norte), enquanto a longitude varia de −180° a +180°. É o sistema mais familiar e universal, adotado por GPS, mapas *web* e a maioria dos arquivos geográficos distribuídos publicamente. Um sistema de coordenadas **projetado**, por sua vez, expressa a posição em coordenadas cartesianas (X e Y) sobre um plano, geralmente em metros. Para chegar a esse plano, é necessária uma projeção cartográfica, o último aspecto a tratarmos neste tópico de SRC.
 
-```{r, echo = F}
+```{r}
 #| label: fig-src-comparacao
-#| fig-cap: "Dois sistemas de referência de coordenadas: geográfico com visão global em WGS84 (acima) e projetado em UTM fuso 23S aplicado à América do Sul (abaixo)."
+#| echo: false
+#| fig-cap: "Dois sistemas de referência de coordenadas aplicados ao Brasil: geográfico em SIRGAS 2000 (acima), com eixos em graus de latitude e longitude; e projetado em SIRGAS 2000 / Policônico (abaixo), com eixos em metros."
 #| fig-width: 7
 #| fig-height: 9
 #| cache: true
 #| message: false
 #| warning: false
-
-data(world, package = "spData")
 
 fill_color   <- "#C8884A"
 border_color <- "#7A5020"
@@ -252,20 +250,19 @@ map_theme <- theme_minimal() +
     plot.subtitle    = element_text(hjust = 0.5, size = 9, color = "gray40")
   )
 
-p_geo <- world |>
+p_geo <- uf_br |>
   ggplot() +
   geom_sf(fill = fill_color, color = border_color, linewidth = 0.15) +
-  coord_sf(crs = "+proj=ortho +lat_0=25 +lon_0=15") +
-  labs(title = "SRC Geográfico — WGS84 (EPSG 4326)") +
+  coord_sf() +
+  labs(title = "Coordenadas Geográficas — SIRGAS 2000 (EPSG 4674)") +
   map_theme
 
-p_proj <- world |>
-  filter(continent == "South America") |>
-  st_transform(32723) |>
+p_proj <- uf_br |>
+  st_transform(5880) |>
   ggplot() +
   geom_sf(fill = fill_color, color = border_color, linewidth = 0.15) +
-  coord_sf(datum = sf::st_crs(32723)) +
-  labs(title = "SRC Projetado — UTM Fuso 23S (EPSG 32723)") +
+  coord_sf(datum = sf::st_crs(5880)) +
+  labs(title = "SRC Projetado — SIRGAS 2000 / Policônico (EPSG 5880)") +
   map_theme
 
 p_geo / p_proj
@@ -333,7 +330,7 @@ O padrão *Simple Features* define 18 tipos de geometria. Na prática, utilizamo
 
 ![Tipos de geometria do padrão *Simple Features* e a relação entre eles.](img/5-dados-geograficos/5-6-tipos_geometria.png){#fig-tipos-geometria}
 
-Cada tipo tem uma representação textual padronizada chamada *WKT* (*Well-Known Text*), que é o formato utilizado internamente pelo `sf` para descrever geometrias. Conhecer essa notação é útil para interpretar mensagens de erro, inspecionar objetos e criar geometrias manualmente. A função `st_as_sfc()` converte uma *string* WKT (no formato de texto, entre aspas) em um objeto de geometria do `sf`.
+Cada tipo tem uma representação textual padronizada chamada *WKT* (*Well-Known Text*), útil para inspecionar objetos `sf`, construir geometrias manualmente e trocar dados entre sistemas diferentes. A função `st_as_sfc()` converte uma *string* WKT (no formato de texto, entre aspas) em um objeto de geometria do `sf`.
 
 Um `POINT` é o tipo mais simples: um único par de coordenadas x y separadas por espaço, onde x corresponde à longitude e y à latitude:
 
@@ -669,7 +666,7 @@ ggplot() +
 
 Um *buffer* é uma zona de influência gerada ao redor de uma feição, delimitada por uma distância definida. Ele responde a perguntas como "o que está a menos de 600 metros de cada estação de metrô?" ou "qual área fica a menos de 200 metros da linha de metrô?".
 
-A função `st_buffer()` funciona sobre qualquer tipo de geometria: ao redor de um ponto, gera um círculo; ao redor de uma linha, gera uma faixa paralela; ao redor de um polígono, expande seus limites. O argumento `dist` especifica a distância em unidades do SRC — por isso a reprojeção para UTM é indispensável antes de criar buffers.
+A função `st_buffer()` funciona sobre qualquer tipo de geometria: ao redor de um ponto, gera um círculo; ao redor de uma linha, gera uma faixa paralela; ao redor de um polígono, expande seus limites. Já o argumento `dist` especifica a distância em unidades do SRC. Por isso, reprojetar para um SRC projetado antes de criar buffers é uma boa prática. Vale destacar que desde a versão 1.0 do `sf`, a biblioteca `s2geometry` permite que `st_buffer()` opere em coordenadas geográficas aceitando distâncias em metros. Todavia, trabalhar em um SRC projetado continua sendo a abordagem mais previsível e recomendável para análises locais, pois as operações geométricas são feitas diretamente em um plano métrico.
 
 ```{r}
 #| label: fig-buffer-estacoes
@@ -687,15 +684,13 @@ O mesmo raciocínio se aplica à linha do metrô:
 
 ```{r}
 #| label: fig-buffer-linha
-#| fig-cap: "Buffer de 200 metros ao redor da linha do metrô de Salvador, combinado com o buffer de 600 metros das estações."
+#| fig-cap: "Buffer de 200 metros ao redor da linha do metrô de Salvador."
 bff_linha <- st_buffer(lin_metro_utm, dist = 200)
 
 ggplot() +
   geom_sf(data = bairros, fill = "gray92", color = "gray70", linewidth = 0.2) +
   geom_sf(data = bff_linha,    fill = "#f0500f", alpha = 0.30, color = NA) +
-  geom_sf(data = bff_estacoes, fill = "steelblue", alpha = 0.35, color = NA) +
-  geom_sf(data = lin_metro_utm, color = "#f0500f", linewidth = 1) +
-  geom_sf(data = est_metro_utm, color = "steelblue", size = 2) +
+  geom_sf(data = lin_metro_utm, color = "darkred", linewidth = 1) +
   theme_minimal()
 ```
 
@@ -884,7 +879,7 @@ O argumento `.predicate` recebe qualquer um dos predicados vistos anteriormente.
 
 #### Junção Espacial
 
-Nos capítulos anteriores, os `join()` do `dplyr` combinam tabelas por colunas com valores em comum. A junção espacial faz o equivalente, usando a localização geográfica como chave e transferindo os atributos de uma camada para outra com base na posição relativa. O predicado usado é definido pelo argumento `join`, sendo `st_within` o mais comum: ele transfere os atributos de um polígono para todos os pontos que estão dentro dele.
+Nos capítulos anteriores, os `join()` do `dplyr` combinam tabelas por colunas com valores em comum. A junção espacial faz o equivalente, usando a localização geográfica como chave e transferindo os atributos de uma camada para outra com base na posição relativa. O predicado usado é definido pelo argumento `join`, sendo `st_within` um predicado bastante utilizado para esse tipo de operação: ele transfere os atributos de um polígono para todos os pontos que estão completamente dentro dele. Um detalhe importante é que `st_within` exige que o ponto esteja *dentro* do polígono — pontos que caiam exatamente sobre a fronteira podem não ser reconhecidos como pertencentes a ele. Para situações em que esse comportamento seja indesejado, `st_intersects` é uma alternativa que também considera pontos sobre a borda.
 
 O código abaixo atribui o nome do bairro a cada escola de Salvador:
 
@@ -919,7 +914,7 @@ Faça o download dos arquivos abaixo e salve-os na mesma pasta de trabalho:
 
 **Exercício 1.** Carregue os dois arquivos com `st_read()`. Verifique o SRC de cada um com `st_crs()`. Plote ambas as camadas no mesmo mapa: as regiões de saúde como polígonos e os estabelecimentos como pontos.
 
-**Exercício 2.** Reprojete os dois objetos para SIRGAS 2000 Policônico (EPSG 5880), um SRC projetado adequado para análises em escala do Brasil.
+**Exercício 2.** Reprojete os dois objetos para SIRGAS 2000 / Brazil Albers (EPSG 10857), um SRC projetado adequado para análises que demandam preservação de área no contexto do Brasil.
 
 **Exercício 3.** Calcule o centroide de cada região de saúde usando duas opções de funções, justificando qual das duas seria mais apropriada. Plote os centroides sobre o mapa das regiões.
 
