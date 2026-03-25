@@ -49,9 +49,9 @@ Antes de partir para o código, é preciso compreender o que torna um dado geogr
 
 Um dado geográfico é qualquer informação que possua referência explícita a uma localização na superfície da Terra. Essa localização pode ser absoluta, expressa em coordenadas (como latitude e longitude), ou relativa (como "200 m a leste da ponte"). A particularidade desse tipo de dado está exatamente nessa componente espacial, que abre um conjunto de análises impossíveis em uma tabela convencional, como medir proximidade entre entidades, identificar vizinhança, calcular áreas de cobertura ou detectar sobreposições entre fenômenos.
 
-Estes tipos de dados se organizam em dois grandes modelos, conhecidos como vetorial e *raster*. No modelo **vetorial**, os fenômenos são representados por entidades discretas com geometria definida. Pontos representam localizações específicas (uma escola, uma estação de metrô, um poço). Linhas representam trajetórias ou redes (uma rua, uma linha de metrô, um rio). Polígonos representam áreas com fronteiras (um bairro, um município, um estado). A cada entidade geométrica se associa uma tabela de atributos, exatamente como em um *data frame* convencional.
+Estes tipos de dados se organizam em dois grandes modelos, conhecidos como vetorial e *raster*. No modelo **vetorial**, os fenômenos são representados por entidades discretas com geometria definida. Pontos representam localizações específicas (uma escola, uma estação de metrô, um poço). Linhas representam trajetórias ou redes (uma rua, uma linha de metrô, um rio). Polígonos representam áreas com fronteiras (um bairro, um município, um estado). A cada entidade geométrica, também chamada de feição, se associa uma tabela de atributos, exatamente como em um *data frame* convencional.
 
-No modelo ***raster***, a superfície é subdividida em uma grade regular de células (pixels), às quais podem ser atribuídos valores. Esse modelo é adequado para fenômenos contínuos e distribuídos, como elevação do terreno, temperatura, precipitação e uso do solo classificado por sensoriamento remoto. Em vez de fronteiras discretas, o *raster* captura gradações no espaço.
+No modelo ***raster*** (também denominado **matriz**), a superfície é subdividida em uma grade regular de células (pixels), às quais podem ser atribuídos valores. Esse modelo é adequado para fenômenos contínuos e distribuídos, como elevação do terreno, temperatura, precipitação e uso do solo classificado por sensoriamento remoto. Em vez de fronteiras discretas, o *raster* captura gradações no espaço.
 
 ```{r}
 #| label: fig-vetor-raster
@@ -137,7 +137,7 @@ O *Sistema de Referência de Coordenadas* (SRC) é esse o contexto que define co
 
 #### *Datum*
 
-A Terra não é uma esfera perfeita nem um elipsoide regular. Sua forma real, influenciada pela gravidade e pela distribuição de massas internas, é chamada de *geoide*. O geoide é a superfície teórica que representa o nível médio dos mares estendido por baixo dos continentes, formando uma superfície de igual potencial gravitacional.
+A Terra não é uma esfera perfeita nem um elipsoide regular. Sua forma real, influenciada pela gravidade e pela distribuição de massas internas, é chamada de *geoide*. O geoide é a superfície teórica que representa o nível médio dos mares prolongado pelos continentes, formando uma superfície de igual potencial gravitacional.
 
 Como o geoide é muito irregular para ser usado diretamente em geoprocessamento, costumamos utilizar outra entidade, o *elipsoide*. Este, por sua vez, trata-se de uma superfície matemática regular que aproxima a forma da Terra, definida por dois parâmetros (o raio equatorial e o achatamento polar) e que serve de base para os cálculos de coordenadas. A relação entre estes elementos pode ser melhor observada na @fig-geoide-elipsoide.
 
