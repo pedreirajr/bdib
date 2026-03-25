@@ -137,7 +137,7 @@ O *Sistema de Referência de Coordenadas* (SRC) é esse o contexto que define co
 
 #### *Datum*
 
-A Terra não é uma esfera perfeita nem um elipsoide regular. Sua forma real, influenciada pela gravidade e pela distribuição de massas internas, é chamada de *geoide*. O geoide é a superfície teórica que representa o nível médio dos mares prolongado pelos continentes, formando uma superfície de igual potencial gravitacional.
+A Terra não é uma esfera perfeita nem um elipsoide regular. Sua forma real, influenciada pela gravidade e pela distribuição de massas internas, é chamada de *geoide*. O geoide é a superfície teórica que representa o nível médio dos mares prolongado pelos continentes, formando uma superfície de igual potencial gravitacional^[Mais precisamente, ele é uma superfície equipotencial do campo de gravidade da Terra que, nos oceanos, aproxima-se do nível médio do mar em repouso, desconsiderando efeitos dinâmicos como correntes, ventos e marés.].
 
 Como o geoide é muito irregular para ser usado diretamente em geoprocessamento, costumamos utilizar outra entidade, o *elipsoide*. Este, por sua vez, trata-se de uma superfície matemática regular que aproxima a forma da Terra, definida por dois parâmetros (o raio equatorial e o achatamento polar) e que serve de base para os cálculos de coordenadas. A relação entre estes elementos pode ser melhor observada na @fig-geoide-elipsoide.
 
