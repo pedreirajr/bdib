@@ -765,12 +765,12 @@ hemi_min   <- if (bbox["ymin"] >= 0) "N" else "S"
 hemi_max   <- if (bbox["ymax"] >= 0) "N" else "S"
 ```
 
-Deste modo, temos os seguintes resultados para cada coordenada:
+Deste modo, temos os seguintes resultados para os valores x e y dos valores extremos do caixa delimitadora (*bounding box*):
 ```{r}
-cat("Fuso (xmin):", fuso_oeste, hemi_min, "\n")
-cat("Fuso (xmax):", fuso_leste, hemi_max, "\n")
-cat("Hemisfério (ymin):", hemi_min,       "\n")
-cat("Hemisfério (ymax):", hemi_max,       "\n")
+fuso_oeste
+fuso_leste
+hemi_min
+hemi_max
 ```
 
 

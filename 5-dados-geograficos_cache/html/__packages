@@ -9,7 +9,6 @@ stringr
 forcats
 lubridate
 sf
-spData
 terra
 patchwork
 geobr
