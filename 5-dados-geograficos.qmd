@@ -321,9 +321,75 @@ Uma outra projeção bastante notória e que utilizaremos bastante é a UTM (*Un
 
 ![Cilindro secante aplicado a um fuso UTM (a) e as 60 zonas UTM distribuídas ao longo de todo o globo (b). Fonte: [GIS Geography](https://gisgeography.com/utm-universal-transverse-mercator-projection/).](img/5-dados-geograficos/5-6-utm_cilindro_zonas.png){#fig-utm-cilindro-zonas}
 
-O Brasil ocupa principalmente os fusos 19 a 25, e a escolha do fuso correto é essencial para que distâncias e áreas sejam matematicamente precisas ([Geo One](https://geoone.com.br/qual-src-devo-utilizar-em-meu-mapa/)). No exemplo da @fig-src-comparacao anterior, por exemplo, escolhemos o UTM 24S, pois é o fuso UTM onde o município de Vitória da Conquista-BA se localiza.
+O Brasil ocupa principalmente os fusos 18 a 25, e a escolha do fuso correto é essencial para que distâncias e áreas sejam matematicamente precisas. No exemplo da @fig-src-comparacao anterior, por exemplo, escolhemos o UTM 24S, pois é o fuso UTM onde o município de Vitória da Conquista-BA se localiza.
 
-![Fusos UTM que cobrem o território brasileiro. Fonte: [Geo One](https://geoone.com.br/qual-src-devo-utilizar-em-meu-mapa/).](img/5-dados-geograficos/5-7-utm_brasil.jpg){#fig-utm-brasil}
+```{r}
+#| label: fig-utm-brasil
+#| echo: false
+#| message: false
+#| warning: false
+#| cache: true
+#| fig-cap: "Fusos UTM de 18 a 25 sobrepostos ao território brasileiro, subdivididos em Norte (N) e Sul (S) pelo equador. Cada fuso abrange 6° de longitude."
+#| fig-width: 7
+#| fig-height: 5.5
+
+lon_esq  <- seq(-78, -36, by = 6)  # borda esquerda dos fusos 18 a 25
+numeros  <- 18:25
+
+# Criar dois retângulos por fuso: metade Sul (lat -35 a 0) e Norte (lat 0 a 6)
+fusos_lista <- lapply(seq_along(lon_esq), function(i) {
+  xmin <- lon_esq[i]
+  xmax <- xmin + 6
+  n    <- numeros[i]
+
+  sul <- st_sf(
+    fuso   = paste0(n, "S"),
+    numero = n,
+    geometry = st_sfc(st_polygon(list(matrix(
+      c(xmin, -35, xmax, -35, xmax, 0, xmin, 0, xmin, -35),
+      ncol = 2, byrow = TRUE
+    ))), crs = 4674)
+  )
+  norte <- st_sf(
+    fuso   = paste0(n, "N"),
+    numero = n,
+    geometry = st_sfc(st_polygon(list(matrix(
+      c(xmin, 0, xmax, 0, xmax, 6, xmin, 6, xmin, 0),
+      ncol = 2, byrow = TRUE
+    ))), crs = 4674)
+  )
+  rbind(sul, norte)
+})
+fusos_sf <- do.call(rbind, fusos_lista)
+
+# Posição dos rótulos: centro de cada metade
+fusos_cent <- data.frame(
+  fuso = fusos_sf$fuso,
+  lon  = rep(lon_esq + 3, each = 2),
+  lat  = rep(c(-17.5, 3), times = length(lon_esq))
+)
+
+br_bbox <- st_bbox(uf_br)
+
+ggplot() +
+  geom_sf(data = uf_br,
+          fill = "gray90", color = "gray70", linewidth = 0.15) +
+  geom_sf(data = fusos_sf,
+          aes(fill = factor(numero)),
+          color = "gray30", linewidth = 0.3, alpha = 0.15) +
+  geom_hline(yintercept = 0, color = "gray30", linewidth = 0.5, linetype = "dashed") +
+  geom_text(data = fusos_cent,
+            aes(x = lon, y = lat, label = fuso),
+            size = 3, fontface = "bold", color = "gray15") +
+  coord_sf(xlim = c(br_bbox["xmin"], br_bbox["xmax"]),
+           ylim = c(br_bbox["ymin"], br_bbox["ymax"])) +
+  scale_fill_brewer(palette = "Set2", guide = "none") +
+  theme_minimal() +
+  theme(
+    axis.text  = element_text(size = 7, color = "gray50"),
+    panel.grid = element_line(color = "gray85", linewidth = 0.3)
+  )
+```
 
 Na prática, para visualização de áreas extensas (ex.: estados inteiros) e intercâmbio de dados, o SRC geográfico (lat/lon em graus) é o mais conveniente. Para análises quantitativas que envolvam medição de distâncias, cálculo de áreas ou criação de zonas de influência, é necessário um SRC projetado com unidades métricas.
 
