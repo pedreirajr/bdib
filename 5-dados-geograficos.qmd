@@ -160,10 +160,10 @@ t_ctrl <- data.frame(
   y = c(0,  0,   0,  0,   0,  0,   0.4, 0.9, 1.1, 1.5, 2.2, 3.0, 3.7, 4.2, 4.5, 4.7, 4.9, 4.7, 4.1, 3.5, 3.1, 2.8)
 )
 
-# Geoid: wavy, near sea level
+# Geoid: suavemente ondulado, acima do elipsoide
 g_ctrl <- data.frame(
-  x = c(0,    1,    2,    3,    4,    5,    6,    7,    8,    9,    10),
-  y = c(1.05, 0.82, 1.12, 0.90, 1.00, 1.18, 1.32, 1.48, 1.36, 1.28, 1.22)
+  x = c(0,    2,    4,    6,    8,    10),
+  y = c(1.05, 1.14, 1.04, 1.22, 1.16, 1.10)
 )
 
 # Ellipsoid: smooth, below geoid throughout
@@ -176,13 +176,16 @@ t_y <- pmax(spline(t_ctrl$x, t_ctrl$y, xout = x)$y, 0)
 g_y <- spline(g_ctrl$x, g_ctrl$y, xout = x)$y
 e_y <- spline(e_ctrl$x, e_ctrl$y, xout = x)$y
 
-df       <- data.frame(x = x, terrain = t_y, geoid = g_y, ellipsoid = e_y)
-df_ocean <- df[df$x <= 3.2, ]  # ocean area (left, where terrain ≈ 0)
+# Nível do mar: oscila levemente em torno do geoide (que representa a média)
+sea_y <- g_y + 0.15 * sin(2 * pi * x / 1.1)
+
+df       <- data.frame(x = x, terrain = t_y, geoid = g_y, ellipsoid = e_y, sea_surface = sea_y)
+df_ocean <- df[df$x <= 3.2, ]  # área oceânica (esquerda, onde terrain ≈ 0)
 
 ggplot(df) +
-  # Ocean water fill (baseline to geoid, left side)
+  # Ocean water fill (baseline to sea surface, left side)
   geom_ribbon(data = df_ocean,
-              aes(x = x, ymin = 0, ymax = geoid),
+              aes(x = x, ymin = 0, ymax = sea_surface),
               fill = "#9ecae1", alpha = 0.75, color = NA) +
   # Terrain fill (sandy beige)
   geom_ribbon(aes(x = x, ymin = 0, ymax = terrain),
@@ -200,8 +203,8 @@ ggplot(df) +
   geom_line(aes(x = x, y = ellipsoid),
             color = "#757575", linewidth = 1.3) +
   # Text labels
-  annotate("text", x = 1.15, y = 1.18,
-           label = "Geóide",         color = "#1565C0", size = 4, fontface = "italic") +
+  annotate("text", x = 1.15, y = 1.4,
+           label = "Geoide",         color = "#1565C0", size = 4, fontface = "italic") +
   annotate("text", x = 4.10, y = 0.59,
            label = "Elipsoide",      color = "#757575", size = 4, fontface = "italic") +
   annotate("text", x = 8.60, y = 5.10,
@@ -224,21 +227,49 @@ Vale salientar que o sistema oficial de referência no Brasil é o SIRGAS 2000 (
 
 #### Sistema de coordenadas
 
-O sistema de coordenadas define os eixos e as unidades que permitem localizar pontos dentro do *datum*, podendo ser de dois tipos principais: **geográfico** e **projetado**. Um sistema de coordenadas **geográfico** expressa a posição em latitude e longitude, medidas em graus. A latitude varia de −90° (polo sul) a +90° (polo norte), enquanto a longitude varia de −180° a +180°. É o sistema mais familiar e universal, adotado por GPS, mapas *web* e a maioria dos arquivos geográficos distribuídos publicamente. Um sistema de coordenadas **projetado**, por sua vez, expressa a posição em coordenadas cartesianas (X e Y) sobre um plano, geralmente em metros. Para chegar a esse plano, é necessária uma projeção cartográfica, o último aspecto a tratarmos neste tópico de SRC.
+O sistema de coordenadas define os eixos e as unidades que permitem localizar pontos dentro do *datum*, podendo ser de dois tipos principais: **geográfico** e **projetado**. Um sistema de coordenadas **geográfico** expressa a posição em latitude e longitude, medidas em graus. A latitude varia de −90° (polo sul) a +90° (polo norte), enquanto a longitude varia de −180° a +180°. É o sistema mais familiar e universal, adotado por GPS, mapas *web* e a maioria dos arquivos geográficos distribuídos publicamente. Um sistema de coordenadas **projetado**, por sua vez, expressa a posição em coordenadas cartesianas (x e y) sobre um plano, geralmente em metros. Para chegar a esse plano, é necessária uma projeção cartográfica, o último aspecto a tratarmos neste tópico de SRC.
 
 ```{r}
 #| label: fig-src-comparacao
 #| echo: false
-#| fig-cap: "Dois sistemas de referência de coordenadas aplicados ao Brasil: geográfico em SIRGAS 2000 (acima), com eixos em graus de latitude e longitude; e projetado em SIRGAS 2000 / Policônico (abaixo), com eixos em metros."
+#| fig-cap: "O município de Vitória da Conquista-BA (em laranja) e seus vizinhos representados em dois sistemas de referência de coordenadas: geográfico em SIRGAS 2000 (acima), com eixos em graus de latitude e longitude; e projetado em SIRGAS 2000 / UTM 24S (abaixo), com eixos em metros."
 #| fig-width: 7
 #| fig-height: 9
 #| cache: true
 #| message: false
 #| warning: false
+library(geobr)
 
-fill_color   <- "#C8884A"
-border_color <- "#7A5020"
-grid_color   <- "gray75"
+# Municípios da Bahia (código do estado: 29)
+muni_ba <- read_municipality(code_muni = 29, year = 2022)
+
+# Identificar vizinhos de Vitória da Conquista (código IBGE: 2933307)
+idx_vdc     <- which(muni_ba$code_muni == 2933307)
+viz_idx     <- unlist(st_intersects(muni_ba[idx_vdc, ], muni_ba))
+viz_idx     <- viz_idx[viz_idx != idx_vdc]
+codigos_viz <- muni_ba$code_muni[viz_idx]
+
+muni_ba <- muni_ba |>
+  mutate(grupo = case_when(
+    code_muni == 2933307       ~ "vdc",
+    code_muni %in% codigos_viz ~ "vizinho",
+    TRUE                       ~ "outro"
+  ))
+
+# Bbox geográfico centrado em Vitória da Conquista
+xlim_geo <- c(-42.5, -39.0)
+ylim_geo <- c(-16.5, -13.0)
+
+bbox_utm <- st_bbox(
+  st_transform(
+    st_as_sfc(st_bbox(c(xmin = xlim_geo[1], ymin = ylim_geo[1],
+                        xmax = xlim_geo[2], ymax = ylim_geo[2]),
+                      crs = st_crs(4674))),
+    31984
+  )
+)
+
+grid_color <- "gray75"
 
 map_theme <- theme_minimal() +
   theme(
@@ -250,19 +281,29 @@ map_theme <- theme_minimal() +
     plot.subtitle    = element_text(hjust = 0.5, size = 9, color = "gray40")
   )
 
-p_geo <- uf_br |>
+p_geo <- muni_ba |>
   ggplot() +
-  geom_sf(fill = fill_color, color = border_color, linewidth = 0.15) +
-  coord_sf() +
+  geom_sf(aes(fill = grupo), color = "gray60", linewidth = 0.15) +
+  scale_fill_manual(
+    values = c("vdc" = "#C8884A", "vizinho" = "gray85", "outro" = "gray96"),
+    guide  = "none"
+  ) +
+  coord_sf(xlim = xlim_geo, ylim = ylim_geo) +
   labs(title = "Coordenadas Geográficas — SIRGAS 2000 (EPSG 4674)") +
   map_theme
 
-p_proj <- uf_br |>
-  st_transform(5880) |>
+p_proj <- muni_ba |>
+  st_transform(31984) |>
   ggplot() +
-  geom_sf(fill = fill_color, color = border_color, linewidth = 0.15) +
-  coord_sf(datum = sf::st_crs(5880)) +
-  labs(title = "SRC Projetado — SIRGAS 2000 / Policônico (EPSG 5880)") +
+  geom_sf(aes(fill = grupo), color = "gray60", linewidth = 0.15) +
+  scale_fill_manual(
+    values = c("vdc" = "#C8884A", "vizinho" = "gray85", "outro" = "gray96"),
+    guide  = "none"
+  ) +
+  coord_sf(datum = sf::st_crs(31984),
+           xlim  = c(bbox_utm["xmin"], bbox_utm["xmax"]),
+           ylim  = c(bbox_utm["ymin"], bbox_utm["ymax"])) +
+  labs(title = "SRC Projetado — SIRGAS 2000 / UTM 24S (EPSG 31984)") +
   map_theme
 
 p_geo / p_proj
@@ -276,9 +317,15 @@ As projeções são classificadas pela superfície geométrica usada como interm
 
 ![Três famílias de projeções cartográficas: azimutal (esquerda), cônica (centro) e cilíndrica (direita). Em cada caso, a superfície geométrica é tangente ao globo e depois planificada, gerando o mapa correspondente. Fonte: [UCGIS GIS&T Body of Knowledge](https://gistbok-topics.ucgis.org/CV-03-006).](img/5-dados-geograficos/5-5-projecoes.png){#fig-projecoes}
 
-Uma outra projeção bastante notória é a UTM (*Universal Transverse Mercator*), que é cilíndrica, mas aplicada de forma transversal e segmentada. Em vez de um único cilindro envolvendo o mundo inteiro, o UTM divide o globo em 60 fusos verticais de 6° de longitude cada, numerados de 1 a 60. Para cada fuso, aplica-se um cilindro transversal que minimiza as distorções naquela faixa estreita. O Brasil ocupa principalmente os fusos 19 a 25, e a escolha do fuso correto é essencial para que distâncias e áreas sejam matematicamente precisas.
+Uma outra projeção bastante notória e que utilizaremos bastante é a UTM (*Universal Transverse Mercator*), do tipo cilíndrica, mas aplicada de forma transversal e segmentada. Em vez de um único cilindro envolvendo o mundo inteiro, o UTM divide o globo em 60 fusos verticais de 6° de longitude cada, numerados de 1 a 60 ([GIS Geography](https://gisgeography.com/utm-universal-transverse-mercator-projection/)). Para cada fuso, aplica-se um cilindro transversal que minimiza as distorções naquela faixa estreita.
 
-Na prática, para visualização e intercâmbio de dados, o SRC geográfico (lat/lon em graus) é o mais conveniente. Para análises quantitativas que envolvam medição de distâncias, cálculo de áreas ou criação de zonas de influência, é necessário um SRC projetado com unidades métricas.
+![Cilindro secante aplicado a um fuso UTM (a) e as 60 zonas UTM distribuídas ao longo de todo o globo (b). Fonte: [GIS Geography](https://gisgeography.com/utm-universal-transverse-mercator-projection/).](img/5-dados-geograficos/5-6-utm_cilindro_zonas.png){#fig-utm-cilindro-zonas}
+
+O Brasil ocupa principalmente os fusos 19 a 25, e a escolha do fuso correto é essencial para que distâncias e áreas sejam matematicamente precisas ([Geo One](https://geoone.com.br/qual-src-devo-utilizar-em-meu-mapa/)). No exemplo da @fig-src-comparacao anterior, por exemplo, escolhemos o UTM 24S, pois é o fuso UTM onde o município de Vitória da Conquista-BA se localiza.
+
+![Fusos UTM que cobrem o território brasileiro. Fonte: [Geo One](https://geoone.com.br/qual-src-devo-utilizar-em-meu-mapa/).](img/5-dados-geograficos/5-7-utm_brasil.jpg){#fig-utm-brasil}
+
+Na prática, para visualização de áreas extensas (ex.: estados inteiros) e intercâmbio de dados, o SRC geográfico (lat/lon em graus) é o mais conveniente. Para análises quantitativas que envolvam medição de distâncias, cálculo de áreas ou criação de zonas de influência, é necessário um SRC projetado com unidades métricas.
 
 #### Codificação EPSG
 
@@ -328,7 +375,7 @@ O padrão *Simple Features* define 18 tipos de geometria. Na prática, utilizamo
 -   `MULTIPOLYGON`: coleção de polígonos pertencentes à mesma feição (um estado com ilhas, por exemplo).
 -   `GEOMETRYCOLLECTION`: mistura de tipos geométricos em uma única feição.
 
-![Tipos de geometria do padrão *Simple Features* e a relação entre eles.](img/5-dados-geograficos/5-6-tipos_geometria.png){#fig-tipos-geometria}
+![Tipos de geometria do padrão *Simple Features* e a relação entre eles.](img/5-dados-geograficos/5-8-tipos_geometria.png){#fig-tipos-geometria}
 
 Cada tipo tem uma representação textual padronizada chamada *WKT* (*Well-Known Text*), útil para inspecionar objetos `sf`, construir geometrias manualmente e trocar dados entre sistemas diferentes. A função `st_as_sfc()` converte uma *string* WKT (no formato de texto, entre aspas) em um objeto de geometria do `sf`.
 
@@ -440,9 +487,9 @@ O resultado das operações anteriores produzem os seguintes arquivos geográfic
 #| label: fig-geometrias-scratch
 #| fig-cap: "Objeto `sf` criado do zero com três tipos de geometria: um polígono, uma linha e três pontos — todos referenciados ao datum SIRGAS 2000."
 ggplot() +
-  geom_sf(data = poligono_hip, fill = "lightblue", alpha = 0.4) +
-  geom_sf(data = linha_hip, color = "steelblue", linewidth = 1) +
-  geom_sf(data = estacoes_hip, color = "steelblue", size = 3) +
+  geom_sf(data = poligono_hip, fill = "#F2B346", alpha = 0.4) +
+  geom_sf(data = linha_hip, color = "#C77D04", linewidth = 1) +
+  geom_sf(data = estacoes_hip, color = "#875401", size = 3) +
   theme_minimal()
 ```
 
@@ -530,6 +577,7 @@ uf_br |>
   left_join(pop_uf, by = join_by(abbrev_state == sigla)) |>
   ggplot() +
   geom_sf(aes(fill = pop2022), color = "white", linewidth = 0.2) +
+  scale_fill_viridis_c() + # Ajusta as cores de preenchimento para a paleta Viridis
   theme_minimal()
 ```
 
@@ -542,8 +590,8 @@ Do mesmo modo, também é possível sobrepor múltiplas camadas no mesmo mapa pa
 #| fig-cap: "Bairros de Salvador com as estações e as linhas do metrô sobrepostos."
 ggplot() +
   geom_sf(data = bairros, fill = "gray92", color = "gray70", linewidth = 0.2) +
-  geom_sf(data = lin_metro, color = "steelblue", linewidth = 1) +
-  geom_sf(data = est_metro, color = "navyblue", size = 2) +
+  geom_sf(data = lin_metro, color = "#C77D04", linewidth = 1) +
+  geom_sf(data = est_metro, color = "#875401", size = 2) +
   theme_minimal()
 ```
 
@@ -580,7 +628,7 @@ mapview(bairros) + mapview(lin_metro) + mapview(est_metro)
 
 <br>
 
-A função aceita argumentos para controlar a aparência de cada camada. Para polígonos, `zcol` define a coluna usada para colorir as feições, `col.regions` recebe o vetor de cores e `color` controla a cor das bordas. No exemplo abaixo, colorimos os estados por grande região geográfica com cores predefinidas:
+Observe que o *default* de coloração de preenchimento e contorno das geometrias do `mapview` é o azul, o que não é recomendável, pois denota características de corpos da água em feições que não são dessa natureza no nosso caso. Felizmente, a função aceita argumentos para controlar a aparência de cada camada. Para polígonos, `zcol` define a coluna usada para colorir as feições, `col.regions` recebe o vetor de cores e `color` controla a cor das bordas. No exemplo abaixo, colorimos os estados por grande região geográfica com cores predefinidas:
 
 ```{r}
 #| label: mapview-uf-regiao
@@ -589,7 +637,7 @@ cores_regiao <- c(
   "Nordeste"     = "#e6550d",
   "Centro-Oeste" = "#756bb1",
   "Sudeste"      = "#e31a1c",
-  "Sul"          = "#2b8cbe"
+  "Sul"          = "#DDED53"
 )
 
 mapview(uf_br,
@@ -605,11 +653,11 @@ Para linhas e pontos, os principais argumentos estéticos são `color` (cor), `l
 ```{r}
 #| label: mapview-metro
 mapview(lin_metro,
-        color = "steelblue",
+        color = "#C77D04",
         lwd = 4,
         alpha = 0.75) +
 mapview(est_metro,
-        col.regions = "navyblue",
+        col.regions = "#875401",
         color = "white",
         cex = 7,
         alpha.regions = 0.9)
@@ -658,13 +706,13 @@ bairros_pos   <- st_point_on_surface(bairros)
 ggplot() +
   geom_sf(data = bairros, fill = "gray92", color = "gray70", linewidth = 0.2) +
   geom_sf(data = bairros_cent, color = "tomato",  size = 1.5) +
-  geom_sf(data = bairros_pos,  color = "steelblue", size = 1.5, shape = 17) +
+  geom_sf(data = bairros_pos,  color = "#F2B346", size = 1.5, shape = 17) +
   theme_minimal()
 ```
 
 ### *Buffers*
 
-Um *buffer* é uma zona de influência gerada ao redor de uma feição, delimitada por uma distância definida. Ele responde a perguntas como "o que está a menos de 600 metros de cada estação de metrô?" ou "qual área fica a menos de 200 metros da linha de metrô?".
+Um *buffer* é uma zona de influência gerada ao redor de uma feição, delimitada por uma distância definida. Ele responde a perguntas como "o que está a menos de 600 metros de cada estação de metrô?" ou "qual área fica a menos de 400 metros da linha de metrô?".
 
 A função `st_buffer()` funciona sobre qualquer tipo de geometria: ao redor de um ponto, gera um círculo; ao redor de uma linha, gera uma faixa paralela; ao redor de um polígono, expande seus limites. Já o argumento `dist` especifica a distância em unidades do SRC. Por isso, reprojetar para um SRC projetado antes de criar buffers é uma boa prática. Vale destacar que desde a versão 1.0 do `sf`, a biblioteca `s2geometry` permite que `st_buffer()` opere em coordenadas geográficas aceitando distâncias em metros. Todavia, trabalhar em um SRC projetado continua sendo a abordagem mais previsível e recomendável para análises locais, pois as operações geométricas são feitas diretamente em um plano métrico.
 
@@ -675,8 +723,8 @@ bff_estacoes <- st_buffer(est_metro_utm, dist = 600)
 
 ggplot() +
   geom_sf(data = bairros, fill = "gray92", color = "gray70", linewidth = 0.2) +
-  geom_sf(data = bff_estacoes, fill = "steelblue", alpha = 0.35, color = NA) +
-  geom_sf(data = est_metro_utm, color = "steelblue", size = 2) +
+  geom_sf(data = bff_estacoes, fill = "#F2B346", alpha = 0.35, color = NA) +
+  geom_sf(data = est_metro_utm, color = "#875401", size = 2) +
   theme_minimal()
 ```
 
@@ -684,13 +732,13 @@ O mesmo raciocínio se aplica à linha do metrô:
 
 ```{r}
 #| label: fig-buffer-linha
-#| fig-cap: "Buffer de 200 metros ao redor da linha do metrô de Salvador."
-bff_linha <- st_buffer(lin_metro_utm, dist = 200)
+#| fig-cap: "Buffer de 400 metros ao redor da linha do metrô de Salvador."
+bff_linha <- st_buffer(lin_metro_utm, dist = 400)
 
 ggplot() +
   geom_sf(data = bairros, fill = "gray92", color = "gray70", linewidth = 0.2) +
   geom_sf(data = bff_linha,    fill = "#f0500f", alpha = 0.30, color = NA) +
-  geom_sf(data = lin_metro_utm, color = "darkred", linewidth = 1) +
+  geom_sf(data = lin_metro_utm, color = "darkred", linewidth = 0.5) +
   theme_minimal()
 ```
 
@@ -756,7 +804,7 @@ inter_metro_bairros <- st_intersection(bff_estacoes, bairros_utm)
 
 ggplot() +
   geom_sf(data = bairros_utm, fill = "gray92", color = "gray70", linewidth = 0.2) +
-  geom_sf(data = inter_metro_bairros, fill = "steelblue", alpha = 0.6, color = 'black') +
+  geom_sf(data = inter_metro_bairros, fill = "#F2B346", alpha = 0.6, color = 'black') +
   theme_minimal()
 ```
 
@@ -869,7 +917,7 @@ escolas_no_metro <- st_filter(escolas_utm, bff_estacoes, .predicate = st_interse
 
 ggplot() +
   geom_sf(data = bairros_utm, fill = "gray92", color = "gray70", linewidth = 0.2) +
-  geom_sf(data = bff_estacoes, fill = "steelblue", alpha = 0.25, color = NA) +
+  geom_sf(data = bff_estacoes, fill = "#F2B346", alpha = 0.25, color = NA) +
   geom_sf(data = escolas_utm, color = "gray60", size = 0.8) +
   geom_sf(data = escolas_no_metro, color = "tomato", size = 1.5) +
   theme_minimal()
