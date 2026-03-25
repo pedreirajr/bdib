@@ -747,12 +747,27 @@ Como visto na seção sobre SRC, para análises que envolvam distâncias, áreas
 
 O primeiro passo antes de reprojetar é identificar o fuso UTM correto para a área de estudo. O sistema UTM divide o globo em 60 fusos de 6° de largura, numerados de 1 a 60 a partir do antimeridiano (longitude 180° O) em direção ao leste. Para descobrir a qual fuso pertence uma determinada longitude, some 180° à longitude e divida por 6, arredondando o resultado para cima.
 
-Por exemplo, o fuso que cobre o Rio de Janeiro abrange as longitudes de −48° a −42°. Tomando a longitude −42°, a operação fica [180 + (−42)] / 6 = 138 / 6 = 23. Como o Rio de Janeiro fica ao sul do Equador, o fuso é 23 S. Para Salvador, em vez de estimar a longitude de cabeça, extraímos essa informação diretamente dos dados. A função `st_bbox()` retorna o *bounding box* de um objeto `sf`, um retângulo definido por quatro valores: `xmin` e `xmax` (longitudes extremas) e `ymin` e `ymax` (latitudes extremas). O trecho abaixo extrai o bounding box dos bairros de Salvador:
+Por exemplo, o fuso que cobre o Rio de Janeiro abrange as longitudes de −48° a −42°. Tomando a longitude −42°, a operação fica [180 + (−42)] / 6 = 138 / 6 = 23. Como o Rio de Janeiro fica ao sul do Equador, o fuso é 23 S. O mais adequado, entretanto, é verificar em qual fuso cai a região mapeada como um todo.
+
+Vejamos o caso para os bairros de Salvador que estamos trabalhando. Para tanto, podemos obter a caixa delimitadora (*bounding box*) dessa camada utilizando a função `st_bbox()`. O seu resultado retorna as coordenadas das extremidades, `xmin` e `xmax` (longitudes extremas) e `ymin` e `ymax` (latitudes extremas), de um retângulo definido que engloba o objeto `sf` que passamos como argumento:
 
 ```{r}
 #| label: bbox-bairros
 bbox <- st_bbox(bairros)
 bbox
+```
+
+É possível visualizar esses limites junto com os polígonos dos bairros. Para isso, convertemos o objeto `bbox` em uma geometria `sfc` com `st_as_sfc()` e plotamos as duas camadas sobrepostas:
+
+```{r}
+#| label: fig-bbox-bairros
+#| fig-cap: "Bairros de Salvador e sua caixa delimitadora (*bounding box*)"
+ggplot() +
+  geom_sf(data = bairros, fill = "gray92", alpha = 0.4,
+          color = "gray70", linewidth = 0.3) +
+  geom_sf(data = st_as_sfc(bbox), fill = NA, color = "red",
+          linewidth = 0.8, linetype = "dashed") +
+  theme_minimal()
 ```
 
 Com as quatro coordenadas em mãos, aplicamos a fórmula do fuso separadamente a `xmin` e `xmax`, o que permite verificar se toda a área cabe em um único fuso ou se cruza a fronteira entre dois. O hemisfério é derivado de `ymin` e `ymax`, cobrindo toda a extensão latitudinal da área. A função `ceiling()` arredonda para cima em cada cálculo:
