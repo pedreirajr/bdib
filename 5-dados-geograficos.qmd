@@ -916,7 +916,7 @@ Observe que mesmo após `st_make_valid()`, o mapa pode exibir riscos internos vi
 
 `st_intersection()` recorta as geometrias de uma camada pelo contorno das feições de outra, devolvendo os fragmentos resultantes com os atributos das duas camadas reunidos em cada fragmento.
 
-Uma aplicação direta é identificar quais porções de cada bairro de Salvador estão dentro da área de influência do metrô. Neste caso, será retornado, para cada *buffer* de estação de metrô, a área de interseção dos bairros com esses *buffers* em uma tabela com atributos de ambas as bases de dados para cada combinação **buffer** X bairro intersectada. Por exemplo, se o **buffer** de uma estação de metrô M tem interseção com dois bairros A e B, o resultado terá duas linhas com as feições da interseção do *buffer* com o bairro A e do *buffer* com o bairro B, juntamente com as colunas de atributos das bases originais correspondentes a cada uma destas feições.
+Uma aplicação direta é identificar quais porções de cada bairro de Salvador estão dentro da área de influência do metrô. Para cada buffer de estação, a interseção retorna os fragmentos de bairro que se sobrepõem a ele, com atributos de ambas as bases de dados. Se o buffer de uma estação M se sobrepõe aos bairros A e B, o resultado terá duas linhas: uma para a interseção com A e outra para a interseção com B, cada qual com as colunas originais das duas camadas.
 
 Para produzir este resultado, é importante que ambas as camadas precisam estejam no mesmo SRC:
 
@@ -935,8 +935,6 @@ ggplot() +
   geom_sf(data = inter_metro_bairros, fill = "#F2B346", alpha = 0.6, color = 'black') +
   theme_minimal()
 ```
-
-Cada linha do objeto `inter_metro_bairros` corresponde a uma fatia de bairro coberta por algum *buffer*. Os atributos de ambas as camadas originais (identificador da estação e nome do bairro) estão presentes, o que permite sumarizar a cobertura por bairro ou por estação.
 
 ### Filtragem e Junção Espacial
 
