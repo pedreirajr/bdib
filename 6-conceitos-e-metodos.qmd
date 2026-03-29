@@ -164,7 +164,7 @@ ggplot(rmrj) +
 
 ### Recortes supramunicipais institucionais
 
-As Regiões Geográficas Intermediárias e Imediatas são a classificação institucional vigente, adotada pelo IBGE em 2017 para substituir as mesorregiões e microrregiões. `read_intermediate_region()` e `read_immediate_region()` baixam esses recortes, equanto `read_meso_region()` e `read_micro_region()` retornam a classificação anterior, ainda amplamente utilizada em estudos e bases de dados mais antigas. Na @fig-recortes-supra-institucionais, veremos em um único mapa estes dois recortes para o estado de Minas Gerais, distinguindo-os pela coloração e espessura da linha de contorno. Observe que também definimos a cor de preenchimento dos polígonos das regiões intermediárias como vazio (`NA`), de modo que a camada passada inicialmente (`imediatas`) não seja sobreposta completamente.
+As Regiões Geográficas Intermediárias e Imediatas são a classificação institucional vigente, adotada pelo IBGE em 2017 para substituir as mesorregiões e microrregiões. `read_intermediate_region()` e `read_immediate_region()` baixam esses recortes, equanto `read_meso_region()` e `read_micro_region()` retornam a classificação anterior. Na @fig-recortes-supra-institucionais, veremos em um único mapa estes dois recortes para o estado de Minas Gerais, distinguindo-os pela coloração e espessura da linha de contorno. Observe que também definimos a cor de preenchimento dos polígonos das regiões intermediárias como vazio (`NA`), de modo que a camada passada inicialmente (`imediatas`) não seja sobreposta completamente.
 
 ```{r}
 #| label: fig-recortes-supra-institucionais
@@ -207,15 +207,6 @@ bairros |>
 ### Recortes intramunicipais institucionais
 
 Estes são os recortes que mais nos interessam nesse estudo. `read_weighting_area()` e `read_census_tract()` baixam, respectivamente, as áreas de ponderação e os setores censitários. Ambos aceitam código de estado (sigla ou 2 dígitos) ou código de município (7 dígitos) nos parâmetros `code_weighting` e `code_tract`, o que permite baixar apenas os dados de interesse sem carregar o Brasil inteiro.
-
-Os geocódigos do IBGE seguem uma estrutura hierárquica de dígitos [@ibge_quageo]:
-
-- 2 dígitos para o estado
-- 7 dígitos para o município (2 do estado + 5 do município)
-- 13 dígitos para a área de ponderação
-- 15 dígitos para o setor censitário
-
-Essa estrutura é a que as funções do `geobr` esperam receber nos parâmetros `code_weighting` e `code_tract`.
 
 Para visualizar os dois recortes de forma comparada e interativa, usamos o pacote `mapview` em conjunto com o `leafsync`, que permite sincronizar dois mapas lado a lado de modo que o zoom e o deslocamento em um deles se reflitam automaticamente no outro. O código a seguir baixa as áreas de ponderação e os setores censitários de Maceió (AL) e os exibe em painéis sincronizados.
 
