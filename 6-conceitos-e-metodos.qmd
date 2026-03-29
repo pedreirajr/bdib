@@ -6,19 +6,22 @@ title: "Conceitos e Métodos"
 
 O território de uma cidade ou região é habitado por pessoas com características sociodemográficas distintas (idade, renda, escolaridade, raça, gênero, composição familiar) que vivem em condições muito variadas de habitação, saneamento, acesso a serviços e mobilidade. Conhecer essas condições permite que entendamos adequadamente suas necessidades, de modo que possamos definir bem as prioridades de planejamento urbano e regional ao longo do país.
 
-Considere alguns exemplos. A demanda por equipamentos de saúde depende da estrutura etária e das condições de renda da população em cada área da cidade. A escolha dos locais para construção de escolas requer saber onde vivem crianças e adolescentes em idade escolar. O dimensionamento de redes de saneamento básico exige conhecer quantos domicílios existem em cada setor do território e em que condições se encontram. O planejamento dos sistemsa de transporte precisa saber onde moram e trabalham as pessoas, quanto ganham e de que forma se deslocam. Em todos esses casos, a eficácia das políticas públicas depende da qualidade e da granularidade dos dados disponíveis sobre a população.
+Considere alguns exemplos. A demanda por equipamentos de saúde depende da estrutura etária e das condições de renda da população em cada área da cidade. A escolha dos locais para construção de escolas requer saber onde vivem crianças e adolescentes em idade escolar. O dimensionamento de redes de saneamento básico exige conhecer quantos domicílios existem em cada setor do território e em que condições se encontram. O planejamento dos sistemas de transporte precisa saber onde moram e trabalham as pessoas, quanto ganham e de que forma se deslocam. Em todos esses casos, a eficácia das políticas públicas depende da qualidade e da granularidade dos dados disponíveis sobre a população.
 
-Essa necessidade é especialmente crítica em países com grandes desigualdades intraurbanas, como o Brasil. Em uma mesma cidade, bairros vizinhos podem apresentar condições de renda, habitação e acesso a serviços completamente distintas. Sabemos, inclusive, que não é raro que essas diferenças se apresentem dentro de um mesmo bairro! Deste modo, políticas formuladas com base em médias municipais tendem a ignorar essas diferenças e, frequentemente, a aprofundá-las. Dados desagregados em nível intraurbano são, portanto, indispensáveis para um diagnóstico adequado e para o monitoramento dos efeitos de qualquer intervenção.
+Essa necessidade é especialmente crítica em países com grandes desigualdades intraurbanas, como o Brasil. Em uma mesma cidade, bairros vizinhos podem apresentar condições de renda, habitação e acesso a serviços completamente distintas. Sabemos, inclusive, que não é raro que essas diferenças se apresentem dentro de um mesmo bairro! Deste modo, políticas formuladas com base em totais ou médias municipais tendem a ignorar essas diferenças e, frequentemente, a aprofundá-las. Dados desagregados em nível intraurbano são, portanto, indispensáveis para um diagnóstico adequado e para o monitoramento dos efeitos de qualquer intervenção.
 
-No Brasil, a principal fonte de dados populacionais com essa capacidade de desagregação espacial é o **Censo Demográfico**, realizado pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Este capítulo apresenta alguns fundamentos conceituais e metodológicos para compreender e utilizar esses dados: o papel institucional do IBGE, os recortes geográficos que organizam o território para fins estatísticos, as características e o histórico do Censo, a estrutura dos questionários, as unidades de coleta e análise, e as principais formas de acesso não programático aos dados. Os capítulos seguintes desta parte aprofundam cada um dos produtos do Censo: agregados por setor censitário (Cap. 2), microdados (Cap. 3), grade estatística (Cap. 4) e CNEFE (Cap. 5).
+No Brasil, a principal fonte de dados populacionais com essa capacidade de desagregação espacial é o **Censo Demográfico**, realizado pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Este capítulo apresenta alguns fundamentos conceituais e metodológicos para compreender e utilizar esses dados:<!-- Atualizar essa parte sempre que mudar --> o papel institucional do IBGE, os recortes geográficos que organizam o território para fins estatísticos, as características e o histórico do Censo, a estrutura dos questionários, as unidades de coleta e análise, e as principais formas de acesso aos dados. Os capítulos seguintes desta Parte aprofundam alguns dos principais produtos do Censo:<!-- Atualizar essa parte sempre que mudar --> agregados por setor censitário (Cap. 7), Microdados (Cap. 8), Grade Estatística (Cap. 9), CNEFE (Cap. 10) e a Pesquisa Urbanística do Entorno dos Domicílios (Cap. 11).
 
-Embora existam ferramentas de acesso não programático aos dados do Censo (a serem apresentadas na seção 1.7), o foco deste livro é a exploração dessas bases em R, o que nos permitirá uma flexibilidade incrível de manipuçação dessas informações. Ao longo dos capítulos, utilizaremos três pacotes principais: o [`geobr`](https://github.com/ipeaGIT/geobr), que permite baixar recortes geográficos oficiais do Brasil diretamente no R; o [`censobr`](https://github.com/ipeaGIT/censobr/), que dá acesso aos dados do Censo Demográfico (agregados por setor censitário e microdados) de forma padronizada; e o [`cnefetools`](https://github.com/pedreirajr/cnefetools), voltado para o processamento e análise do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE).
 
-## O IBGE
+Embora existam ferramentas de acesso não programático aos dados do Censo (a serem apresentadas na seção 6.7<!-- checar isso -->), o foco deste livro é a exploração dessas bases em R, o que nos permitirá uma flexibilidade incrível de manipuçação dessas informações. Ao longo dos capítulos desta Parte, utilizaremos três pacotes principais: o [`geobr`](https://github.com/ipeaGIT/geobr), que permite baixar recortes geográficos oficiais do Brasil diretamente no R; o [`censobr`](https://github.com/ipeaGIT/censobr/), que dá acesso aos dados do Censo Demográfico (agregados por setor censitário e microdados) de forma padronizada; e o [`cnefetools`](https://github.com/pedreirajr/cnefetools), voltado para o processamento e análise do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE) e produção de mapas personalizados de dados censitários com apoio das coordenadas do CNEFE.
+
+## O papel institucional do IBGE
 
 O Instituto Brasileiro de Geografia e Estatística (IBGE) é o órgão federal responsável pela produção e divulgação das estatísticas oficiais do Brasil. Sua missão institucional é "retratar o Brasil com informações necessárias para conhecer sua realidade e exercer a cidadania" [@ibge_institucional]. A primeira agência estatística brasileira com caráter permanente foi a Diretoria Geral de Estatística, criada em 1871. Após sucessivas reorganizações, o governo federal criou, em 1934, o Instituto Nacional de Estatística (INE), que iniciou suas operações em maio de 1936. Em 1937, o Conselho Brasileiro de Geografia foi incorporado ao INE, dando origem ao nome atual. Para cumprir sua missão, o IBGE mantém hoje uma rede que abrange 27 superintendências estaduais e mais de 560 agências de coleta distribuídas por todo o território nacional.
 
-As atividades do Instituto organizam-se em duas frentes. Na de **estatísticas**, o IBGE produz informações em três áreas: (i) sociais e demográficas (idade, sexo, cor ou raça, educação, trabalho, renda, habitação, migração, saúde, saneamento, entre outros temas); (ii) econômicas (produção, comércio, indústria e contas nacionais); e (iii) agropecuárias (estrutura fundiária e produção rural). Na de **geociências**, é o responsável oficial pela organização do território nacional, incluindo o posicionamento geodésico, a cartografia e a definição dos recortes territoriais usados nas pesquisas — aspecto detalhado na seção 1.3. É importante salientar que as estatísticas sociais e demográficas são obtidas por pesquisas domiciliares, registros públicos e levantamentos em estabelecimentos. A @tbl-pesquisas-ibge apresenta algumas das principais pesquisas domiciliares realizadas pelo IBGE:
+O arcabouço legal que rege o IBGE foi construído ao longo de décadas. A Lei nº 5.878/1973 define os objetivos e competências do Instituto, que abrangem tanto a produção de estatísticas primárias e derivadas quanto as atividades de geociências e cartografia [@lei5878]. O Decreto-Lei nº 161/1967, por sua vez, institui o Plano Nacional de Estatística e o Plano Nacional de Geografia e Cartografia Terrestre, estabelecendo que toda pessoa natural ou jurídica sob jurisdição brasileira é obrigada a fornecer as informações solicitadas pelo IBGE [@dl161]. Essa obrigatoriedade é complementada pela Lei nº 5.534/1968, que garante o caráter sigiloso das informações coletadas. Os dados fornecidos são usados exclusivamente para fins estatísticos e não podem ser objeto de certidão nem servir de prova em processos administrativos, fiscais ou judiciais [@lei5534]. Esse compromisso com o sigilo é condição essencial para que a população confie no processo e forneça informações verídicas.
+
+As atividades do Instituto organizam-se em duas frentes. Na de **estatísticas**, o IBGE produz informações em três áreas: (i) sociais e demográficas (idade, sexo, cor ou raça, educação, trabalho, renda, habitação, migração, saúde, saneamento, entre outros temas); (ii) econômicas (produção, comércio, indústria e contas nacionais); e (iii) agropecuárias (estrutura fundiária e produção rural). Na de **geociências**, é o responsável oficial pela organização do território nacional, incluindo o posicionamento geodésico, a cartografia e a definição dos recortes territoriais usados nas pesquisas, aspecto detalhado na seção 6.3<!-- checar isso -->. É importante salientar que as estatísticas sociais e demográficas são obtidas por pesquisas domiciliares, registros públicos e levantamentos em estabelecimentos. A @tbl-pesquisas-ibge apresenta algumas das principais pesquisas domiciliares realizadas pelo IBGE:
 
 | Pesquisa | Sigla | Periodicidade | Temas principais |
 |:-----------------|:-----------------|:-----------------|:-----------------|
@@ -29,21 +32,19 @@ As atividades do Instituto organizam-se em duas frentes. Na de **estatísticas**
 
 : Principais pesquisas domiciliares do IBGE. Fonte: @ibge_institucional. {#tbl-pesquisas-ibge}
 
-Entre todas essas pesquisas, o Censo Demográfico ocupa uma posição de destaque: é a única que cobre a totalidade da população e permite desagregação espacial em nível intraurbano, a característica que o torna indispensável para o planejamento local e que é detalhada nas seções seguintes. Antes de começarmos a falar especificamente do Censo, entretanto, é importante que entendamos melhor a respeito desses níveis espaciais ou **recortes geográficos** sobre os quais podemos obter informações estatísticas da população.
+Entre todas essas pesquisas, o Censo Demográfico ocupa uma posição de destaque, pois é a única que cobre a totalidade da população e permite desagregação espacial em nível intraurbano. Esta característica o torna indispensável para o planejamento dos municípios em aspectos importantes como habitação, mobilidade, saneamento e distribuição de água e energia. Antes de começarmos a falar especificamente sobre os produtos estatísticos do Censo, é importante que entendamos melhor a respeito dos níveis espaciais ou **recortes geográficos** sobre os quais podemos obter estas informações da população.
 
 ## Recortes Geográficos do IBGE
 
-Para que as estatísticas possam ser associadas a um lugar, o IBGE organiza o território nacional em diferentes tipos de recortes espaciais, sistematizados no [**Quadro Geográfico de Referência para Produção, Análise e Disseminação de Estatísticas**](https://mapasinterativos.ibge.gov.br/recestat/) [@ibge_recestat]. Esses recortes dividem-se em duas grandes categorias. Os **recortes legais** são definidos por legislação federal ou estadual e existem independentemente do IBGE, sendo os mais conhecidos os recortes de **país**, **grandes regiões**, **estados**, **regiões metropolitanas** e **municípios**. No nível intraurbano, os recortes legais são os **distritos** e **subdistritos**, subdivisões administrativas dos municípios.
+Para que as estatísticas possam ser associadas a um lugar, o IBGE organiza o território nacional em diferentes tipos de recortes espaciais, sistematizados no [**Quadro Geográfico de Referência para Produção, Análise e Disseminação de Estatísticas**](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/divisao-regional/24233-quadro-geografico-de-referencia-para-producao-analise-e-disseminacao-de-estatisticas.html?=&t=acesso-ao-produto) [@ibge_quageo]. Esses recortes dividem-se em duas grandes categorias, denominadas recortes **legais** e **institucionais**. Os **recortes legais** são definidos por legislação federal ou estadual e existem independentemente do IBGE, sendo os mais conhecidos os recortes de **país**, **grandes regiões**, **estados**, **regiões metropolitanas** e **municípios**. No nível intraurbano, os recortes legais são os **distritos** e **subdistritos**, subdivisões administrativas dos municípios.
 
 Os **recortes institucionais**, por sua vez, são criados pelo próprio IBGE para fins de organização operacional e divulgação de dados. Em escala supramunicipal, incluem as **regiões geográficas** **intermediárias** e **imediatas** (que substituíram, respectivamente, as **mesorregiões** e **microrregiões** na classificação de 2017, que veremos mais adiante). No nível intraurbano, os recortes institucionais para a análise de dados do Censo são as **áreas de ponderação**, os **setores censitários** e a **grade estatística**, cada um com características específicas de resolução espacial e riqueza temática.
 
-Um conceito fundamental para compreender os produtos do Censo é o de **resolução espacial**, que é a medida do nível de detalhe geográfico de um conjunto de dados. Quanto maior a resolução espacial, menores são as unidades representadas e mais precisamente os dados podem ser localizados no território. A grade estatística (células de 200 × 200 metros nas áreas urbanas e 1 × 1 km nas rurais) representa a maior resolução espacial disponível nos produtos do IBGE. Já o país, como um todo, a menor.
+Um conceito fundamental de se entender a respeito dos recortes geográficos é o de **resolução espacial**, que é a medida do nível de detalhamento espacial de um dado geográfico. Quanto *maior* a resolução espacial, *menores* são as unidades representadas e *mais precisamente* os dados podem ser localizados no território. Por exemplo, a grade estatística (células de 200 × 200 metros nas áreas urbanas e 1 × 1 km nas rurais) representa a maior resolução espacial disponível nos produtos do IBGE. Já a camada do país, com sua única feição representando os seus 8,5 milhões de km² de área, a menor.
 
-Há, porém, uma relação inversa entre resolução espacial e riqueza temática das informações divulgadas, ou seja, quanto maior a resolução espacial, menor a quantidade de estatísticas divulgadas neste nível. Isso ocorre porque o IBGE é legalmente obrigado a proteger o sigilo das informações individuais coletadas <!-- confirmar -->. Em unidades geográficas muito pequenas, divulgar muitas variáveis aumenta o risco de que uma combinação de características permita identificar um domicílio ou uma pessoa específica. Por essa razão, a grade estatística disponibiliza apenas totais populacionais e de domicílios, enquanto os microdados do questionário da amostra — muito mais ricos tematicamente — são identificados apenas até o nível da área de ponderação, que agrega domicílios em número suficiente para preservar o anonimato. Esse *trade-off* entre resolução espacial e detalhe temático é central para entender as capacidades e limitações de cada produto do Censo, detalhados nos capítulos seguintes.
+### Explorando recortes geográficos com o `geobr`
 
-## Explorando recortes geográficos com o `geobr`
-
-Todos os recortes geográficos do IBGE podem ser explorados interativamente no portal [Recortes Geográficos para Estatísticas - Quadro Geográfico](https://mapasinterativos.ibge.gov.br/recestat/) do IBGE [@ibge_recestat]. Para acesso programático em R, o pacote `geobr` [@geobr] disponibiliza funções para download direto das malhas oficiais do IBGE, com geometrias simplificadas prontas para análise e visualização. A documentação completa encontra-se em [ipeagit.github.io/geobr](https://ipeagit.github.io/geobr/).
+Todos os recortes geográficos do IBGE podem ser explorados interativamente no portal [Recortes Geográficos para Estatísticas - Quadro Geográfico](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/divisao-regional/24233-quadro-geografico-de-referencia-para-producao-analise-e-disseminacao-de-estatisticas.html?=&t=acesso-ao-produto) do IBGE [@ibge_quageo]. Para acesso programático em R, o pacote `geobr` [@geobr] disponibiliza funções para download direto das malhas oficiais do IBGE, com geometrias simplificadas prontas para análise e visualização. A documentação completa encontra-se em [ipeagit.github.io/geobr](https://ipeagit.github.io/geobr/).
 
 Vamos começar adicionando as bibliotecas necessárias para processamento e visualização dos dados:
 ```{r, warning = F, message = F}
@@ -52,7 +53,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-A @fig-recortes-legais-institucionais ilustra a diferença entre recortes legais e institucionais para o território brasileiro: os municípios representam a malha legal de base, enquanto as regiões intermediárias agrupam municípios contíguos com similaridades socioeconômicas para fins de organização estatística.
+A @fig-recortes-legais-institucionais ilustra essa diferença para o território brasileiro. Os municípios representam a malha legal de base, enquanto as regiões intermediárias agrupam municípios contíguos com similaridades socioeconômicas para fins de organização estatística.
 ```{r}
 #| label: fig-recortes-legais-institucionais
 #| fig-cap: "Municípios (recorte legal) e regiões intermediárias (recorte institucional) do Brasil."
@@ -69,10 +70,12 @@ mesorregioes <- read_intermediate_region(year = 2020)
 
 # Plotando os mapas dos municípios e regiões intermediárias com ggplot:
 ggplot(municipios) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.1) +
+  theme_minimal()
 
 ggplot(mesorregioes) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 ```
 
 É possível explorar as malhas geográficas disponibilizadas pelo `geobr` por meio da função `list_geobr()`, que retorna um `data.frame` com todos os conjuntos de dados disponíveis, seus anos e uma breve descrição. É importante destacar além de trazer os recortes geográficos previstos pelo IBGE, o pacote também traz bases espaciais específicas de certos setores, a exemplo das regiões de saúde do DataSUS (`read_health_region`) e das escolas do INEP (`read_schools`). Sendo assim, o `list_geobr()` é um bom ponto de partida para descobrir o que o pacote oferece.
@@ -123,10 +126,12 @@ estados <- read_state(year = 2020)
 metros  <- read_metro_area(year = 2018)
 
 ggplot(estados) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 
 ggplot(metros) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 ```
 
 Caso você queria somente os estados do Ceará e a Região Metropolitana do Rio de Janeiro, é possível utilizar o `code_state` no primeiro caso e um `filter` do pacote `dplyr` no segundo, conforme a @fig-recortes-supra-legais-2.
@@ -149,10 +154,12 @@ rmrj  <- read_metro_area(year = 2018) |>
   
 
 ggplot(ceara) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 
 ggplot(rmrj) +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 ```
 
 ### Recortes supramunicipais institucionais
@@ -171,8 +178,9 @@ imediatas      <- read_immediate_region(year = 2020,
                                         code_immediate = "MG")
 
 ggplot() +
-  geom_sf(data = imediatas, color = 'black', linewidth = 0.6) +
-  geom_sf(data = intermediarias, color = 'blue', linewidth = 1.2, fill = NA)
+  geom_sf(data = imediatas, fill = "gray92", color = "gray70", linewidth = 0.4) +
+  geom_sf(data = intermediarias, color = "black", linewidth = 1.2, fill = NA) +
+  theme_minimal()
 ```
 
 ### Recortes intramunicipais legais
@@ -192,52 +200,106 @@ bairros <- read_neighborhood(year = 2022, showProgress = FALSE)
 bairros |>
   filter(name_muni == "Salvador") |>
   ggplot() +
-  geom_sf()
+  geom_sf(fill = "gray92", color = "gray70", linewidth = 0.3) +
+  theme_minimal()
 ```
 
 ### Recortes intramunicipais institucionais
 
-Estes são os recortes que mais nos interessam nesse estudo. `read_weighting_area()` e `read_census_tract()` baixam, respectivamente, as áreas de ponderação e os setores censitários. Ambos aceitam código de estado (sigla ou 2 dígitos) ou código de município (7 dígitos) nos parâmetros `code_weighting` e `code_tract`, o que permite baixar apenas os dados de interesse sem carregar o Brasil inteiro. O mapa a seguir compara os dois recortes para Salvador, antecipando a discussão da seção 1.6.
+Estes são os recortes que mais nos interessam nesse estudo. `read_weighting_area()` e `read_census_tract()` baixam, respectivamente, as áreas de ponderação e os setores censitários. Ambos aceitam código de estado (sigla ou 2 dígitos) ou código de município (7 dígitos) nos parâmetros `code_weighting` e `code_tract`, o que permite baixar apenas os dados de interesse sem carregar o Brasil inteiro.
+
+Os geocódigos do IBGE seguem uma estrutura hierárquica de dígitos [@ibge_quageo]:
+
+- 2 dígitos para o estado
+- 7 dígitos para o município (2 do estado + 5 do município)
+- 13 dígitos para a área de ponderação
+- 15 dígitos para o setor censitário
+
+Essa estrutura é a que as funções do `geobr` esperam receber nos parâmetros `code_weighting` e `code_tract`.
+
+Para visualizar os dois recortes de forma comparada e interativa, usamos o pacote `mapview` em conjunto com o `leafsync`, que permite sincronizar dois mapas lado a lado de modo que o zoom e o deslocamento em um deles se reflitam automaticamente no outro. O código a seguir baixa as áreas de ponderação e os setores censitários de Maceió (AL) e os exibe em painéis sincronizados.
 
 ```{r}
-#| label: fig-recortes-intra-institucionais
-#| fig-cap: "Recortes intramunicipais institucionais de Maceió (AL) em 2010"
-#| fig-subcap:
-#|   - "Áreas de ponderação"
-#|   - "Setores censitários"
-#| layout-ncol: 2
+#| label: map-recortes-intra-institucionais
 #| message: false
 #| cache: true
 
-# Código IBGE de Maceió: 2927408
+library(mapview)
+library(leafsync)
+
+# Código IBGE de Maceió: 2704302
 areas_pond <- read_weighting_area(code_weighting = 2704302, year = 2010)
 setores    <- read_census_tract(code_tract = 2704302, year = 2010)
 
-ggplot(areas_pond) +
-  geom_sf()
+m_pond    <- mapview(areas_pond, layer.name = "Áreas de ponderação",
+                     col.regions = "gray80", color = "gray40", lwd = 1.5,
+                     alpha.regions = 0.5, legend = FALSE)
+m_setores <- mapview(setores, layer.name = "Setores censitários",
+                     col.regions = "gray80", color = "gray40", lwd = 0.5,
+                     alpha.regions = 0.5, legend = FALSE)
 
-ggplot(setores) +
-  geom_sf()
+sync(m_pond, m_setores)
 ```
+
+::: {.callout-tip}
+Aproxime o zoom nos dois mapas e observe os contornos dos polígonos. É comum perceber pequenas imperfeições nas bordas das feições, como ângulos levemente arredondados ou vértices deslocados. Isso ocorre porque o parâmetro `simplified = TRUE` é o padrão em todas as funções do `geobr`, o que reduz o tamanho dos arquivos e acelera o processamento, mas introduz simplificações na geometria. Para reproduzir os mapas com geometrias precisas, execute o código localmente com `simplified = FALSE` nos dois downloads e aproxime o zoom novamente.
+:::
 
 ## O Censo Demográfico
 
-O Censo Demográfico é o maior e mais complexo levantamento estatístico do Brasil. Diferente das pesquisas por amostragem — como a PNAD-C, a POF ou a PNS, que entrevistam apenas uma fração dos domicílios —, o Censo tem como ambição cobrir todos os domicílios do território nacional, sem exceção. Essa universalidade é o que o torna insubstituível: é a única pesquisa capaz de fornecer informações estatísticas desagregadas em qualquer recorte do território, desde o nível nacional até o setor censitário.
+O Censo Demográfico é o maior e mais complexo levantamento estatístico do Brasil. Diferente das pesquisas por amostragem (como a PNAD-C, a POF ou a PNS, que entrevistam apenas uma fração dos domicílios), o Censo tem como ambição cobrir todos os domicílios do território nacional, sem exceção. Essa universalidade é o que o torna insubstituível, pois é a única pesquisa capaz de fornecer informações estatísticas desagregadas em qualquer recorte do território, desde o nível nacional até o setor censitário.
 
-Os objetivos centrais do Censo são dois: contar todos os habitantes do território nacional e identificar as condições em que vivem, revelando não apenas quantas pessoas moram em cada lugar, mas como é sua moradia, qual é sua renda, qual é seu nível de escolaridade, quais são suas condições de saneamento, entre muitas outras dimensões. O resultado é um retrato estatístico de alta resolução do país inteiro, com um detalhamento espacial que nenhuma outra pesquisa periódica consegue oferecer.
+Os objetivos centrais do Censo são dois: contar todos os habitantes do território nacional e identificar as condições em que vivem, revelando quantas pessoas moram em cada lugar, como é sua moradia, qual é sua renda, qual é seu nível de escolaridade, quais são suas condições de saneamento, entre muitas outras dimensões. O resultado é um retrato estatístico de alta resolução do país inteiro, com um detalhamento espacial que nenhuma outra pesquisa periódica consegue oferecer.
 
-O primeiro recenseamento do território brasileiro foi realizado em 1872, no Período Imperial. A partir de 1890, o Censo passou a ter periodicidade decenal, embora as edições previstas para 1910 e 1930 não tenham sido realizadas. No século XX, foram realizados Censos em 1940, 1950, 1960, 1970, 1980 e 1991. No século XXI, as edições foram as de 2000, 2010 e 2022. O mais recente ocorreu com um intervalo de doze anos em relação ao anterior, em razão da pandemia de Covid-19, que inviabilizou sua realização no ano previsto de 2020, e de dificuldades no planejamento e financiamento da pesquisa naquele período.
+O primeiro recenseamento do território brasileiro foi realizado em 1872, no Período Imperial. A partir de 1890, o Censo passou a ter periodicidade decenal, embora as edições previstas para 1910 e 1930 não tenham sido realizadas. Essa periodicidade máxima de dez anos entre censos demográficos foi formalmente estabelecida pela Lei nº 8.184/1991 [@lei8184], que fixou também o intervalo máximo de cinco anos para os Censos Econômicos. No século XX, foram realizados Censos em 1940, 1950, 1960, 1970, 1980 e 1991. No século XXI, as edições foram as de 2000, 2010 e 2022. O mais recente ocorreu com um intervalo de doze anos em relação ao anterior, em razão e de dificuldades no planejamento e financiamento da pesquisa, agravadas ainda pela pandemia da COVID-19, o que inviabilizou sua realização no ano previsto de 2020.
 
-A data de referência do Censo é o instante que define quem é recenseável. No caso do Censo de 2022, foi a meia-noite do dia 31 de julho de 2022: qualquer pessoa que residia em um domicílio brasileiro nesse momento é, por definição, parte da população recenseada. Moradores que estivessem temporariamente fora de casa na data da visita do recenseador eram registrados normalmente, desde que o domicílio fosse seu local habitual de residência [@ibge_metodologia2010].
-
-Realizar um censo demográfico é uma das operações logísticas mais complexas que um Estado pode empreender. Para o Censo de 2022, o IBGE coordenou centenas de milhares de agentes recenseadores distribuídos por todos os municípios do país, com a missão de visitar individualmente cada domicílio brasileiro, incluindo áreas urbanas densas, zonas rurais isoladas, territórios indígenas e comunidades de difícil acesso. Essa escala exige anos de preparação antes do trabalho de campo e anos de processamento e divulgação de resultados após sua conclusão.
+Realizar um censo demográfico é uma das operações logísticas mais complexas que um Estado pode empreender. Para o [Censo de 2022](https://censo2022.ibge.gov.br/sobre/geografia-censitaria/base-territorial.html), o IBGE coordenou 183 mil agentes recenseadores distribuídos em 450 mil setores censitários de todos os municípios do país. Com a missão de visitar individualmente cada domicílio brasileiro, incluindo áreas urbanas densas, zonas rurais isoladas, territórios indígenas e comunidades de difícil acesso, estes agentes percorreram mais de [13,4 milhões de km no território](https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/41911-censo-2022-na-casa-brasil-ibge-equipe-tecnica-divulga-os-agregados-por-setores-censitarios-e-trajetos-dos-recenseadores), o que equivale a, aproximadamente, 355 voltas em torno da Terra. Essa escala exige anos de preparação antes do trabalho de campo e anos de processamento e divulgação de resultados após sua conclusão.
 
 A importância do Censo ultrapassa sua própria produção de dados. Por oferecer a única contagem exaustiva da população em nível intraurbano, ele fundamenta o funcionamento de todo o sistema de estatísticas nacionais. As pesquisas por amostragem do IBGE utilizam os resultados do Censo para calibrar os pesos de suas amostras, garantindo que os resultados sejam representativos para a população como um todo. Projeções populacionais para os anos entre censos, utilizadas para o planejamento público e a distribuição de recursos entre municípios, também são calculadas com base nas tendências observadas entre edições censitárias. Sem o Censo, o sistema estatístico brasileiro perderia sua referência de ancoragem.
+
+A metodologia censitária no Brasil é desenvolvida em diálogo com padrões internacionais. A referência global para os institutos nacionais de estatística é o documento *Principles and Recommendations for Population and Housing Censuses* [@unsd_princrec2025], publicado pela Divisão de Estatística das Nações Unidas (UNSD, Série M67). A Revisão 4 do documento, aprovada pela Comissão de Estatística da ONU em março de 2025, orienta o chamado Census Round 2030, o ciclo internacional de censos que abrange os recenseamentos realizados ao longo da década de 2030. Para coordenar a produção dessa revisão, a ONU organizou grupos de trabalho temáticos, os *Task Teams*. O IBGE preside o **Task Team 3: Use of Geospatial Information in Census Operations**, responsável por consolidar as recomendações sobre o uso de informação geoespacial nas operações censitárias. O Task Team 3 conta com a participação de institutos e organismos de vários países e regiões, entre eles Indonésia, Austrália, Colômbia, Índia, Quênia e Polônia, além de organizações como a Comissão Europeia (Eurostat), o Banco Mundial, a CEPAL e o UNFPA. A presidência brasileira desse grupo reflete o reconhecimento internacional do trabalho do IBGE na integração entre estatística e geografia, materializado, entre outros, no Quadro Geográfico de Referência [@ibge_quageo].
 
 ::: callout-note
 **Desafios e limitações do Censo**
 
-A realização de um censo demográfico envolve desafios logísticos e metodológicos consideráveis. O mais fundamental é a impossibilidade de garantir cobertura total da população: parte dos habitantes não é recenseada, fenômeno conhecido como *subenumeração*. Essa lacuna não se distribui de forma uniforme no território — regiões de difícil acesso, áreas de conflito fundiário e populações em situação de rua tendem a apresentar taxas mais elevadas [@ibge_metodologia2010]. Populações indígenas com menor contato com a sociedade envolvente representam um desafio adicional. Outro desafio é a periodicidade decenal: com intervalos de dez anos entre censos (doze anos no caso de 2010–2022, em razão da pandemia de Covid-19), os dados envelhecem rapidamente em um país com dinâmica urbana acelerada. Para mitigar essa limitação, o IBGE realiza periodicamente pesquisas amostrais que permitem atualizar estimativas entre censos, mas sem a mesma granularidade espacial.
+A realização de um censo demográfico envolve desafios logísticos e metodológicos consideráveis. O mais fundamental é a impossibilidade de garantir cobertura total da população, já que parte dos habitantes não é recenseada, fenômeno conhecido como *subenumeração*. Essa lacuna afeta o território de forma desigual, com taxas mais elevadas em regiões de difícil acesso, áreas de conflito fundiário e populações em situação de rua [@ibge_metodologia2010]. Populações indígenas com menor contato com a sociedade envolvente representam um desafio adicional. Outro desafio é a periodicidade decenal, pois com intervalos de dez anos entre censos (doze anos no caso de 2010–2022, em razão da pandemia de Covid-19), os dados envelhecem rapidamente em um país com dinâmica urbana acelerada. Para mitigar essa limitação, o IBGE realiza periodicamente pesquisas amostrais que permitem atualizar estimativas entre censos, mas sem a mesma granularidade espacial.
 
-A realização de censos demográficos periódicos é prática comum entre os institutos nacionais de estatística ao redor do mundo. Nos Estados Unidos, o *Census Bureau* conduz um censo decenal desde 1790, complementado pela *American Community Survey* (ACS), pesquisa amostral anual que fornece estimativas de características socioeconômicas em nível local entre os censos. Em Portugal e Espanha, o Instituto Nacional de Estatística (INE) realiza recenseamentos decenais com estrutura metodológica semelhante à do IBGE. O Statistics Canada conduz o censo a cada cinco anos, alternando entre um recenseamento completo e uma versão com questionário expandido aplicado a uma amostra. Em todos esses casos, a lógica central é a mesma: combinar uma contagem universal da população com a coleta de informações detalhadas sobre suas características, produzindo a base de referência a partir da qual todas as demais pesquisas são calibradas.
+A realização de censos demográficos periódicos é prática comum entre os institutos nacionais de estatística ao redor do mundo. Nos Estados Unidos, o *Census Bureau* conduz um censo decenal desde 1790, complementado pela *American Community Survey* (ACS), pesquisa amostral anual que fornece estimativas de características socioeconômicas em nível local entre os censos. Em Portugal e Espanha, o Instituto Nacional de Estatística (INE) realiza recenseamentos decenais com estrutura metodológica semelhante à do IBGE. O Statistics Canada conduz o censo a cada cinco anos, alternando entre um recenseamento completo e uma versão com questionário expandido aplicado a uma amostra. Em todos esses casos, a lógica central é a mesma, combinando uma contagem universal da população com a coleta de informações detalhadas sobre suas características para produzir a base de referência a partir da qual todas as demais pesquisas são calibradas.
 :::
+
+### Os Instrumentos de Coleta de Dados do Censo
+
+Para cada setor censitário, o Censo mobiliza um conjunto de instrumentos distintos, cada um com finalidade, cobertura e método de coleta próprios. Alguns são questionários aplicados diretamente à população. Outros registram informações sobre o entorno dos domicílios ou sobre a própria operação de campo.
+
+#### Questionários Básico e da Amostra
+
+Os dois questionários domiciliares do Censo compartilham uma mesma referência temporal, a **data de referência**, que define quem é recenseável. No Censo de 2022, foi a meia-noite do dia 31 de julho de 2022. Qualquer pessoa que residia em um domicílio brasileiro nesse momento é, por definição, parte da população recenseada. Moradores temporariamente ausentes na data da visita do recenseador eram registrados normalmente, desde que o domicílio fosse seu local habitual de residência [@ibge_metodologia2010].
+
+O **Questionário Básico** é aplicado em todos os domicílios do país e investiga as características fundamentais dos moradores e do domicílio. No Censo de 2010 continha 34 questões; no de 2022, 26 questões. <!-- VERIFICAR número exato de questões no Censo 2022 via metodologia oficial --> Os resultados são divulgados agregados no nível do setor censitário. O **Questionário da Amostra** é aplicado em uma fração dos domicílios, selecionada por amostragem aleatória estratificada. Inclui todos os quesitos do Básico e acrescenta temas adicionais, como migração, fecundidade, trabalho, rendimento e deslocamento. No Censo de 2010 o questionário tinha 102 quesitos; no de 2022, 103. <!-- VERIFICAR --> A fração amostral varia com o porte do município: nos menores, chega a 50% dos domicílios; nos maiores, pode ser inferior a 10%. Os resultados são divulgados no nível da área de ponderação, recorte que agrega setores censitários em número suficiente de domicílios para garantir precisão estatística e preservar o anonimato dos respondentes. Ambos os questionários são aplicados em entrevista presencial pelo recenseador, com uso de tablet dotado do aplicativo de coleta do IBGE.
+
+#### Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE)
+
+O CNEFE é o instrumento de cadastramento georreferenciado de todos os endereços visitados pelo recenseador durante a operação censitária. Enquanto os questionários coletam informações sobre quem mora nos domicílios, o CNEFE registra onde esses domicílios estão. Para cada endereço, o recenseador captura as coordenadas geográficas com o receptor GPS/GNSS integrado ao tablet, além de informações sobre a espécie do endereço (domicílio particular, domicílio coletivo, estabelecimento comercial, etc.). No Censo de 2022 foram cadastrados 106,8 milhões de endereços com coordenadas geográficas [@cnefe_metodologia2024]. O CNEFE é divulgado como produto independente e é o tema do Capítulo 10 deste livro.
+
+#### Pesquisa Urbanística do Entorno dos Domicílios
+
+A Pesquisa Urbanística do Entorno dos Domicílios investiga as características da infraestrutura urbana no entorno imediato de cada setor censitário, com foco nas faces de quadra que compõem o setor. São investigados elementos como iluminação pública, pavimentação, meio-fio, calçadas, rampas para cadeirantes, arborização, bueiros, esgoto a céu aberto e presença de lixo. Esta pesquisa é realizada apenas para setores urbanos faceados e precede a aplicação dos questionários básico e da amostra. Ao percorrer as faces do setor durante a etapa de arrolamento, o recenseador registra as características de infraestrutura antes de dar início às entrevistas domiciliares.
+
+#### Trajeto dos Recenseadores
+
+O trajeto dos recenseadores é o registro georreferenciado automático das rotas percorridas durante a operação de campo. O tablet utilizado pelo recenseador captura continuamente a posição GPS ao longo do percurso pelo setor, gerando uma trilha que documenta o caminho percorrido e os endereços visitados. O produto resultante permite ao IBGE monitorar a cobertura da coleta em tempo real, identificar setores com gaps de cobertura e, após a operação, disponibilizar para o público um conjunto de dados que permite visualizar os trajetos de todos os recenseadores no país.
+
+### Os Produtos do Censo
+
+O Censo Demográfico produz um conjunto diversificado de produtos de dados, cada um com características distintas de resolução espacial, riqueza temática e forma de acesso. Os principais produtos divulgados pelo IBGE são:
+
+- **Agregados por setor censitário:** estatísticas tabuladas para cada um dos 450 mil setores censitários do país, a partir das respostas do Questionário Básico (universo). Cobrem características dos domicílios e dos moradores. São o tema do Capítulo 7.
+- **Microdados da Amostra:** registros individuais anonimizados de domicílios e moradores que responderam ao Questionário da Amostra, identificados até o nível da área de ponderação. Permitem análises complexas com controle de variáveis socioeconômicas e são o tema do Capítulo 8.
+- **Grade Estatística:** contagens populacionais e de domicílios distribuídas em células regulares de 200 × 200 m nas áreas urbanas e 1 × 1 km nas rurais, oferecendo a maior resolução espacial dos produtos do Censo. É o tema do Capítulo 9.
+- **CNEFE:** o cadastro georreferenciado de endereços descrito na seção anterior, com coordenadas geográficas para cada endereço visitado. É o tema do Capítulo 10.
+- **Pesquisa Urbanística do Entorno dos Domicílios:** informações sobre infraestrutura urbana nas faces de quadra dos setores urbanos faceados. É o tema do Capítulo 11.
+- **Produtos temáticos:** o Censo produz ainda resultados específicos para territórios indígenas, comunidades quilombolas, favelas e aglomerados subnormais, entre outros recortes populacionais e territoriais especiais. Esses produtos não são abordados neste livro.
+
+Uma característica importante que orienta o uso desses produtos é a relação inversa entre resolução espacial e riqueza temática das informações divulgadas. Quanto maior a resolução espacial, menor a quantidade de estatísticas disponíveis naquele nível. Isso ocorre porque o IBGE é legalmente obrigado a proteger o sigilo das informações individuais coletadas. Em unidades geográficas muito pequenas, divulgar muitas variáveis aumenta o risco de que uma combinação de características permita identificar um domicílio ou uma pessoa específica. Por essa razão, a grade estatística disponibiliza apenas totais populacionais e de domicílios, enquanto os microdados do Questionário da Amostra, muito mais ricos tematicamente, são identificados apenas até o nível da área de ponderação. A @fig-res-esp-vol-est ilustra esse *trade-off*, mostrando que à medida que a resolução espacial aumenta (da esquerda para a direita), o volume de estatísticas disponíveis por unidade diminui.
+
+![Relação entre resolução espacial e volume de estatísticas nos produtos do Censo Demográfico.](img/6-conceitos-e-metodos/res_esp_vs_vol_est.png){#fig-res-esp-vol-est}
