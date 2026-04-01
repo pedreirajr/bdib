@@ -1,5 +1,5 @@
-tidyverse
 ggplot2
+tidyverse
 tibble
 tidyr
 readr
@@ -12,5 +12,3 @@ sf
 geobr
 censobr
 mapview
-cnefetools
-odbr
