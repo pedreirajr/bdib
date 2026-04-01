@@ -3,7 +3,9 @@
 /_freeze/
 /*_files/
 *.html
+!docs/*.html
 !docs/**/*.html
+!docs/*_files/
 !docs/**/*_files/
 **/*.quarto_ipynb
 
