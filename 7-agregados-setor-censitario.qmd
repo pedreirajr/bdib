@@ -12,7 +12,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 ## Introdução
 
-Os **Agregados por Setores Censitários** são um dos produtos do Censo mais amplamente utilizados por pesquisadores, planejadores e gestores públicos. Trata-se de um conjunto de tabelas em que cada linha representa um setor censitário e cada coluna representa uma variável agregada, como o total de moradores, o número de domicílios, as condições de abastecimento de água e esgotamento sanitário e a composição etária da população.
+O produto **Agregados por Setores Censitários** é um dos resultados do Censo mais amplamente utilizados por pesquisadores, planejadores e gestores públicos. Trata-se de um conjunto de tabelas em que cada linha representa um setor censitário e cada coluna representa uma variável agregada, como o total de moradores, o número de domicílios, as condições de abastecimento de água e esgotamento sanitário e a composição etária da população.
 
 A popularidade desse produto decorre do equilíbrio entre resolução espacial e quantidade de estatísticas disponível por unidade espacial. Enquanto os microdados da amostra permitem análises mais ricas em termos de variáveis (renda, educação, migração), as **áreas de ponderação** (unidade espacial dos microdados) são muito maiores que os setores censitários. Para se ter uma ideia, no Censo de 2010, o município de São Paulo possuía 5082 setores censitários, mas apenas 107 áreas de ponderação, conforme ilustra a @fig-sp-comparacao. A grade estatística, por sua vez, oferece resolução ainda maior com as quadrículas urbanas de 200 X 200 m, mas contém somente totais de população e domicílio. 
 
@@ -57,7 +57,7 @@ ggplot(sp_ap) +
   theme_minimal()
 ```
 
-O produto que conhecemos hoje tem uma origem mais modesta do que a dimensão atual sugere. Antes do Censo 1991, esses arquivos eram concebidos como cadastros de apoio às operações internas do IBGE, com a finalidade de viabilizar a seleção de amostras em pesquisas domiciliares posteriores [@ibge_nota_sc2022]. Para isso, era suficiente registrar variáveis descritivas da divisão territorial e informações sobre o porte dos setores, como o total de domicílios e estimativas de variância que orientavam a determinação do tamanho das amostras.
+O produto que conhecemos hoje tem uma origem mais modesta do que a dimensão atual sugere. A ideia de setor censitário, como a menor unidade espacial de trabalho do Censo, só veio surgir [pela primeira vez no Censo de 1950](https://www.ibge.gov.br/estatisticas/sociais/saude/9662-censo-demografico-2010.html?edicao=9754&t=conceitos-e-metodos). Antes do Censo 1991, esses arquivos eram concebidos como cadastros de apoio às operações internas do IBGE, com a finalidade de viabilizar a seleção de amostras em pesquisas domiciliares posteriores [@ibge_nota_sc2022]. Para isso, era suficiente registrar variáveis descritivas da divisão territorial e informações sobre o porte dos setores, como o total de domicílios e estimativas de variância que orientavam a determinação do tamanho das amostras.
 
 No Censo 2000, o IBGE produziu a primeira edição dos agregados por setor censitário, reunindo 527 variáveis sobre características dos domicílios, dos responsáveis e das pessoas residentes, com cruzamentos exclusivamente por sexo. Uma segunda edição, gerada a partir dos microdados do universo, expandiu esse conjunto para mais de 3200 variáveis, organizadas em planilhas separadas por Unidade da Federação.
 
