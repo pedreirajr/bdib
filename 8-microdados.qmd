@@ -30,14 +30,12 @@ No momento da escrita deste capítulo (início de abril de 2026), o IBGE ainda n
 
 ### O plano amostral
 
-Para que somente parte dos domicílios precise responder ao Questionário da Amostra, o IBGE realiza uma **amostragem probabilística** no interior de cada setor censitário. Em cada setor, uma fração fixa de domicílios particulares é selecionada por sorteio com equiprobabilidade (amostragem aleatória simples sem reposição dentro do setor). <!--O setor censitário é, portanto, o estrato do plano, com a seleção ocorrendo de forma independente dentro de cada um, e nenhum domicílio é selecionado com base no que ocorreu nos demais setores.-->
+Para que somente parte dos domicílios precise responder ao Questionário da Amostra, o IBGE realiza uma **amostragem probabilística** no interior de cada setor censitário. Em cada setor, uma fração fixa de domicílios particulares é selecionada por sorteio aleatório. <!--O setor censitário é, portanto, o estrato do plano, com a seleção ocorrendo de forma independente dentro de cada um, e nenhum domicílio é selecionado com base no que ocorreu nos demais setores.-->
 
-Quando um domicílio é selecionado, todos os seus moradores são entrevistados. Isso cria dois regimes de amostragem distintos para os dois arquivos de microdados:
+Quando um domicílio é selecionado, todos os seus moradores são entrevistados. Isso cria dois regimes de amostragem distintos para os dois arquivos de microdados, cuja distinção tem consequências diretas para a análise, como veremos na @sec-survey:
 
-- **Microdados de domicílios:** amostragem aleatória estratificada simples, com estratos nos setores censitários.
-- **Microdados de pessoas:** amostragem estratificada e conglomerada, com estratos nos setores censitários e conglomerados nos domicílios. Os indivíduos não foram sorteados diretamente; eles compõem um conglomerado inserido em um domicílio que foi selecionado.
-
-Essa distinção tem consequências diretas para a análise, como veremos na @sec-survey.
+- **Microdados de domicílios:** amostragem aleatória estratificada simples de domicílios, com estratos nos setores censitários.
+- **Microdados de pessoas:** amostragem estratificada e conglomerada, com estratificação nos setores censitários (estratos = setores censitários) e conglomeração nos domicílios (conglomerados = domicílios). Isso significa que os indivíduos não são sorteados diretamente, mas compõem um conglomerado inserido em um domicílio que foi selecionado.
 
 A fração amostral aplicada aos setores de cada município depende do seu porte. A @tbl-fracoes apresenta as frações adotadas nas duas últimas edições do Censo. As frações são idênticas em 2010 e 2022, e resultam numa fração amostral média de cerca de 11% da população nacional.
 
@@ -66,7 +64,7 @@ A fração mais alta nos municípios menores garante que mesmo localidades com p
 
 Em ambas as edições, alguns distritos e subdistritos de municípios grandes receberam frações maiores que a padrão municipal, para viabilizar a divulgação de resultados em nível inframunicipal. Em 2022, o procedimento foi estendido também a Terras Indígenas, Territórios Quilombolas e Favelas e Comunidades Urbanas, que receberam frações diferenciadas chegando a 100% em alguns casos [@ibge_nota_am2022].
 
-O resultado desse processo de seleção amostral representou 6,2 milhões de domicílios com 20,6 milhões de pessoas no Censo de 2010 e 7,8 milhões de domicílios com 21,9 milhões de pessoas no Censo de 2022 [@ibge_metodologia2010; @ibge_nota_am2022]. Em ambos os casos, temos quase 11% do total da população em análise, cujos dados exploraremos mais adiante.
+Esse processo de seleção amostral resultou em 6,2 milhões de domicílios com 20,6 milhões de pessoas no Censo de 2010 e 7,8 milhões de domicílios com 21,9 milhões de pessoas no Censo de 2022 [@ibge_metodologia2010; @ibge_nota_am2022]. Em ambos os casos, temos quase 11% do total da população em análise, cujos dados exploraremos mais adiante.
 
 ### Expansão da amostra
 
@@ -75,29 +73,35 @@ Numa pesquisa por amostragem probabilística, cada domicílio selecionado não r
 ![Município hipotético com 105 domicílios em 2 áreas de ponderação e 5 setores censitários ](img/8-microdados/fig-config_cidade_hipo.png){#fig-config_cidade_hipo}
 
 
-Suponha que a fração amostral seja de 20% para todo esse município, implicando que 1 a cada 5 domicílios de cada setor censitário seja selecionado para compor a amostra. Uma primeira aproximação para esse peso é o inverso da fração amostral efetiva. Ou seja, cada domicílio selecionado representa aproximadamente 5 outros domicílios (pois, $1/0,20 = 5$). Deste modo, poderíamos aleatoriamente selecionar os seguintes domicílios na cor vermelha conforme a @fig-domicilios_sorteados no município hipotético, que recebem, cada um, peso amostral igual a 5 (ou seja, representam 5 domicílios em sua região) <!-- Domicílios em setores com frações distintas recebem pesos distintos, o que introduz probabilidades de seleção desiguais entre domicílios de municípios de portes diferentes.-->
+Suponha que a fração amostral seja de 20% para todo esse município, implicando que 1 a cada 5 domicílios de cada setor censitário seja selecionado para compor a amostra. Uma primeira aproximação para esse peso é o inverso da fração amostral efetiva. Ou seja, cada domicílio selecionado representa aproximadamente 5 outros domicílios (pois, $1/0,20 = 5$). Deste modo, poderíamos aleatoriamente selecionar os seguintes domicílios na cor vermelha conforme a @fig-domicilios_sorteados no município hipotético. Nesse processo, cada recebe peso amostral igual a 5 (ou seja, representam 5 domicílios em seu setor). <!-- Domicílios em setores com frações distintas recebem pesos distintos, o que introduz probabilidades de seleção desiguais entre domicílios de municípios de portes diferentes.-->
 
 ![Domicílios selecionados aleatoriamente em cada setor censitário, de acordo com uma fração amostral de 20%](img/8-microdados/fig-domicilios_sorteados.png){#fig-domicilios_sorteados}
 
 Esse peso inicial, porém, pode não refletir adequadamente a distribuição real da população. Por acaso, a amostra pode ter capturado um número menor de pessoas de 0 a 15 anos ou mais pessoas do sexo feminino em comparação ao que se sabe do universo naquela região. Para corrigir essa variação aleatória, o IBGE realiza um processo de **calibração** destes pesos.
 
-A calibração consiste em ajustar os pesos iniciais de maneira que as estimativas da amostra se aproximem dos totais já conhecidos para um conjunto de variáveis *auxiliares*. Tais variáveis são obtidas de quesitos que existem em ambos os questionários (Básico e da Amostra), ou seja, correspondem a totais populacionais conhecidos do processo de levantamento do Censo. O método de calibração baseia-se em uma estratégia de Mínimos Quadrados Generalizados (MQG), considerando as propostas de @bankier1992 e @deville1993, similar ao empregado em outros Censos, como o canadense [@ibge_metodologia2010; @ibge_nota_am2022]. Questões metodológicas específicas sobre amostragem complexa não são o foco deste livro, mas o(a) leitor(a) interessado pode ganhar mais profundidade teórica e prática consultando as obras de @silva2021amostragem, @lumley2011 e @zimmer2024.
+A calibração consiste em ajustar os pesos iniciais de maneira que as estimativas da amostra se aproximem dos totais já conhecidos para um conjunto de variáveis *auxiliares*. Tais variáveis são obtidas de quesitos que existem em ambos os questionários (Básico e da Amostra), ou seja, correspondem a totais populacionais conhecidos do processo de levantamento do Censo. 
 
-É importante destacar que esse processo de calibração é realizado no nível da área de *ponderação*, que recebe esse nome  justamente por servir como unidade espacial onde se realiza a calibração dos pesos. Nesse sentido, as **restrições de calibração** consistem em impor que os totais populacionais das variáveis auxiliares se aproximem da estimativa obtida a partir somente das informações da amostra expandida (multiplicada por estes pesos) neste nível espacial. Em 2010, foram consideradas 40 restrições, incluindo total de pessoas, total de domicílios, distribuição por sexo e faixas etárias detalhadas [@ibge_metodologia2010]. Em 2022, o conjunto foi ampliado para 47 restrições, com a adição de Terras Indígenas, Territórios Quilombolas, Favelas e Comunidades Urbanas, além de categorias de número de banheiros nos domicílios particulares permanentes [@ibge_nota_am2022].
+O método de calibração baseia-se em uma estratégia de Mínimos Quadrados Generalizados (MQG), considerando as propostas de @bankier1992 e @deville1993, similar ao empregado em outros Censos, como o canadense [@ibge_metodologia2010; @ibge_nota_am2022]. Questões metodológicas específicas sobre amostragem complexa não são o foco deste livro, mas o(a) leitor(a) interessado pode ganhar mais profundidade teórica e prática consultando as obras de @silva2021amostragem, @lumley2011 e @zimmer2024.
 
-É importante mencionar que para evitar pesos extremos (muito pequenos ou muito grandes) que poderiam distorcer as estimativas, são impostos limites aos pesos calibrados. Na prática, o peso calibrado de cada domicílio não pode ser inferior a um quinto do peso inicial nem superior a cinco vezes o valor deste peso inicial [@ibge_nota_am2022]. 
+É importante destacar que esse processo de calibração é realizado no nível da área de *ponderação*, que recebe esse nome  justamente por servir como unidade espacial onde se realiza a calibração dos pesos. Nesse sentido, as **restrições de calibração** consistem em impor que os totais populacionais das variáveis auxiliares se aproximem da estimativa obtida a partir somente das informações da amostra expandida (multiplicada por estes pesos) neste nível de desagregação espacial. 
 
-O produto final é um único peso calibrado para cada domicílio da amostra, que é replicado para todos os seus moradores. Esse peso, armazenado na variável `V0010` para os dados do Censo de 2010<!--Atualizar quando for 2022!!!-->, é o que utilizaremos em toda a análise. O IBGE recomenda que ele seja mantido como valor fracionário (com 10 casas decimais), pois o arredondamento para valores inteiros rompe a consistência das restrições de calibração [@ibge_nota_am2022]. Na @fig-vars_aux_censo22 abaixo, é possível evidenciar o resultado desse processo de calibração para o Censo de 2022, comparando as diferenças finais entre os totais observados e os totais estimados com os pesos amostrais calibrados. Observe, as diferenças são sempre menores que 1%, à exceção da variável *Total de domicílios particulares permanentes sem banheiro* (~1,35%).
+Em 2010, foram consideradas 40 restrições, incluindo total de pessoas, total de domicílios, distribuição por sexo e faixas etárias detalhadas [@ibge_metodologia2010]. Em 2022, o conjunto foi ampliado para 47 restrições, com a adição de Terras Indígenas, Territórios Quilombolas, Favelas e Comunidades Urbanas, além de categorias de número de banheiros nos domicílios particulares permanentes [@ibge_nota_am2022].
+
+É importante mencionar que para evitar pesos extremos (muito pequenos ou muito grandes) que poderiam distorcer as estimativas, são impostos limites aos pesos calibrados. Na prática, considerando os pesos inicial e calibrado de cada domicílio como $w$ e $w^*$, respectivamente, os pesos calibrados dos domicílios não podem ser nem inferiores a 1/5 ($w^*\ge w/5$) nem superiores a 5 vezes ($w^*\ge 5w$) o valor deste peso inicial^[Na prática, a notação é $w_{ai}$ e $w^*_{ai}$, que representa o peso do domicílio $i$ na área de ponderação $a$, mas mantemos sem os índices aqui por propósitos didáticos] [@ibge_nota_am2022]^. 
+
+O produto final é um único peso calibrado para cada domicílio da amostra, que é replicado para todos os seus moradores. Esse peso, armazenado na variável `V0010` para os dados do Censo de 2010<!--Atualizar quando for 2022!!!-->, é o que utilizaremos em toda a análise. O IBGE recomenda que ele seja mantido como valor fracionário (com 10 casas decimais), pois o arredondamento para valores inteiros rompe a consistência das restrições de calibração [@ibge_nota_am2022]. 
+
+Na tabela da @fig-vars_aux_censo22 abaixo, obtida de um *screenshot* do documento metodológico do Censo de 2022 [@ibge_nota_am2022], é possível evidenciar o resultado desse processo de calibração para o Censo de 2022, comparando as diferenças entre os totais observados e os totais estimados com os pesos amostrais calibrados. Observe, as diferenças são sempre menores que 1%, à exceção da variável *Total de domicílios particulares permanentes sem banheiro* (~1,35%).
 
 ![Comparação entre os totais observados e com peso de cada variável auxiliar da calibração para o Censo de 2022. Fonte: @ibge_nota_am2022](img/8-microdados/fig-vars_aux_censo22.png){#fig-vars_aux_censo22}
 
 ### Áreas de ponderação (aspectos metodológicos) {#sec-areas-pond}
 
-Conforme já mencionado anteriormente, a **área de ponderação** é o recorte geográfico para o qual os microdados da amostra podem ser divulgados publicamente. No Censo de 2010, estamos falando de 10.184 áreas de ponderação compreendendo os cerca de 313 mil setores censitários. Para o Censo de 2022, temos até o momento somente áreas de ponderação preliminares (cuja malha espacial  não foi divulgada) onde os pesos já foram calibrados para a produção de alguns resultados parciais. Neste caso, temos um total de 10.607 áreas de ponderação, que abrangem os 468 mil setores censitários do país. <!-- Atualizar aqui-->
+Conforme mencionado anteriormente, a **área de ponderação** é o recorte geográfico mais desagregado para o qual os microdados da amostra podem ser divulgados publicamente. No Censo de 2010, estamos falando de 10.184 áreas de ponderação compreendendo os cerca de 313 mil setores censitários. Para o Censo de 2022, temos, até o presente momento^[início de Abril de 2026<!--Atualizar aqui-->], somente áreas de ponderação preliminares (cuja malha espacial  não foi divulgada), com pesos calibrados para a produção de alguns resultados parciais. Eles compõem um total de 10.607 áreas de ponderação, que abrangem os 468 mil setores censitários do país. <!-- Atualizar aqui-->
 
 Dois critérios justificam essa escolha. O primeiro é a **precisão estatística**, já que domínios geográficos muito pequenos produzem estimativas com erros amostrais elevados. O segundo é a **proteção da confidencialidade**, já que identificar unidades geográficas menores nos microdados públicos permitiria, em muitas situações, identificar domicílios ou indivíduos específicos.
 
-A formação das áreas de ponderação obedece a três critérios simultâneos: (i) **contiguidade** dos setores que a compõem; (ii) **tamanho mínimo** de 400 domicílios particulares ocupados na amostra; e (iii) **homogeneidade socioeconômica** interna. Em 2022, a homogeneidade foi maximizada por um algoritmo baseado em distância de Mahalanobis calculada a partir de oito variáveis dos setores censitários, entre elas renda média do responsável, proporção de domicílios na rede de esgoto e estrutura etária da população [@ibge_nota_am2022].
+A formação das áreas de ponderação obedece a três critérios simultâneos: (i) **contiguidade** dos setores que a compõem; (ii) **tamanho mínimo** de 400 domicílios particulares ocupados na amostra; e (iii) **homogeneidade socioeconômica** interna. Em 2022, a homogeneidade foi maximizada por um algoritmo baseado em oito variáveis dos setores censitários, entre elas renda média do responsável, proporção de domicílios na rede de esgoto e estrutura etária da população [@ibge_nota_am2022].
 
 O método de formação varia conforme o porte do município. Em municípios com menos de 100 mil habitantes nos quais é possível formar pelo menos duas áreas, o processo é automático, via algoritmo em R desenvolvido pelo IBGE. Em municípios com mais de 100 mil habitantes, os técnicos do Instituto realizam o agrupamento manualmente, utilizando as áreas de ponderação do Censo 2010 como referência e fazendo ajustes com base em critérios de homogeneidade e morfologia urbana. Municípios com uma única área cobrem o território municipal por inteiro.
 
@@ -105,32 +109,58 @@ O método de formação varia conforme o porte do município. Em municípios com
 
 Como discutido na seção anterior, os microdados da amostra têm uma estrutura amostral complexa. A seleção foi feita por amostragem estratificada (estratos nos setores censitários) nos domicílios, com uma etapa adicional de conglomeração no caso de indivíduos. Cada observação tem um peso diferente resultante da calibração. Calcular estatísticas sem levar essa estrutura em conta produz estimativas que, para as médias e totais, podem estar razoavelmente corretas, mas com **erros-padrão incorretos** (geralmente subestimados). Isso faz com que intervalos de confiança sejam mais estreitos do que deveriam, o que pode levar a conclusões equivocadas sobre a significância das diferenças encontradas.
 
-O pacotes `survey` [@survey_pkg] foi desenvolvido especificamente para lidar com esse problema. A ideia é implementar estimadores e métodos de estimação de variância corretos para amostras complexas, incorporando automaticamente os pesos, a estratificação e a conglomeração em todos os cálculos. Vale salientar que o pacote `survey` para R é inclusive a solução utilizada pelo corpo técnico do IBGE no processo de calibração dos pesos desde o Censo de 2010 [@ibge_metodologia2010; @ibge_nota_am2022]. O ponto de partida é a criação de um **objeto de desenho amostral** (*survey design object*) com a função `svydesign()`, que armazena os dados junto com a especificação do plano de amostragem. Todas as funções de análise recebem esse objeto em vez do *data frame* original.
+O pacote `survey` para R [@survey_pkg] foi desenvolvido especificamente para lidar com esse problema. A ideia é implementar estimadores e métodos de estimação de variância corretos para amostras complexas, incorporando automaticamente os pesos, a estratificação e a conglomeração em todos os cálculos. Vale salientar que o pacote `survey` é inclusive a solução utilizada pelo corpo técnico do IBGE no processo de calibração dos pesos desde o Censo de 2010 [@ibge_metodologia2010; @ibge_nota_am2022]. O ponto de partida é a criação de um **objeto de desenho amostral** (*survey design object*) com a função `svydesign()`, que armazena os dados junto com a especificação do plano de amostragem. Todas as funções de análise recebem esse objeto em vez do *data frame* original.
 
 Já o pacote `srvyr` [@srvyr_pkg] é uma extensão do `survey` que oferece uma interface no estilo tidyverse. O objeto de desenho é criado com `as_survey_design()`, que aceita os mesmos argumentos de `svydesign()` mas sem fórmulas, de modo a se integrar naturalmente ao fluxo `|>`. A análise por grupos usa `group_by()` e `summarize()`, exatamente como no `dplyr`.
 
 A @tbl-survey-srvyr apresenta as principais funções equivalentes entre os dois pacotes.
 
-| Tarefa                        | `survey`        | `srvyr`                              |
-|:------------------------------|:----------------|:-------------------------------------|
-| Criar objeto de plano amostral | `svydesign()`   | `as_survey_design()`                 |
-| Média                         | `svymean()`     | `survey_mean()`                      |
-| Total                         | `svytotal()`    | `survey_total()`                     |
-| Mediana / quantis             | `svyquantile()` | `survey_median()` / `survey_quantile()` |
-| Proporção                     | `svymean()`  | `survey_prop()`          |
-| Estatísticas por grupo        | `svyby()`       | `group_by()` + `summarize()`         |
+```{r, warning = F}
+#| label: tbl-survey-srvyr
+#| tbl-cap: "Funções equivalentes nos pacotes `survey` e `srvyr`."
+#| echo: false
 
-: Funções equivalentes nos pacotes `survey` e `srvyr`. {#tbl-survey-srvyr}
+tibble::tibble(
+  Tarefa = c(
+    "Criar objeto de plano amostral",
+    "Média",
+    "Total",
+    "Mediana / quantis",
+    "Proporção",
+    "Estatísticas por grupo"
+  ),
+  survey = c(
+    "`svydesign()`",
+    "`svymean()`",
+    "`svytotal()`",
+    "`svyquantile()`",
+    "`svymean()`",
+    "`svyby()`"
+  ),
+  srvyr = c(
+    "`as_survey_design()`",
+    "`survey_mean()`",
+    "`survey_total()`",
+    "`survey_median()` / `survey_quantile()`",
+    "`survey_prop()`",
+    "`group_by()` + `summarize()`"
+  )
+) |>
+  knitr::kable(
+    col.names = c("Tarefa", "`survey`", "`srvyr`"),
+    align = c("l", "c", "c")
+  )
+```
 
-Nos exemplos das próximas seções, usaremos exclusivamente o `srvyr`. Leitores que preferirem o `survey` podem consultar @lumley2011 e @zimmer2024 para a sintaxe equivalente. Eles se baseiam no tutorial de @silva2017censo, apresentado no 6º Seminário de Metodologia do IBGE em 2017. Leitores que desejarem aprofundar os fundamentos metodológicos da análise de amostras complexas para o Censo Demográfico brasileiro podem consultar @pessoa1998analise, referência clássica na área.
+Nos exemplos das próximas seções, usaremos exclusivamente o `srvyr`. Leitores que preferirem o `survey` podem consultar @lumley2011 e @zimmer2024 para a sintaxe equivalente. Eles se baseiam no tutorial de @silva2017censo, apresentado no 6º Seminário de Metodologia do IBGE em 2017. Para quem deseja aprofundar em fundamentos metodológicos de amostragem complexa, com foco especial no Censo Demográfico brasileiro, o livro de @pessoa1998analise é uma referência clássica na área.
 
 ## Analisando microdados de domicílios {#sec-dom}
 
-Esta seção e a próxima (@sec-ind) percorrem um ciclo básico de trabalho com microdados do Censo, da obtenção dos dados brutos à visualização dos resultados. A seção atual trata dos microdados de domicílios e a seguinte dos microdados de indivíduos. Em ambas, usamos Belo Horizonte como município de exemplo, o que nos permite explorar um contexto urbano de grande porte com diversidade interna expressiva. Como os microdados da amostra do Censo 2022 ainda não foram divulgados pelo IBGE no momento da escrita deste capítulo, todos os exemplos utilizam dados do Censo de 2010, acessados via pacote `censobr`.
+Esta seção e a próxima (@sec-ind) percorrem o ciclo completo de trabalho com microdados do Censo, desde a obtenção dos dados brutos à visualização dos resultados. A seção atual trata dos microdados de domicílios e a seguinte dos microdados de indivíduos. Em ambas, usamos Belo Horizonte como município de exemplo, o que nos permite explorar um contexto urbano de grande porte com diversidade interna expressiva. Como os microdados da amostra do Censo 2022 ainda não foram divulgados pelo IBGE no momento da escrita deste capítulo, todos os exemplos utilizam dados do Censo de 2010, acessados via pacote `censobr`.
 
 ### Obtendo e preparando os dados
 
-Para analisar os microdados de domicílios de Belo Horizonte no Censo 2010, seguiremos quatro etapas: obter a geometria das áreas de ponderação do município; extrair os códigos dessas áreas para filtrar os microdados; ler e filtrar os microdados de domicílios; e montar o objeto de desenho amostral. O código abaixo começa carregando os pacotes necessários.
+O ponto de partida é carregar os pacotes necessários para as duas seções.
 
 ```{r}
 #| label: pacotes
@@ -144,7 +174,7 @@ library(survey)
 library(srvyr)
 ```
 
-Antes de ler os dados propriamente, vale consultar o dicionário de variáveis do arquivo de domicílios. A função `data_dictionary()` do `censobr` abre uma tabela interativa com os nomes, descrições e categorias de cada variável disponível.
+Antes de ler os dados, vale consultar o dicionário de variáveis do arquivo de domicílios. A função `data_dictionary()` do `censobr` abre uma tabela interativa com nomes, descrições e categorias de cada variável disponível. Com centenas de colunas nos arquivos de microdados, esse passo é essencial para identificar as variáveis de interesse antes de qualquer leitura.
 
 ```{r}
 #| label: dicionario-dom
@@ -152,7 +182,7 @@ Antes de ler os dados propriamente, vale consultar o dicionário de variáveis d
 censobr::data_dictionary(year = 2010, dataset = 'households')
 ```
 
-Com o dicionário em mãos, podemos identificar as variáveis de interesse. O código a seguir lê as áreas de ponderação de Belo Horizonte (código IBGE 3106200) com o `geobr` e visualiza sua distribuição espacial.
+Com o dicionário em mãos, o passo seguinte é obter a geometria das áreas de ponderação de Belo Horizonte (código IBGE 3106200) com a função `read_weighting_area()` do `geobr`. Com ele, poderemos visualizar espacialmente os resultados nos mapas produzidos adiante e selecionar os códigos das áreas de ponderação a serem utilizados para filtrar os microdados de BH.
 
 ```{r}
 #| label: fig-bh-areas
@@ -172,9 +202,9 @@ ggplot(ap_bh) +
   labs(title = NULL)
 ```
 
-O mapa já revela uma característica importante das áreas de ponderação: elas são bastante menores nas regiões centrais e mais densas da cidade, onde o número de domicílios por quilômetro quadrado permite formar áreas compactas que atendam ao mínimo de 400 domicílios na amostra. Nas bordas periféricas, especialmente nas áreas com menor densidade, as áreas tendem a ser maiores em extensão territorial.
+O mapa revela uma característica importante das áreas de ponderação: elas são menores nas regiões centrais e mais densas da cidade, onde o número de domicílios por quilômetro quadrado permite formar recortes compactos que atendam ao mínimo de 400 domicílios na amostra. Nas bordas periféricas, onde a densidade é menor, as áreas tendem a ser maiores em extensão territorial.
 
-Com a geometria em mãos, extraímos os códigos das áreas de ponderação para filtrar os microdados. Esse passo é importante porque a função `read_households()` do `censobr` lê os dados de todo o Brasil como um *lazy frame* (via pacote `arrow`), e o filtro é aplicado antes de carregar os dados para a memória com `collect()`.
+Com os códigos das áreas de ponderação em mãos, podemos ler os microdados. A função `read_households()` do `censobr` retorna os dados de todo o Brasil como um *Arrow Table* (via pacote `arrow`), sem carregá-los para a memória imediatamente. O filtro por `code_weighting` seleciona apenas os domicílios de Belo Horizonte, e `collect()` materializa o resultado em um *data frame* convencional. Selecionaremos também apenas as variáveis de interesse, o que reduz consideravelmente o volume de dados em memória.
 
 ```{r}
 #| label: leitura-dom
@@ -206,7 +236,13 @@ md_dom_bh <- censobr::read_households(year = 2010, columns = cols_dom) |>
   collect()
 ```
 
-Com os microdados em memória, calculamos o total expandido de domicílios em cada área de ponderação — o valor que corresponde ao total da população de domicílios naquela área, obtido somando os pesos. Esse total será usado como argumento `fpc` (*finite population correction*) no objeto de desenho amostral, informando ao pacote o tamanho real de cada estrato.
+### Declarando o plano amostral
+
+Para que qualquer estimativa produzida com os microdados seja estatisticamente válida, é preciso declarar ao `srvyr` como os dados foram coletados. Sem essa declaração, as funções de resumo tratariam os dados como uma amostra aleatória simples, ignorando a estratificação e os pesos calibrados, o que produziria erros-padrão incorretos e intervalos de confiança inadequados.
+
+O plano amostral dos domicílios é caracterizado por três elementos. O primeiro é a **estratificação**: como a calibração foi realizada no nível da área de ponderação, cada área de ponderação constitui um estrato amostral independente. O segundo é a **unidade amostral**, que no arquivo de domicílios é o próprio domicílio: cada linha representa um domicílio sorteado diretamente, sem conglomeração adicional. O terceiro são os **pesos calibrados**, armazenados na variável `V0010`, que indicam quantos domicílios da população cada observação representa.
+
+Há ainda um quarto elemento, a **correção de população finita** (`fpc`, de *finite population correction*). Ela ajusta os erros-padrão quando a fração amostral não é desprezível. Para calculá-la, somamos os pesos dentro de cada área de ponderação, obtendo uma estimativa do total de domicílios naquele estrato.
 
 ```{r}
 #| label: plano-amostral-dom
@@ -227,20 +263,21 @@ pa_dom <- md_dom_bh |>
     ids     = 1,               # cada linha é um domicílio (unidade sorteada)
     strata  = code_weighting,  # estratos = áreas de ponderação (onde a calibração foi feita)
     weights = V0010,           # pesos calibrados
-    fpc     = n_dom            # total de domicílios em cada área (correção de finitude)
+    fpc     = n_dom            # total de domicílios em cada área (correção de população finita)
   )
 ```
 
-O argumento `ids = 1` indica que cada linha é a própria unidade sorteada (o domicílio), sem conglomeração adicional. O argumento `strata = code_weighting` declara as áreas de ponderação como estratos, garantindo que os erros-padrão sejam estimados corretamente dentro de cada uma. O argumento `fpc` aplica a correção de finitude: quando a fração amostral é alta (como 50% nos municípios muito pequenos), ignorar o tamanho finito da população inflaria desnecessariamente os erros-padrão. No caso de Belo Horizonte, cuja fração amostral é de 5%, o impacto é pequeno, mas é boa prática incluí-lo.
+O objeto `pa_dom` reúne os dados e a especificação completa do plano amostral. Todas as funções de análise do `srvyr` a seguir receberão esse objeto, garantindo que as estimativas levem em conta a estratificação e os pesos.
 
 ### Calculando estatísticas {#sec-dom-estat}
 
-Com o objeto `pa_dom` configurado, podemos calcular qualquer estatística descritiva usando as funções do `srvyr`. O fluxo é idêntico ao do `dplyr`: `summarize()` para o total, `group_by()` para análises por subgrupos.
+Com o plano amostral configurado, podemos calcular estimativas ponderadas para qualquer variável dos microdados. O fluxo de trabalho é similar ao do `dplyr`, com `summarize()` para estatísticas do município como um todo e `group_by()` para análises por subgrupos.
 
-O código a seguir calcula a média e a mediana do rendimento domiciliar per capita (`V6531`) em Belo Horizonte, com intervalos de confiança de 95%.
+Começamos estimando a média e a mediana do rendimento domiciliar per capita (`V6531`) em Belo Horizonte. Os argumentos `vartype = "ci"` e `level = 0.95` solicitam que o resultado inclua os limites inferior e superior do intervalo de confiança de 95%.
 
 ```{r}
 #| label: tbl-renda-bh
+#| tbl-cap: "Rendimento domiciliar per capita em Belo Horizonte (R$), Censo 2010."
 #| message: false
 pa_dom |>
   summarize(
@@ -252,73 +289,84 @@ pa_dom |>
   knitr::kable(
     col.names = c("Média", "IC inf. (média)", "IC sup. (média)",
                   "Mediana", "IC inf. (mediana)", "IC sup. (mediana)"),
-    digits = 1,
-    caption = "Rendimento domiciliar per capita em Belo Horizonte (R$), Censo 2010."
+    digits = 1
   )
 ```
 
-Os argumentos `vartype = "ci"` e `level = 0.95` solicitam o intervalo de confiança de 95% junto com a estimativa pontual. Esse retorno é útil para qualquer análise comparativa: quando os intervalos de dois grupos não se sobrepõem, há evidência de diferença estatisticamente significante.
+A mediana é substancialmente menor que a média, o que reflete a assimetria positiva da distribuição de renda. Uma minoria de domicílios com rendimentos muito altos eleva a média sem deslocar a mediana, tornando esta última a medida mais representativa da renda típica.
 
-Uma aplicação direta é comparar o rendimento entre domicílios com e sem automóvel particular (variável `V0222`). Domicílios com automóvel tendem a ter rendas mais altas, e a diferença pode ser quantificada com poucas linhas.
+Uma comparação natural é verificar como a posse de automóvel particular (`V0222`) se associa ao rendimento domiciliar. O gráfico a seguir apresenta a renda mediana estimada para cada categoria, com o respectivo intervalo de confiança de 95%.
 
 ```{r}
-#| label: renda-automovel
+#| label: fig-renda-automovel
+#| fig-cap: "Rendimento domiciliar per capita mediano por posse de automóvel, Belo Horizonte (Censo 2010). Barras de erro indicam IC 95%."
 #| message: false
 pa_dom |>
+  filter(!is.na(V0222)) |>
   group_by(V0222) |>
   summarize(
     renda_mediana = survey_median(V6531, na.rm = TRUE,
                                   vartype = "ci", level = 0.95)
   ) |>
-  knitr::kable(
-    col.names = c("Automóvel", "Mediana (R$)",
-                  "IC inf.", "IC sup."),
-    digits = 1,
-    caption = "Rendimento domiciliar per capita mediano por posse de automóvel, BH 2010."
-  )
+  mutate(V0222 = factor(V0222,
+                        levels = c("1", "2"),
+                        labels = c("Com automóvel", "Sem automóvel"))) |>
+  ggplot(aes(x = V0222, y = renda_mediana,
+             ymin = renda_mediana_low, ymax = renda_mediana_upp)) +
+  geom_col(fill = "steelblue", alpha = 0.85, width = 0.5) +
+  geom_errorbar(width = 0.15, color = "gray30") +
+  scale_y_continuous(
+    labels = scales::label_dollar(prefix = "R$ ", big.mark = ".", decimal.mark = ",")
+  ) +
+  labs(x = NULL, y = "Renda mediana (R$)") +
+  theme_minimal()
 ```
 
-Além de médias e medianas, os microdados permitem estimar totais e proporções para variáveis categóricas. O código abaixo calcula o total e a proporção de domicílios em cada categoria de condição de ocupação (`V0201`).
+A diferença entre os dois grupos é expressiva, e como os intervalos de confiança não se sobrepõem, ela é estatisticamente significativa. Domicílios com automóvel apresentam renda per capita mediana substancialmente maior, resultado esperado dado o custo de aquisição e manutenção de um veículo próprio.
+
+Os microdados também permitem estimar proporções para variáveis categóricas. O gráfico a seguir apresenta a distribuição de domicílios por condição de ocupação (`V0201`), com a proporção estimada e o intervalo de confiança de 95% para cada categoria.
 
 ```{r}
-#| label: tbl-condicao-ocup
+#| label: fig-condicao-ocup
+#| fig-cap: "Proporção de domicílios por condição de ocupação, Belo Horizonte (Censo 2010). Barras de erro indicam IC 95%."
 #| message: false
 pa_dom |>
   group_by(V0201) |>
   summarize(
-    total    = survey_total(),
-    proporcao = survey_prop()
+    proporcao = survey_prop(vartype = "ci", level = 0.95)
   ) |>
-  knitr::kable(
-    col.names = c("Condição de ocupação", "Total (domicílios)",
-                  "Erro-padrão (total)", "Proporção", "Erro-padrão (prop.)"),
-    digits = c(0, 0, 0, 3, 3),
-    caption = "Domicílios por condição de ocupação, Belo Horizonte, Censo 2010."
-  )
+  ggplot(aes(x = reorder(V0201, proporcao), y = proporcao,
+             ymin = proporcao_low, ymax = proporcao_upp)) +
+  geom_col(fill = "steelblue", alpha = 0.85) +
+  geom_errorbar(width = 0.3, color = "gray30") +
+  coord_flip() +
+  scale_y_continuous(labels = scales::label_percent(decimal.mark = ",")) +
+  labs(x = NULL, y = "Proporção") +
+  theme_minimal()
 ```
 
-Por fim, calculamos a proporção de domicílios atendidos por rede geral de esgoto ou pluvial (categoria `'1'` da variável `V0207`), um indicador clássico de saneamento básico.
+Por fim, calculamos a proporção de domicílios atendidos por rede geral de esgoto ou pluvial (categoria `'1'` da variável `V0207`), um indicador clássico de cobertura de saneamento básico.
 
 ```{r}
-#| label: tbl-esgoto-bh
+#| label: fig-esgoto-bh
+#| fig-cap: "Proporção de domicílios por tipo de esgotamento sanitário, Belo Horizonte (Censo 2010). Barras de erro indicam IC 95%."
 #| message: false
 pa_dom |>
   mutate(esg_rede = factor(ifelse(V0207 == '1', 'Rede geral', 'Outro'))) |>
   group_by(esg_rede) |>
   summarize(proporcao = survey_prop(vartype = "ci", level = 0.95)) |>
-  knitr::kable(
-    col.names = c("Tipo de esgotamento", "Proporção",
-                  "IC inf.", "IC sup."),
-    digits = 3,
-    caption = "Proporção de domicílios por tipo de esgotamento sanitário, BH 2010."
-  )
+  ggplot(aes(x = esg_rede, y = proporcao,
+             ymin = proporcao_low, ymax = proporcao_upp)) +
+  geom_col(fill = "steelblue", alpha = 0.85, width = 0.5) +
+  geom_errorbar(width = 0.15, color = "gray30") +
+  scale_y_continuous(labels = scales::label_percent(decimal.mark = ",")) +
+  labs(x = NULL, y = "Proporção") +
+  theme_minimal()
 ```
 
 ### Produzindo mapas
 
-As mesmas estatísticas calculadas para o município como um todo podem ser desagregadas por área de ponderação com `group_by(code_weighting)` e depois visualizadas espacialmente com `geom_sf()`.
-
-O código a seguir calcula a renda domiciliar per capita mediana em cada área de ponderação e constrói o mapa da @fig-bh-renda.
+As mesmas estatísticas calculadas para o município como um todo podem ser desagregadas por área de ponderação com `group_by(code_weighting)` e visualizadas espacialmente com `geom_sf()`. O mapa da @fig-bh-renda apresenta a renda domiciliar per capita mediana em cada área de ponderação. Para isso, calculamos a mediana por área com `survey_median()` e depois unimos o resultado à geometria com `left_join()`.
 
 ```{r}
 #| label: fig-bh-renda
@@ -351,9 +399,9 @@ ap_bh |>
   )
 ```
 
-O padrão espacial da renda em Belo Horizonte é marcante: as áreas de ponderação com rendimentos mais altos concentram-se na região Centro-Sul e nos bairros da Zona Sul do município, enquanto os menores rendimentos predominam nas periferias norte e nordeste. Esse gradiente reflete uma estrutura de segregação socioespacial historicamente consolidada na metrópole.
+O padrão espacial é marcante: as áreas com rendimentos mais altos concentram-se na região Centro-Sul e na Zona Sul do município, enquanto os menores rendimentos predominam nas periferias norte e nordeste. Esse gradiente reflete uma estrutura de segregação socioespacial historicamente consolidada na metrópole.
 
-O procedimento é idêntico para outras variáveis. O mapa da @fig-bh-esgoto apresenta a proporção de domicílios atendidos por rede geral de esgoto ou pluvial por área de ponderação.
+O mapa da @fig-bh-esgoto apresenta, para as mesmas unidades espaciais, a proporção de domicílios atendidos por rede geral de esgoto. O procedimento é idêntico ao do mapa anterior, substituindo `survey_median()` por `survey_prop()` e criando uma variável indicadora antes do agrupamento.
 
 ```{r}
 #| label: fig-bh-esgoto
@@ -388,21 +436,23 @@ ap_bh |>
   )
 ```
 
-Comparando os dois mapas, é possível observar uma correlação entre renda e saneamento, como esperado: as áreas de maior renda tendem a apresentar maior cobertura da rede de esgoto. Essa relação, contudo, não é perfeita, e identificar onde o saneamento está aquém do esperado dado o nível de renda é exatamente o tipo de diagnóstico que os microdados da amostra viabilizam.
+Comparando os dois mapas, observa-se uma correlação positiva entre renda e cobertura de saneamento. As áreas com maior rendimento tendem a apresentar maior proporção de domicílios atendidos pela rede geral de esgoto. A relação, contudo, não é perfeita, e identificar onde o saneamento está aquém do esperado dado o nível de renda é exatamente o tipo de diagnóstico que os microdados da amostra viabilizam.
 
 ## Analisando microdados de indivíduos {#sec-ind}
 
 ### Obtendo e preparando os dados
 
-O arquivo de pessoas do Censo segue a mesma lógica de acesso que o de domicílios, mas requer atenção especial na especificação do plano amostral. Como explicado na @sec-survey, os indivíduos não foram sorteados diretamente: foi o domicílio que foi selecionado, e todos os seus moradores foram entrevistados. Isso cria uma estrutura conglomerada que precisa ser declarada explicitamente.
+O arquivo de pessoas do Censo segue a mesma lógica de acesso que o de domicílios, mas exige atenção especial na especificação do plano amostral. Como discutido na @sec-survey, os indivíduos não foram sorteados diretamente. O que foi sorteado foi o domicílio, e todos os seus moradores foram entrevistados. Essa estrutura conglomerada precisa ser declarada explicitamente, como veremos adiante.
 
-O código a seguir consulta o dicionário do arquivo de pessoas e lê os microdados de indivíduos de Belo Horizonte.
+Assim como no arquivo de domicílios, vale consultar o dicionário antes de iniciar a leitura.
 
 ```{r}
 #| label: dicionario-ind
 #| eval: false
 censobr::data_dictionary(year = 2010, dataset = 'population')
 ```
+
+O código a seguir seleciona as variáveis de interesse e lê os microdados de indivíduos de Belo Horizonte, aproveitando os códigos de área de ponderação já extraídos anteriormente.
 
 ```{r}
 #| label: leitura-ind
@@ -412,7 +462,7 @@ censobr::data_dictionary(year = 2010, dataset = 'population')
 
 ## Variáveis selecionadas do arquivo de pessoas
 cols_ind <- c(
-  'V0300',          # Identificador do domicílio (controle) — usado como id do conglomerado
+  'V0300',          # Identificador do domicílio (controle, usado como id do conglomerado)
   'V0010',          # Peso amostral calibrado
   'V1006',          # Situação do domicílio (urbano/rural)
   'code_weighting', # Área de ponderação
@@ -430,7 +480,11 @@ md_ind_bh <- censobr::read_population(year = 2010, columns = cols_ind) |>
   collect()
 ```
 
-A montagem do plano amostral de indivíduos difere do de domicílios em um ponto central: o argumento `ids`. No arquivo de pessoas, `ids = V0300` declara que `V0300` é o identificador do domicílio (o conglomerado), sinalizando ao `srvyr` que os indivíduos que compartilham o mesmo `V0300` foram selecionados juntos — não de forma independente.
+### Declarando o plano amostral
+
+O plano amostral de indivíduos difere do de domicílios em um aspecto fundamental: a declaração da conglomeração. No arquivo de pessoas, os moradores não chegaram à amostra de forma independente. Foram os domicílios que foram sorteados, e cada morador pertence a um conglomerado (seu domicílio). Dois moradores do mesmo domicílio tendem a ter características muito mais similares entre si do que dois indivíduos escolhidos ao acaso na população. Ignorar essa estrutura leva a erros-padrão subestimados, porque o `srvyr` contaria cada observação como se fosse independente, quando na verdade membros de uma mesma família contribuem com informação redundante.
+
+Para informar a conglomeração ao `srvyr`, usamos o argumento `ids = V0300`, em que `V0300` é o identificador do domicílio. Com isso, o pacote entende que todos os indivíduos com o mesmo `V0300` foram coletados juntos, como parte do mesmo conglomerado. O `fpc` passa a ser o total expandido de pessoas por área de ponderação.
 
 ```{r}
 #| label: plano-amostral-ind
@@ -455,55 +509,67 @@ pa_ind <- md_ind_bh |>
   )
 ```
 
-A diferença em relação ao plano de domicílios está no argumento `ids = V0300`. Omitir essa declaração equivale a tratar cada indivíduo como se tivesse sido sorteado de forma independente, o que subestima os erros-padrão — pois irmãos, cônjuges e filhos de um mesmo domicílio compartilham condições muito similares e não são observações verdadeiramente independentes.
-
 ### Calculando estatísticas
 
-Com o plano amostral de indivíduos definido, podemos explorar variáveis que o Questionário Básico não cobre. Começamos com a distribuição por cor ou raça (`V0606`), um dos temas mais analiticamente relevantes da amostra.
+Com o plano amostral de indivíduos configurado, podemos explorar variáveis que o Questionário Básico não cobre. Começamos com a distribuição por cor ou raça (`V0606`). O gráfico a seguir apresenta a proporção estimada para cada grupo, com intervalo de confiança de 95%.
 
 ```{r}
-#| label: tbl-raca-bh
+#| label: fig-raca-bh
+#| fig-cap: "Distribuição da população por cor ou raça, Belo Horizonte (Censo 2010). Barras de erro indicam IC 95%."
 #| message: false
 pa_ind |>
   group_by(V0606) |>
   summarize(
-    total    = survey_total(),
     proporcao = survey_prop(vartype = "ci", level = 0.95)
   ) |>
-  knitr::kable(
-    col.names = c("Cor ou raça", "Total (pessoas)", "Erro-padrão",
-                  "Proporção", "IC inf.", "IC sup."),
-    digits = c(0, 0, 0, 3, 3, 3),
-    caption = "Distribuição da população por cor ou raça, Belo Horizonte, Censo 2010."
-  )
+  mutate(V0606 = factor(V0606,
+                        levels = c("1", "2", "3", "4", "5"),
+                        labels = c("Branca", "Preta", "Amarela", "Parda", "Indígena"))) |>
+  ggplot(aes(x = reorder(V0606, -proporcao), y = proporcao,
+             ymin = proporcao_low, ymax = proporcao_upp)) +
+  geom_col(fill = "steelblue", alpha = 0.85) +
+  geom_errorbar(width = 0.3, color = "gray30") +
+  scale_y_continuous(labels = scales::label_percent(decimal.mark = ",")) +
+  labs(x = NULL, y = "Proporção") +
+  theme_minimal()
 ```
 
-Uma análise que combina cor ou raça com outra variável de interesse é o tempo de deslocamento ao trabalho (`V0662`), uma das poucas perguntas sobre mobilidade disponíveis no Censo. O código abaixo restringe a análise às pessoas que retornavam para casa diariamente (`V0661 == '1'`) e calcula a distribuição dos tempos de deslocamento por grupo de cor ou raça.
+O tempo de deslocamento ao trabalho (`V0662`) é uma das poucas perguntas sobre mobilidade disponíveis no Censo. O gráfico a seguir restringe a análise às pessoas que retornavam diariamente para casa (`V0661 == '1'`) e compara a distribuição dos tempos de deslocamento entre os três principais grupos de cor ou raça, com intervalos de confiança de 95%. Focamos nos grupos Branca, Preta e Parda por concentrarem a quase totalidade da população de Belo Horizonte.
 
 ```{r}
-#| label: tbl-desloc-raca
+#| label: fig-desloc-raca
+#| fig-cap: "Distribuição do tempo de deslocamento ao trabalho por cor ou raça, Belo Horizonte, Censo 2010 (trabalhadores que retornam diariamente). Barras de erro indicam IC 95%."
 #| message: false
 pa_ind |>
-  filter(V0661 == '1') |>
+  filter(V0661 == '1', V0606 %in% c("1", "2", "4")) |>
+  mutate(
+    V0606 = factor(V0606,
+                   levels = c("1", "2", "4"),
+                   labels = c("Branca", "Preta", "Parda"))
+  ) |>
   group_by(V0606, V0662) |>
   summarize(proporcao = survey_prop(vartype = "ci", level = 0.95)) |>
-  knitr::kable(
-    col.names = c("Cor ou raça", "Tempo de deslocamento",
-                  "Proporção", "IC inf.", "IC sup."),
-    digits = 3,
-    caption = "Distribuição do tempo de deslocamento ao trabalho por cor ou raça, BH 2010 (trabalhadores que retornam diariamente)."
-  )
+  ggplot(aes(x = V0662, y = proporcao,
+             ymin = proporcao_low, ymax = proporcao_upp,
+             fill = V0606)) +
+  geom_col(position = "dodge", alpha = 0.85) +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.25, color = "gray30") +
+  scale_y_continuous(labels = scales::label_percent(decimal.mark = ",")) +
+  scale_fill_brewer(palette = "Set2", name = "Cor ou raça") +
+  labs(x = "Tempo de deslocamento (código)", y = "Proporção") +
+  theme_minimal()
 ```
 
 ::: {.callout-tip}
 ## Interpretando os códigos das variáveis
 
-Os valores numéricos de variáveis como `V0606` (cor/raça) e `V0662` (tempo de deslocamento) correspondem a categorias descritas no dicionário de variáveis. Para interpretá-los corretamente, consulte `censobr::data_dictionary(year = 2010, dataset = 'population')` e localize a variável de interesse. A coluna de categorias lista os valores e seus rótulos. Nos exemplos acima, a conversão desses códigos para rótulos legíveis pode ser feita com `factor(..., levels = ..., labels = ...)` após a leitura dos dados.
+Os valores numéricos de variáveis como `V0606` (cor ou raça) e `V0662` (tempo de deslocamento) correspondem a categorias descritas no dicionário de variáveis. Para interpretá-los corretamente, consulte `censobr::data_dictionary(year = 2010, dataset = 'population')` e localize a variável de interesse. A coluna de categorias lista os valores e seus rótulos. A conversão para rótulos legíveis pode ser feita com `factor(..., levels = ..., labels = ...)` após a leitura dos dados.
 :::
 
 ### Produzindo mapas
 
-Assim como nos domicílios, as estatísticas por pessoa podem ser desagregadas no nível de área de ponderação e mapeadas. O mapa da @fig-bh-desloc mostra, para cada área de ponderação de Belo Horizonte, a proporção de trabalhadores com tempo de deslocamento superior a 30 minutos entre casa e trabalho — um indicador de esforço cotidiano de mobilidade.
+Assim como nos domicílios, as estatísticas por pessoa podem ser desagregadas por área de ponderação e mapeadas. O mapa da @fig-bh-desloc apresenta, para cada área de ponderação de Belo Horizonte, a proporção de trabalhadores com tempo de deslocamento superior a 30 minutos entre casa e trabalho, um indicador do esforço cotidiano de mobilidade. As categorias da variável `V0662` com código maior ou igual a 3 correspondem a tempos superiores a 30 minutos (confirme com `data_dictionary()` se os códigos mudaram).
 
 ```{r}
 #| label: fig-bh-desloc
@@ -512,9 +578,6 @@ Assim como nos domicílios, as estatísticas por pessoa podem ser desagregadas n
 #| message: false
 #| warning: false
 
-## Proporção de trabalhadores com deslocamento > 30 min por área de ponderação
-## (categorias de V0662 com código >= 3 correspondem a tempos superiores a 30 min
-##  — confirme com data_dictionary() se os códigos mudaram)
 desloc_ap <- pa_ind |>
   filter(V0661 == '1', !is.na(V0662)) |>
   mutate(desloc_longo = factor(ifelse(as.integer(V0662) >= 3,
@@ -523,7 +586,6 @@ desloc_ap <- pa_ind |>
   summarize(proporcao = survey_prop()) |>
   filter(desloc_longo == 'Mais de 30 min')
 
-## Join com geometria e mapa
 ap_bh |>
   left_join(desloc_ap, by = join_by(code_weighting)) |>
   ggplot() +
@@ -542,12 +604,12 @@ ap_bh |>
   )
 ```
 
-O mapa evidencia que as maiores proporções de deslocamentos longos tendem a ocorrer nas áreas periféricas do município, onde a distância até os principais centros de emprego é maior e a oferta de transporte coletivo pode ser menos densa. Sobreposto ao mapa de renda da @fig-bh-renda, esse padrão sugere uma dupla desvantagem: menor renda e maior esforço de deslocamento nas periferias.
+As maiores proporções de deslocamentos longos tendem a ocorrer nas áreas periféricas do município, onde a distância até os principais centros de emprego é maior e a oferta de transporte coletivo pode ser menos densa. Sobreposto ao mapa de renda da @fig-bh-renda, esse padrão sugere uma dupla desvantagem nas periferias, com menor renda e maior esforço cotidiano de mobilidade.
 
 ::: {.callout-note}
 ## Combinando domicílios e indivíduos
 
-Os dois arquivos de microdados (domicílios e pessoas) compartilham a variável `V0300`, o identificador do domicílio. Isso permite cruzar informações dos dois arquivos: por exemplo, associar características do domicílio (tipo de esgotamento, número de cômodos) às características dos moradores (cor/raça, escolaridade). Esse cruzamento é feito com `left_join()` antes de montar o plano amostral, e pode enriquecer consideravelmente a análise.
+Os dois arquivos de microdados compartilham a variável `V0300`, o identificador do domicílio. Isso permite cruzar informações dos dois arquivos, por exemplo, associar características do domicílio (tipo de esgotamento, número de cômodos) às características dos moradores (cor ou raça, escolaridade). Esse cruzamento é feito com `left_join()` antes de montar o plano amostral e pode enriquecer consideravelmente a análise.
 :::
 
 ## Exercícios
