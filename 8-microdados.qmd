@@ -158,7 +158,7 @@ Esta seção e a próxima (@sec-ind) percorrem um ciclo completo de trabalho com
 
 ### Obtendo e preparando os dados
 
-O ponto de partida é carregar os pacotes necessários para as duas seções.
+O ponto de partida é carregar os pacotes necessários para as duas seções^[Lembre-se de instalá-los com `install.packages()` caso ainda não tenha feito por aí].
 
 ```{r}
 #| label: pacotes
@@ -172,7 +172,7 @@ library(survey)
 library(srvyr)
 ```
 
-Antes de ler os dados, vale consultar o dicionário de variáveis do arquivo de domicílios. A função `data_dictionary()` do `censobr` abre uma tabela interativa com nomes, descrições e categorias de cada variável disponível. Com centenas de colunas nos arquivos de microdados, esse passo é essencial para identificar as variáveis de interesse antes de qualquer leitura.
+Antes de ler os dados, vale consultar o dicionário de variáveis do arquivo de domicílios. A função `data_dictionary()` do `censobr` abre uma tabela interativa com nomes, descrições e categorias de cada variável disponível. Com centenas de colunas nos arquivos de microdados, esse passo é essencial para identificar as variáveis de interesse antes de qualquer leitura. Observe que definimos `year = 2010` e `dataset = 'households'` na função `data_dictionary()` para obter o dicionário dos microdados de domicílios relativos ao Censo de 2010:
 
 ```{r}
 #| label: dicionario-dom
@@ -200,9 +200,7 @@ ggplot(ap_bh) +
   labs(title = NULL)
 ```
 
-O mapa revela uma característica importante das áreas de ponderação: elas são menores nas regiões centrais e mais densas da cidade, onde o número de domicílios por quilômetro quadrado permite formar recortes compactos que atendam ao mínimo de 400 domicílios na amostra. Nas bordas periféricas, onde a densidade é menor, as áreas tendem a ser maiores em extensão territorial.
-
-Com os códigos das áreas de ponderação em mãos, podemos ler os microdados. A função `read_households()` do `censobr` retorna os dados de todo o Brasil como um *Arrow Table* (via pacote `arrow`), sem carregá-los para a memória imediatamente. O filtro por `code_weighting` seleciona apenas os domicílios de Belo Horizonte, e `collect()` materializa o resultado em um *data frame* convencional. Selecionaremos também apenas as variáveis de interesse, o que reduz consideravelmente o volume de dados em memória.
+Com os códigos das áreas de ponderação em mãos, podemos ler os microdados. A função `read_households()` do `censobr` retorna os dados de todo o Brasil como um *Arrow Table* (assim como na `read_tracts` para os Agregados por Setor Censitário), sem carregá-los para a memória imediatamente. O filtro por `code_weighting` seleciona apenas os domicílios de Belo Horizonte, e `collect()` materializa o resultado em um *data frame* convencional. Selecionaremos também apenas as variáveis de interesse, o que reduz consideravelmente o volume de dados em memória.
 
 ```{r}
 #| label: leitura-dom
@@ -210,7 +208,7 @@ Com os códigos das áreas de ponderação em mãos, podemos ler os microdados. 
 #| message: false
 #| warning: false
 
-## Códigos das áreas de ponderação de BH
+## Armazenando códigos das áreas de ponderação de BH em um vetor ap_bh_cods
 ap_bh_cods <- ap_bh |>
   pull(code_weighting)
 
@@ -234,19 +232,34 @@ md_dom_bh <- censobr::read_households(year = 2010, columns = cols_dom) |>
   collect()
 ```
 
+Para visualizar as primeiras linhas dessa base de dados, podemos fazer:
+```{r}
+head(md_dom_bh)
+```
+
+Com os dados em mãos, podemos partir então para o processo de análise. E isto começa, antes de mais nada, com a definição do plano amostral do estudo.
+
 ### Declarando o plano amostral
 
-Para que qualquer estimativa produzida com os microdados seja estatisticamente válida, é preciso declarar ao `srvyr` como os dados foram coletados. Sem essa declaração, as funções de resumo tratariam os dados como uma amostra aleatória simples, ignorando a estratificação e os pesos calibrados, o que produziria erros-padrão incorretos e intervalos de confiança inadequados.
+Para que qualquer estimativa produzida com os microdados seja estatisticamente válida, é preciso declarar ao `srvyr` o tipo de amostragem realizada com a função `as_survey_design`^[No caso do pacote `survey`, essa função é a `svydesign()`]. Sem essa declaração, as estatísticas descritivas obtidas a partir destes dados ignorariam a estratificação e os pesos calibrados, produzindo erros-padrão incorretos e, consequentemente, intervalos de confiança inadequados.
 
-O plano amostral dos domicílios é caracterizado por três elementos. O primeiro é a **estratificação**: como a calibração foi realizada no nível da área de ponderação, cada área de ponderação constitui um estrato amostral independente. O segundo é a **unidade amostral**, que no arquivo de domicílios é o próprio domicílio: cada linha representa um domicílio sorteado diretamente, sem conglomeração adicional. O terceiro são os **pesos calibrados**, armazenados na variável `V0010`, que indicam quantos domicílios da população cada observação representa.
+Lembremos que no caso dos domicílios, temos uma **amostragem aleatória estratificada**, em que os setores censitários são os estratos. Nosso objetivo, então, é caracterizar esse plano amostral por meio do preenchimento de 4 parâmetros da função `as_survey_design`:
 
-Há ainda um quarto elemento, a **correção de população finita** (`fpc`, de *finite population correction*). Ela ajusta os erros-padrão quando a fração amostral não é desprezível. Para calculá-la, somamos os pesos dentro de cada área de ponderação, obtendo uma estimativa do total de domicílios naquele estrato.
+- `id`: unidade amostral
+- `strata`: o estrato do plano amostral
+- `weights`: pesos amostrais
+- `fpc`: correção de população finita (do inglês, *finite population correction*).
+
+Em primeiro lugar, para o parâmetro `id`, devemos indicar as unidades que foram amostradas aleatoriamente no nosso plano. Como cada linha representa um domicílio na tabela `md_dom_bh`, podemos fazer simplesmente passar `id = 1` dentro da função `as_survey_design()`. Na sequência, devemos definir o estrato do plano amostral em `strata`. À primeira vista, parece óbvio que devamos indicar os setores censitários para este parâmetro. Todavia, além de não haver essa informação nos microdados, lembremos que os pesos amostrais fornecidos na coluna `V0010` referem-se à versão **calibrada** e que essa calibração é feita no nível da **área de ponderação**. Deste modo, devemos inserir a coluna com o código da área de ponderação da tabela `md_dom_bh`, ou seja, `code_weighting`.
+
+Posteriormente, temos que declarar os pesos e isto é simples, uma vez que eles são representados pela coluna `V0010` de `md_dom_bh`. Finalmente, precisamos inserir o parâmetro `fpc`, um fator usado em amostragem para ajustar a variância, o erro-padrão e a margem de erro quando a amostra representa uma fração não desprezível de uma população finita. A ideia é que quando a população é finita e você retira uma parcela considerável dela, há menos incerteza do que haveria numa população muito grande ou “infinita”. Então, o FPC reduz o erro amostral estimado^[Esse fator é dado por $\sqrt{\frac{N-n}{N-1}}$, em que $n$ é o tamanho da amostra e $N$ é o tamanho da população].
+
+Neste caso, o que a função `as_survey_design()` necessita é que forneçamos uma coluna na base de dados `md_dom_bh` com o total de unidades correspondente aos estratos definido em `strata`, ou seja, a quantidade de domicílios total da área de ponderação (no nosso caso.) Uma maneira de obtermos essa informação é somar os valores dos pesos `V0010` em cada área de ponderação. Lembre-se que a ideia do peso de uma unidade amostral é exatamente indicar quantas unidades ela representa em seu estrato. Logo somar os pesos de todas as unidades dentro da área de ponderação será uma aproximação do valor total de domicílios nesta área.
+
+Para tanto, primeiro produzimos uma tabela sumarizada retornando o total de domicílios de cada área de ponderação. Na sequência, com o operador `left_join`, trazemos essa informação de população para cada linha de `md_dom_bh`, informando `code_weighting` como chave. O resultado é uma nova coluna em `md_dom_bh`, que traz o valor correspondente do total de domicílios em cada área de ponderação definida na coluna `code_weighting`, conforme o código abaixo:
 
 ```{r}
-#| label: plano-amostral-dom
-#| message: false
-
-## Total de domicílios expandido por área de ponderação (para correção de finitude)
+## Total de domicílios expandido por área de ponderação (para correção de população finita)
 dom_ap <- md_dom_bh |>
   group_by(code_weighting) |>
   summarize(n_dom = sum(V0010))
@@ -254,6 +267,16 @@ dom_ap <- md_dom_bh |>
 ## Adiciona n_dom ao arquivo de domicílios
 md_dom_bh <- md_dom_bh |>
   left_join(dom_ap, by = join_by(code_weighting))
+
+## Observe a última coluna n_dom adicionada à tabela
+head(md_dom_bh)
+```
+
+Observe que os valores de `n_dom` são repetidos para todas as 6 primeiras linhas mostradas acima, pois essas observações são relativas a domicílios de uma mesma área de ponderação identificada pela coluna `code_weighting`. Com estas definições, podemos finalmente produzir o plano amostral da função `as_survey_design()`, de acordo com o código abaixo:
+
+```{r}
+#| label: plano-amostral-dom
+#| message: false
 
 ## Objeto de desenho amostral (srvyr)
 pa_dom <- md_dom_bh |>
@@ -269,9 +292,9 @@ O objeto `pa_dom` reúne os dados e a especificação completa do plano amostral
 
 ### Calculando estatísticas {#sec-dom-estat}
 
-Com o plano amostral configurado, podemos calcular estimativas ponderadas para qualquer variável dos microdados. O fluxo de trabalho é similar ao do `dplyr`, com `summarize()` para estatísticas do município como um todo e `group_by()` para análises por subgrupos.
+Com o plano amostral configurado, podemos calcular estimativas para qualquer variável dos microdados. O fluxo de trabalho é similar ao do `dplyr`, com `summarize()` para estatísticas do município como um todo e `group_by()` para análises por subgrupos.
 
-Começamos estimando a média e a mediana do rendimento domiciliar per capita (`V6531`) em Belo Horizonte. Os argumentos `vartype = "ci"` e `level = 0.95` solicitam que o resultado inclua os limites inferior e superior do intervalo de confiança de 95%.
+Começamos estimando a média e a mediana do rendimento domiciliar per capita (`V6531`) em Belo Horizonte. Os argumentos `vartype = "ci"` (de *Confidence Interval*) e `level = 0.95` solicitam que o resultado inclua os limites inferior e superior do intervalo de confiança de 95%.
 
 ```{r}
 #| label: tbl-renda-bh
@@ -440,7 +463,7 @@ Comparando os dois mapas, observa-se uma correlação positiva entre renda e cob
 
 ### Obtendo e preparando os dados
 
-O arquivo de pessoas do Censo segue a mesma lógica de acesso que o de domicílios, mas exige atenção especial na especificação do plano amostral. Como discutido na @sec-survey, os indivíduos não foram sorteados diretamente. O que foi sorteado foi o domicílio, e todos os seus moradores foram entrevistados. Essa estrutura conglomerada precisa ser declarada explicitamente, como veremos adiante.
+O arquivo de pessoas do Censo segue a mesma lógica de acesso que o de domicílios, mas exige atenção especial na especificação do plano amostral. Como discutido na @sec-survey, os indivíduos não foram sorteados diretamente. O que foi sorteado foi o domicílio, e todos os seus moradores foram entrevistados. Essa estrutura de **amostragem estratificada e conglomerada** precisa ser declarada explicitamente, como veremos adiante.
 
 Assim como no arquivo de domicílios, vale consultar o dicionário antes de iniciar a leitura.
 
@@ -480,14 +503,11 @@ md_ind_bh <- censobr::read_population(year = 2010, columns = cols_ind) |>
 
 ### Declarando o plano amostral
 
-O plano amostral de indivíduos difere do de domicílios em um aspecto fundamental: a declaração da conglomeração. No arquivo de pessoas, os moradores não chegaram à amostra de forma independente. Foram os domicílios que foram sorteados, e cada morador pertence a um conglomerado (seu domicílio). Dois moradores do mesmo domicílio tendem a ter características muito mais similares entre si do que dois indivíduos escolhidos ao acaso na população. Ignorar essa estrutura leva a erros-padrão subestimados, porque o `srvyr` contaria cada observação como se fosse independente, quando na verdade membros de uma mesma família contribuem com informação redundante.
+O plano amostral de indivíduos difere do de domicílios em um aspecto fundamental, que é a declaração da conglomeração. No arquivo de pessoas, os moradores não chegaram à amostra de forma independente. Foram os domicílios que foram sorteados, e cada morador pertence a um conglomerado (seu domicílio). Dois moradores do mesmo domicílio tendem a ter características muito mais similares entre si do que dois indivíduos escolhidos ao acaso na população. Ignorar essa estrutura leva a erros-padrão subestimados, porque o `srvyr` contaria cada observação como se fosse independente, quando na verdade membros de uma mesma família contribuem com informação redundante.
 
-Para informar a conglomeração ao `srvyr`, usamos o argumento `ids = V0300`, em que `V0300` é o identificador do domicílio. Com isso, o pacote entende que todos os indivíduos com o mesmo `V0300` foram coletados juntos, como parte do mesmo conglomerado. O `fpc` passa a ser o total expandido de pessoas por área de ponderação.
+Para informar a conglomeração ao `srvyr`, usamos o argumento `ids = V0300`, em que `V0300` é o identificador do domicílio. Lembre-se que o argumento `ids` espera a unidade amostral sorteada que, no nosso caso, são os domicílios. Com isso, o pacote entende que todos os indivíduos com o mesmo `V0300` foram coletados juntos, como parte do mesmo conglomerado. Além disso, o `fpc` agora passa a ser o total expandido de pessoas por área de ponderação, conforme o código abaixo:
 
 ```{r}
-#| label: plano-amostral-ind
-#| message: false
-
 ## Total de indivíduos expandido por área de ponderação (para correção de finitude)
 pop_ap <- md_ind_bh |>
   group_by(code_weighting) |>
@@ -497,13 +517,22 @@ pop_ap <- md_ind_bh |>
 md_ind_bh <- md_ind_bh |>
   left_join(pop_ap, by = join_by(code_weighting))
 
+## Observando os 6 primeiros resultados com a nova coluna n_ind
+head(md_ind_bh)
+```
+
+Sendo assim, podemos então definir o plano amostral como:
+
+```{r}
+#| label: plano-amostral-ind
+#| message: false
 ## Objeto de desenho amostral (srvyr)
 pa_ind <- md_ind_bh |>
   as_survey_design(
     ids     = V0300,           # domicílio = unidade de conglomeração
     strata  = code_weighting,  # estratos = áreas de ponderação
     weights = V0010,           # pesos calibrados
-    fpc     = n_ind            # total de pessoas em cada área (correção de finitude)
+    fpc     = n_ind            # total de pessoas em cada área (correção de população finita)
   )
 ```
 
