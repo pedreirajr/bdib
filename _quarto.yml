@@ -27,7 +27,7 @@ book:
     - part: "PARTE 2: CENSO DEMOGRÁFICO"
       chapters:
         - 6-conceitos-e-metodos.qmd
-        - 7-agregados-setor-censitario.qmd
+        - 7-agregados.qmd
         - 8-microdados.qmd
         - 9-grade-estatistica.qmd
         - 10-cnefe.qmd
