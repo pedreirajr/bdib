@@ -18,9 +18,9 @@ library(ggplot2)
 
 Para o IBGE, saber onde as pessoas estão é condição para fazer pesquisas. É preciso localizar os informantes, controlar operações de campo, selecionar amostras e enviar questionários. Sem um cadastro de endereços atualizado e abrangente, essas atividades simplesmente não funcionam. O Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), é a resposta institucional do IBGE a esse problema.
 
-O CNEFE não é apenas um instrumento interno do instituto. Governos, empresas e pesquisadores utilizam seus dados para localizar serviços, avaliar cobertura de equipamentos públicos, apoiar a defesa civil em emergências e conduzir estudos acadêmicos. Quando enchentes devastaram o Rio Grande do Sul em 2024, o CNEFE foi uma das ferramentas mobilizadas para identificar endereços em áreas alagadas e apoiar as ações de socorro.
+O CNEFE é bem mais que apenas um instrumento interno do instituto. Governos, empresas e pesquisadores utilizam seus dados para planejamento de pesquisas amostrais, localizar serviços, avaliar cobertura de equipamentos públicos, apoiar a defesa civil em emergências climáticas e subsidiar estudos científicos. Desde a sua edição inicial, do Censo de 2010, esta base tem sido utilizada por, exemplo, como quadro amostral de pesquisas do próprio IBGE e de planejamento de transportes (Pesquisas Origem-Destino) de algumas regiões metropolitanas, como a de São Paulo (RMSP) e de Salvador (RMS). Além disso, quando enchentes devastaram o Rio Grande do Sul em 2024, o CNEFE foi uma das ferramentas mobilizadas para identificar endereços em áreas alagadas e apoiar as ações de socorro.
 
-Este capítulo apresenta o CNEFE resultante do Censo Demográfico 2022 — a versão mais completa e precisa já publicada, com 106 milhões de endereços e coordenadas geográficas para praticamente todos eles. Veremos como o cadastro é construído, o que ele contém e como acessá-lo e analisá-lo com R por meio do pacote `cnefetools`.
+Este capítulo apresenta o CNEFE resultante do Censo Demográfico 2022, a versão mais completa e precisa já publicada, com 106 milhões de endereços e coordenadas geográficas para praticamente todos eles. Veremos como o cadastro é construído, o que ele contém e como acessá-lo e analisá-lo com R por meio do pacote `cnefetools`.
 
 ## Um breve histórico {#sec-cnefe-historico}
 
