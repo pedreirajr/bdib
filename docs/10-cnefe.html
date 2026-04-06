@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -175,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7-agregados-setor-censitario.html" class="sidebar-item-text sidebar-link">
+  <a href="./7-agregados.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Agregados por Setor Censitário</span></span></a>
   </div>
 </li>
@@ -210,8 +245,40 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice do Capítulo</h2>
+   
+  <ul>
+  <li><a href="#sec-cnefe-intro" id="toc-sec-cnefe-intro" class="nav-link active" data-scroll-target="#sec-cnefe-intro"><span class="header-section-number">10.1</span> Introdução</a></li>
+  <li><a href="#sec-cnefe-historico" id="toc-sec-cnefe-historico" class="nav-link" data-scroll-target="#sec-cnefe-historico"><span class="header-section-number">10.2</span> Um breve histórico</a></li>
+  <li><a href="#sec-cnefe-metodologia" id="toc-sec-cnefe-metodologia" class="nav-link" data-scroll-target="#sec-cnefe-metodologia"><span class="header-section-number">10.3</span> Aspectos metodológicos da coleta</a>
+  <ul>
+  <li><a href="#o-trabalho-dos-recenseadores-em-campo" id="toc-o-trabalho-dos-recenseadores-em-campo" class="nav-link" data-scroll-target="#o-trabalho-dos-recenseadores-em-campo"><span class="header-section-number">10.3.1</span> O trabalho dos recenseadores em campo</a></li>
+  <li><a href="#a-coleta-de-coordenadas-com-gnss" id="toc-a-coleta-de-coordenadas-com-gnss" class="nav-link" data-scroll-target="#a-coleta-de-coordenadas-com-gnss"><span class="header-section-number">10.3.2</span> A coleta de coordenadas com GNSS</a></li>
+  <li><a href="#tratamento-pós-coleta-e-níveis-de-geocodificação" id="toc-tratamento-pós-coleta-e-níveis-de-geocodificação" class="nav-link" data-scroll-target="#tratamento-pós-coleta-e-níveis-de-geocodificação"><span class="header-section-number">10.3.3</span> Tratamento pós-coleta e níveis de geocodificação</a></li>
+  </ul></li>
+  <li><a href="#sec-cnefe-dados" id="toc-sec-cnefe-dados" class="nav-link" data-scroll-target="#sec-cnefe-dados"><span class="header-section-number">10.4</span> Conteúdo e estrutura dos dados</a>
+  <ul>
+  <li><a href="#as-espécies-de-endereço" id="toc-as-espécies-de-endereço" class="nav-link" data-scroll-target="#as-espécies-de-endereço"><span class="header-section-number">10.4.1</span> As espécies de endereço</a></li>
+  <li><a href="#os-campos-do-dicionário" id="toc-os-campos-do-dicionário" class="nav-link" data-scroll-target="#os-campos-do-dicionário"><span class="header-section-number">10.4.2</span> Os campos do dicionário</a></li>
+  </ul></li>
+  <li><a href="#sec-cnefe-r" id="toc-sec-cnefe-r" class="nav-link" data-scroll-target="#sec-cnefe-r"><span class="header-section-number">10.5</span> Lendo dados do CNEFE com R</a>
+  <ul>
+  <li><a href="#o-pacote-cnefetools" id="toc-o-pacote-cnefetools" class="nav-link" data-scroll-target="#o-pacote-cnefetools"><span class="header-section-number">10.5.1</span> O pacote cnefetools</a></li>
+  <li><a href="#carregando-os-dados-de-porto-alegre" id="toc-carregando-os-dados-de-porto-alegre" class="nav-link" data-scroll-target="#carregando-os-dados-de-porto-alegre"><span class="header-section-number">10.5.2</span> Carregando os dados de Porto Alegre</a></li>
+  <li><a href="#mapeando-estabelecimentos-de-saúde" id="toc-mapeando-estabelecimentos-de-saúde" class="nav-link" data-scroll-target="#mapeando-estabelecimentos-de-saúde"><span class="header-section-number">10.5.3</span> Mapeando estabelecimentos de saúde</a></li>
+  <li><a href="#comparando-distribuições-espaciais" id="toc-comparando-distribuições-espaciais" class="nav-link" data-scroll-target="#comparando-distribuições-espaciais"><span class="header-section-number">10.5.4</span> Comparando distribuições espaciais</a></li>
+  </ul></li>
+  <li><a href="#sec-cnefe-counts" id="toc-sec-cnefe-counts" class="nav-link" data-scroll-target="#sec-cnefe-counts"><span class="header-section-number">10.6</span> Agregando contagens com cnefe_counts()</a>
+  <ul>
+  <li><a href="#a-função-cnefe_counts" id="toc-a-função-cnefe_counts" class="nav-link" data-scroll-target="#a-função-cnefe_counts"><span class="header-section-number">10.6.1</span> A função cnefe_counts()</a></li>
+  <li><a href="#mapeando-a-concentração-de-equipamentos-por-hexágono" id="toc-mapeando-a-concentração-de-equipamentos-por-hexágono" class="nav-link" data-scroll-target="#mapeando-a-concentração-de-equipamentos-por-hexágono"><span class="header-section-number">10.6.2</span> Mapeando a concentração de equipamentos por hexágono</a></li>
+  <li><a href="#agregando-por-setor-censitário" id="toc-agregando-por-setor-censitário" class="nav-link" data-scroll-target="#agregando-por-setor-censitário"><span class="header-section-number">10.6.3</span> Agregando por setor censitário</a></li>
+  </ul></li>
+  <li><a href="#sec-cnefe-exercicios" id="toc-sec-cnefe-exercicios" class="nav-link" data-scroll-target="#sec-cnefe-exercicios"><span class="header-section-number">10.7</span> Exercícios</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -235,8 +302,578 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="sec-cnefe-intro" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-cnefe-intro"><span class="header-section-number">10.1</span> Introdução</h2>
+<p>Para o IBGE, saber onde as pessoas estão é condição para fazer pesquisas. É preciso localizar os informantes, controlar operações de campo, selecionar amostras e enviar questionários. Sem um cadastro de endereços atualizado e abrangente, essas atividades simplesmente não funcionam. O Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), é a resposta institucional do IBGE a esse problema.</p>
+<p>O CNEFE não é apenas um instrumento interno do instituto. Governos, empresas e pesquisadores utilizam seus dados para localizar serviços, avaliar cobertura de equipamentos públicos, apoiar a defesa civil em emergências e conduzir estudos acadêmicos. Quando enchentes devastaram o Rio Grande do Sul em 2024, o CNEFE foi uma das ferramentas mobilizadas para identificar endereços em áreas alagadas e apoiar as ações de socorro.</p>
+<p>Este capítulo apresenta o CNEFE resultante do Censo Demográfico 2022 — a versão mais completa e precisa já publicada, com 106 milhões de endereços e coordenadas geográficas para praticamente todos eles. Veremos como o cadastro é construído, o que ele contém e como acessá-lo e analisá-lo com R por meio do pacote <code>cnefetools</code>.</p>
+</section>
+<section id="sec-cnefe-historico" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-cnefe-historico"><span class="header-section-number">10.2</span> Um breve histórico</h2>
+<p>O CNEFE tem origem nas operações do Censo Demográfico 2000, quando o IBGE mantinha registros de endereços em formulários de papel, de forma descentralizada e sem padronização nacional. Em 2005, o instituto formalizou o cadastro como produto permanente, criando um padrão unificado de registro e atribuindo à Gerência do Cadastro de Endereços a responsabilidade por sua manutenção.</p>
+<p>A partir daí, o CNEFE foi progressivamente aprimorado a cada operação censitária. Em 2007, serviu de insumo para a Contagem Populacional. Em 2010, passou por melhorias significativas, foi associado pela primeira vez aos mapas digitais e teve seus dados divulgados publicamente — mas ainda com geocodificação restrita às áreas rurais. Em 2017, acompanhou o Censo Agropecuário. E em 2022, o cadastro deu um salto qualitativo importante: pela primeira vez, todos os endereços registrados receberam coordenadas geográficas individuais, tornando o CNEFE 100% georreferenciado.</p>
+<p>Essa evolução reflete não apenas o avanço tecnológico dos dispositivos de coleta, mas também o amadurecimento institucional do IBGE na gestão de cadastros de endereços. Trabalhar com cadastros é, como o próprio instituto reconhece, uma atividade permanente — o mito de Sísifo, mas com sentido: produzir informações cada vez mais precisas sobre onde as pessoas vivem e trabalham.</p>
+</section>
+<section id="sec-cnefe-metodologia" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-cnefe-metodologia"><span class="header-section-number">10.3</span> Aspectos metodológicos da coleta</h2>
+<section id="o-trabalho-dos-recenseadores-em-campo" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="o-trabalho-dos-recenseadores-em-campo"><span class="header-section-number">10.3.1</span> O trabalho dos recenseadores em campo</h3>
+<p>O CNEFE de 2022 é resultado direto do trabalho dos cerca de 120 mil recenseadores que percorreram o território brasileiro durante a realização do Censo. Para cada setor censitário, o recenseador carregava em seu dispositivo móvel uma <em>lista prévia</em> de endereços, construída a partir de operações anteriores do IBGE. Essa lista continha cerca de 89 milhões de registros.</p>
+<p>Ao percorrer o setor, o recenseador tinha três tarefas em relação a cada endereço da lista prévia:</p>
+<ul>
+<li><strong>Confirmar</strong> os endereços que ainda existiam (81,5% dos registros prévios foram confirmados);</li>
+<li><strong>Incluir</strong> endereços novos que não constavam da lista (34 milhões de registros foram adicionados em campo, representando 31,8% da lista final);</li>
+<li><strong>Excluir</strong> endereços que deixaram de existir ou haviam sido incluídos indevidamente (18,5% dos registros prévios foram excluídos).</li>
+</ul>
+<p>O resultado final foi uma lista de 106 milhões de endereços, cobrindo a totalidade dos setores censitários do país.</p>
+</section>
+<section id="a-coleta-de-coordenadas-com-gnss" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="a-coleta-de-coordenadas-com-gnss"><span class="header-section-number">10.3.2</span> A coleta de coordenadas com GNSS</h3>
+<p>A novidade mais importante do CNEFE 2022 em relação às edições anteriores é que todos os endereços, não apenas os rurais, receberam coordenadas geográficas individuais. Isso foi possível graças ao uso de dispositivos móveis de coleta equipados com receptor GNSS (<em>Global Navigation Satellite System</em>).</p>
+<p>Para cada endereço confirmado ou incluído, o aplicativo de coleta exigia três tentativas de captura das coordenadas antes de permitir que o recenseador prosseguisse. As coordenadas eram registradas automaticamente pelo dispositivo e transmitidas ao sistema de acompanhamento do IBGE, o que permitia supervisionar a cobertura territorial em tempo real.</p>
+<p>A precisão das coordenadas depende das condições locais de coleta. Em situação ideal, o erro quadrático médio (EQM) do receptor GNSS embarcado foi estimado em <strong>5,84 metros</strong>. Em condições normais de campo, com edificações horizontais e áreas rurais, o erro chegou a <strong>11,71 metros</strong>. Em condições adversas, como áreas com edificações verticais densas, vielas estreitas ou restrições de acesso (como condomínios fechados), o erro pode superar esse valor ou mesmo impossibilitar a captura.</p>
+</section>
+<section id="tratamento-pós-coleta-e-níveis-de-geocodificação" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="tratamento-pós-coleta-e-níveis-de-geocodificação"><span class="header-section-number">10.3.3</span> Tratamento pós-coleta e níveis de geocodificação</h3>
+<p>Após a coleta, as coordenadas passaram por um processo de validação e correção. Os setores censitários foram agrupados em quatro categorias para definir os critérios de aceitação:</p>
+<ul>
+<li><strong>Grupo 1:</strong> setores urbanos com alta densidade de edificações</li>
+<li><strong>Grupo 2:</strong> setores urbanos com baixa densidade ou aglomerados rurais</li>
+<li><strong>Grupo 3:</strong> setores rurais</li>
+<li><strong>Grupo 4:</strong> agrupamentos indígenas</li>
+</ul>
+<p>Para cada grupo, foram definidas distâncias máximas de aceitação das coordenadas coletadas: até 500 metros do contorno do setor para setores urbanos, 1.000 metros para rurais e 10.000 metros para indígenas. Coordenadas fora desses limites foram consideradas inválidas e submetidas a estimação.</p>
+<p>Um tratamento especial foi aplicado aos apartamentos: como diferentes unidades de um mesmo edifício naturalmente geram coordenadas muito próximas entre si, com variação aleatória introduzida pelas condições do GNSS, o IBGE padronizou todas as unidades de um mesmo número e face de quadra para a coordenada mediana do conjunto.</p>
+<p>Para as coordenadas inválidas ou ausentes, foi aplicada uma cadeia de estimações em ordem decrescente de precisão: coordenadas de questionários aplicados no mesmo endereço, endereços vizinhos na mesma face, registros históricos de operações anteriores, ponto médio da face de quadra e, por último, centroide do setor.</p>
+<p>O resultado desse processo é representado pelo campo <code>NV_GEO_COORD</code>, que classifica cada registro em um de seis níveis:</p>
+<div class="cell">
+<div id="tbl-geocod" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-geocod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;10.1: Níveis de geocodificação no CNEFE 2022
+</figcaption>
+<div aria-describedby="tbl-geocod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Código</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Endereço — coordenada original do Censo 2022</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Endereço — coordenada modificada (apartamentos em mesmo número/face)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Endereço — coordenada estimada</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Face de quadra</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Localidade</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Setor censitário</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Os resultados mostram a alta qualidade posicional do CNEFE 2022: 99,68% dos 111 milhões de registros foram geocodificados ao nível do endereço. Desses, 93,8% mantiveram a coordenada original coletada em campo, 5,5% receberam coordenada modificada pelo procedimento de padronização de apartamentos e apenas 0,7% foram estimados. Apenas 0,32% do total ficou em níveis de precisão menor (face de quadra, localidade ou setor).</p>
+</section>
+</section>
+<section id="sec-cnefe-dados" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-cnefe-dados"><span class="header-section-number">10.4</span> Conteúdo e estrutura dos dados</h2>
+<section id="as-espécies-de-endereço" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="as-espécies-de-endereço"><span class="header-section-number">10.4.1</span> As espécies de endereço</h3>
+<p>A variável mais relevante para análises temáticas do CNEFE é <code>COD_ESPECIE</code>, que classifica cada registro segundo a finalidade de uso do endereço. São oito categorias, cobrindo desde domicílios particulares até edificações em construção:</p>
+<div class="cell">
+<div id="tbl-especies" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-especies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;10.2: Espécies de endereço no CNEFE 2022 e seus totais
+</figcaption>
+<div aria-describedby="tbl-especies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Código</th>
+<th style="text-align: left;">Espécie</th>
+<th style="text-align: left;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Domicílio particular</td>
+<td style="text-align: left;">90,6 milhões</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Domicílio coletivo</td>
+<td style="text-align: left;">104 mil</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Estabelecimento agropecuário</td>
+<td style="text-align: left;">4,1 milhões</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Estabelecimento de ensino</td>
+<td style="text-align: left;">264 mil</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Estabelecimento de saúde</td>
+<td style="text-align: left;">247,5 mil</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Estabelecimento de outras finalidades</td>
+<td style="text-align: left;">11,7 milhões</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Edificação em construção ou reforma</td>
+<td style="text-align: left;">3,5 milhões</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Estabelecimento religioso</td>
+<td style="text-align: left;">579,8 mil</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Um número chama atenção: o Brasil tem mais templos religiosos (579,8 mil) do que estabelecimentos de ensino (264 mil) e de saúde (247,5 mil) somados. Essa informação, divulgada pelo IBGE em fevereiro de 2024 junto com a publicação do CNEFE, gerou ampla repercussão no debate público sobre a distribuição de equipamentos e serviços no país.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Uma espécie por endereço, mas um endereço pode ter múltiplas espécies
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O CNEFE registra espécies, não endereços. Um mesmo endereço pode abrigar mais de uma espécie ao mesmo tempo — por exemplo, um terreno com uma casa e uma edificação em construção nos fundos. Por isso, o número total de espécies (111 milhões) é maior que o número de endereços (106 milhões).</p>
+</div>
+</div>
+</section>
+<section id="os-campos-do-dicionário" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="os-campos-do-dicionário"><span class="header-section-number">10.4.2</span> Os campos do dicionário</h3>
+<p>A versão completa do CNEFE 2022 conta com 29 variáveis. Os campos se organizam em quatro grupos funcionais:</p>
+<div class="cell">
+<div id="tbl-dicionario" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dicionario-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;10.3: Principais grupos de variáveis do CNEFE 2022
+</figcaption>
+<div aria-describedby="tbl-dicionario-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Grupo</th>
+<th style="text-align: left;">Variáveis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Localização geográfica</td>
+<td style="text-align: left;">COD_UF, COD_MUNICIPIO, COD_DISTRITO, COD_SUBDISTRITO, COD_SETOR, NUM_QUADRA, NUM_FACE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Endereço textual</td>
+<td style="text-align: left;">NOM_TIPO_SEGLOGR, NOM_SEGLOGR, NUM_ENDERECO, DSC_MODIFICADOR, NOM/VAL_COMP_ELEM1-5, CEP, DSC_LOCALIDADE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Coordenadas</td>
+<td style="text-align: left;">LATITUDE, LONGITUDE, NV_GEO_COORD</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Espécie e uso</td>
+<td style="text-align: left;">COD_ESPECIE, DSC_ESTABELECIMENTO, COD_TIPO_ESPECIE, COD_INDICADOR_ESTAB_ENDERECO, COD_INDICADOR_CONST_ENDERECO, COD_INDICADOR_FINALIDADE_CONST</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Identificador</td>
+<td style="text-align: left;">COD_UNICO_ENDERECO</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>O campo <code>DSC_ESTABELECIMENTO</code> merece atenção especial: para os registros que não são domicílios particulares, ele traz o nome do estabelecimento tal como coletado pelo recenseador. Apesar de ser texto livre e não padronizado, esse campo é muito útil para identificar tipos específicos de equipamentos por meio de busca por palavras-chave — hospitais, escolas, igrejas de determinadas denominações, entre outros.</p>
+<p>O campo <code>COD_TIPO_ESPECIE</code> detalha o tipo de edificação dos domicílios: casa (101), casa de vila ou em condomínio (102), apartamento (103) e outros (104). Já <code>COD_INDICADOR_FINALIDADE_CONST</code> classifica as edificações em construção como residenciais (1), não residenciais (2), mistas (3) ou de finalidade indeterminada (4).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Onde baixar os dados
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Os dados do CNEFE 2022 estão disponíveis no portal do IBGE, organizados por município ou por unidade da federação, em arquivos <code>.csv</code> com campos separados por ponto e vírgula. O pacote <code>cnefetools</code>, apresentado na próxima seção, automatiza o download e a leitura desses arquivos diretamente no R.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-cnefe-r" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-cnefe-r"><span class="header-section-number">10.5</span> Lendo dados do CNEFE com R</h2>
+<section id="o-pacote-cnefetools" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="o-pacote-cnefetools"><span class="header-section-number">10.5.1</span> O pacote cnefetools</h3>
+<p>O pacote <code>cnefetools</code> foi desenvolvido para facilitar o acesso e a análise do CNEFE no R. Ele automatiza o download dos arquivos por município, cuida do cache local para evitar downloads repetidos e retorna os dados como objeto <code>sf</code> pronto para análise espacial.</p>
+<p>Para instalar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cnefetools"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As funções principais são:</p>
+<ul>
+<li><code>read_cnefe()</code> — lê os dados de um município como tabela Arrow ou objeto <code>sf</code></li>
+<li><code>cnefe_counts()</code> — agrega contagens de endereços por espécie a células hexagonais H3 ou a polígonos definidos pelo usuário</li>
+<li><code>cnefe_dictionary()</code> — abre o dicionário de dados em Excel</li>
+<li><code>cnefe_doc()</code> — abre a nota metodológica em PDF</li>
+</ul>
+</section>
+<section id="carregando-os-dados-de-porto-alegre" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="carregando-os-dados-de-porto-alegre"><span class="header-section-number">10.5.2</span> Carregando os dados de Porto Alegre</h3>
+<p>A função <code>read_cnefe()</code> recebe o código IBGE do município e retorna um objeto <code>sf</code> com todos os registros do CNEFE. Para carregar os dados de Porto Alegre (código 4314902), fazemos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poa_cnefe <span class="ot">&lt;-</span> <span class="fu">read_cnefe</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">code_muni =</span> <span class="dv">4314902</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">output    =</span> <span class="st">"sf"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose   =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Com os dados carregados, contamos os registros por espécie para ter uma visão geral do que está disponível:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>poa_cnefe <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(COD_ESPECIE) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">especie =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Domicílio particular"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Domicílio coletivo"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Est. agropecuário"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Est. de ensino"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Est. de saúde"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">"Est. de outras finalidades"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">"Edificação em construção"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      COD_ESPECIE <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">"Est. religioso"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(COD_ESPECIE, especie, n) <span class="sc">|&gt;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Código"</span>, <span class="st">"Espécie"</span>, <span class="st">"Registros"</span>),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>(<span class="at">big.mark =</span> <span class="st">"."</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' and 'decimal.mark' are both '.', which could be confusing
+Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' and 'decimal.mark' are both '.', which could be confusing</code></pre>
+</div>
+<div id="tbl-especies-poa" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-especies-poa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;10.4: Registros do CNEFE 2022 em Porto Alegre por espécie
+</figcaption>
+<div aria-describedby="tbl-especies-poa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Código</th>
+<th style="text-align: left;">Espécie</th>
+<th style="text-align: right;">Registros</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Domicílio particular</td>
+<td style="text-align: right;">686.846</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Domicílio coletivo</td>
+<td style="text-align: right;">833</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Est. agropecuário</td>
+<td style="text-align: right;">128</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Est. de ensino</td>
+<td style="text-align: right;">1.194</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Est. de saúde</td>
+<td style="text-align: right;">1.592</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Est. de outras finalidades</td>
+<td style="text-align: right;">61.068</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Edificação em construção</td>
+<td style="text-align: right;">8.627</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Est. religioso</td>
+<td style="text-align: right;">1.951</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="mapeando-estabelecimentos-de-saúde" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="mapeando-estabelecimentos-de-saúde"><span class="header-section-number">10.5.3</span> Mapeando estabelecimentos de saúde</h3>
+<p>Uma das aplicações mais diretas do CNEFE é localizar equipamentos de saúde. Filtramos os registros com <code>COD_ESPECIE == 5</code> e, dentro deles, buscamos os que têm “hospital” no nome do estabelecimento por meio do campo <code>DSC_ESTABELECIMENTO</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>poa_saude <span class="ot">&lt;-</span> poa_cnefe <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COD_ESPECIE <span class="sc">==</span> <span class="dv">5</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>poa_hospitais <span class="ot">&lt;-</span> poa_saude <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"hospital"</span>, DSC_ESTABELECIMENTO, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Para visualizar a distribuição espacial, usamos o limite municipal de Porto Alegre como camada de fundo e sobrepomos os dois conjuntos de pontos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>poa_muni <span class="ot">&lt;-</span> <span class="fu">read_municipality</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">code_muni  =</span> <span class="dv">4314902</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">year       =</span> <span class="dv">2022</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">simplified =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_muni, <span class="at">fill =</span> <span class="st">"grey95"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_saude, <span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">0.6</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_hospitais, <span class="at">color =</span> <span class="st">"firebrick"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fonte: CNEFE 2022 (IBGE) | Pacote cnefetools"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-saude-poa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-saude-poa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.1: Estabelecimentos de saúde em Porto Alegre segundo o CNEFE 2022. Os pontos vermelhos indicam os estabelecimentos com ‘hospital’ no nome do estabelecimento.
+</figcaption>
+<div aria-describedby="fig-saude-poa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-cnefe_files/figure-html/fig-saude-poa-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>O mapa revela a distribuição desigual dos equipamentos de saúde: há maior concentração nas áreas centrais e ao longo dos principais eixos viários, com rarefação nas periferias da cidade.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Buscas por texto no DSC_ESTABELECIMENTO
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O campo <code>DSC_ESTABELECIMENTO</code> é texto livre coletado pelo recenseador. Isso significa que a mesma instituição pode aparecer grafada de formas diferentes em registros distintos — com abreviações, sem acentos ou com erros de digitação. Ao usar <code>grepl()</code> para filtrar por palavras-chave, vale testar variações da busca para não perder registros relevantes.</p>
+</div>
+</div>
+</section>
+<section id="comparando-distribuições-espaciais" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="comparando-distribuições-espaciais"><span class="header-section-number">10.5.4</span> Comparando distribuições espaciais</h3>
+<p>Outra análise frequente com o CNEFE é comparar a localização de diferentes tipos de equipamento. O mapa a seguir mostra os estabelecimentos de ensino (espécie 4) e religiosos (espécie 8) em Porto Alegre em painéis separados, o que permite observar como suas distribuições se assemelham ou divergem ao longo do tecido urbano:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>poa_edurel <span class="ot">&lt;-</span> poa_cnefe <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COD_ESPECIE <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tipo =</span> <span class="fu">factor</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(COD_ESPECIE <span class="sc">==</span> <span class="dv">4</span>, <span class="st">"Ensino"</span>, <span class="st">"Religioso"</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Ensino"</span>, <span class="st">"Religioso"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_muni, <span class="at">fill =</span> <span class="st">"grey95"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data  =</span> poa_edurel,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> tipo),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">size  =</span> <span class="fl">0.8</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.6</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Ensino"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Religioso"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>tipo) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fonte: CNEFE 2022 (IBGE) | Pacote cnefetools"</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-ensino-religioso" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-ensino-religioso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.2: Estabelecimentos de ensino e religiosos em Porto Alegre segundo o CNEFE 2022.
+</figcaption>
+<div aria-describedby="fig-ensino-religioso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-cnefe_files/figure-html/fig-ensino-religioso-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>A comparação visual revela que os estabelecimentos religiosos têm distribuição mais dispersa pelo território municipal, enquanto os de ensino tendem a se concentrar mais próximos aos núcleos residenciais consolidados.</p>
+</section>
+</section>
+<section id="sec-cnefe-counts" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-cnefe-counts"><span class="header-section-number">10.6</span> Agregando contagens com cnefe_counts()</h2>
+<section id="a-função-cnefe_counts" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="a-função-cnefe_counts"><span class="header-section-number">10.6.1</span> A função cnefe_counts()</h3>
+<p>Ao analisar a distribuição espacial de endereços, muitas vezes queremos trabalhar com recortes espaciais em vez de pontos individuais. A função <code>cnefe_counts()</code> resolve isso: ela baixa os dados do CNEFE e os agrega a células hexagonais H3 ou a polígonos fornecidos pelo usuário, retornando a contagem de registros por espécie em cada unidade espacial.</p>
+<p>Os principais argumentos são:</p>
+<ul>
+<li><code>code_muni</code> — código IBGE do município</li>
+<li><code>polygon_type</code> — <code>"hex"</code> para grade hexagonal H3 ou <code>"user"</code> para polígonos personalizados</li>
+<li><code>polygon</code> — objeto <code>sf</code> com os polígonos (obrigatório quando <code>polygon_type = "user"</code>)</li>
+<li><code>h3_resolution</code> — resolução da grade H3 (padrão 9, células de aproximadamente 0,1 km²)</li>
+<li><code>backend</code> — motor de processamento: <code>"duckdb"</code> (mais rápido) ou <code>"r"</code> (sem dependências extras)</li>
+</ul>
+<p>O retorno é um objeto <code>sf</code> com oito colunas de contagem, uma por espécie (<code>addr_type1</code> a <code>addr_type8</code>), além da geometria das células ou polígonos.</p>
+</section>
+<section id="mapeando-a-concentração-de-equipamentos-por-hexágono" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="mapeando-a-concentração-de-equipamentos-por-hexágono"><span class="header-section-number">10.6.2</span> Mapeando a concentração de equipamentos por hexágono</h3>
+<p>Para identificar padrões intra-urbanos de distribuição de equipamentos de ensino e religiosos em Porto Alegre, usamos a grade hexagonal H3 com resolução 9. Antes de fazer os cálculos, precisamos agregar os dados:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>poa_hex <span class="ot">&lt;-</span> <span class="fu">cnefe_counts</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">code_muni     =</span> <span class="dv">4314902</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">polygon_type  =</span> <span class="st">"hex"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">h3_resolution =</span> <span class="dv">9</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache         =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose       =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Com a contagem por hexágono, calculamos a proporção de estabelecimentos de ensino em relação ao total de equipamentos educacionais e religiosos em cada célula. Células com valores próximos a 1 indicam predominância de ensino; próximas a 0, predominância religiosa:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>poa_hex_ratio <span class="ot">&lt;-</span> poa_hex <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((addr_type4 <span class="sc">+</span> addr_type8) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_ensino =</span> addr_type4 <span class="sc">/</span> (addr_type4 <span class="sc">+</span> addr_type8))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_muni, <span class="at">fill =</span> <span class="st">"grey90"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> poa_hex_ratio, <span class="fu">aes</span>(<span class="at">fill =</span> prop_ensino), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette   =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">name      =</span> <span class="st">"Proporção</span><span class="sc">\n</span><span class="st">de ensino"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits    =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Fonte: CNEFE 2022 (IBGE) | Pacote cnefetools"</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-prop-ensino" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-prop-ensino-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10.3: Proporção de estabelecimentos de ensino em relação ao total de equipamentos de ensino e religiosos em Porto Alegre, por hexágono H3 (resolução 9). Valores próximos a 1 indicam predomínio de ensino; próximos a 0, predomínio religioso.
+</figcaption>
+<div aria-describedby="fig-prop-ensino-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="10-cnefe_files/figure-html/fig-prop-ensino-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>O mapa revela variações espaciais expressivas. Nas áreas centrais e nos bairros com maior densidade urbana, a proporção de estabelecimentos de ensino tende a ser mais alta. Nas periferias, a presença de templos religiosos se torna relativamente mais pronunciada — padrão consistente com o que a literatura aponta sobre a expansão das igrejas evangélicas em territórios de urbanização mais recente.</p>
+</section>
+<section id="agregando-por-setor-censitário" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="agregando-por-setor-censitário"><span class="header-section-number">10.6.3</span> Agregando por setor censitário</h3>
+<p>Quando o interesse é comparar os dados do CNEFE com outras variáveis do Censo, faz sentido agregar ao nível dos setores censitários. Para isso, usamos <code>polygon_type = "user"</code> e fornecemos o <code>sf</code> com os setores como argumento <code>polygon</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># poa_setores &lt;- read_census_tract(code_muni = 4314902, year = 2022)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># poa_setor_counts &lt;- cnefe_counts(</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   code_muni    = 4314902,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   polygon_type = "user",</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   polygon      = poa_setores,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   cache        = TRUE,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   verbose      = FALSE</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A tabela resultante pode ser combinada com os agregados por setor (Capítulo 7) para análises que relacionam, por exemplo, a densidade de estabelecimentos de saúde com indicadores socioeconômicos da população residente.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Backend DuckDB para grandes volumes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para municípios menores, o argumento padrão <code>backend = "duckdb"</code> é a opção mais rápida. Se o DuckDB não estiver instalado, use <code>backend = "r"</code> para processar os dados inteiramente em R, sem dependências adicionais.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-cnefe-exercicios" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-cnefe-exercicios"><span class="header-section-number">10.7</span> Exercícios</h2>
+<ol type="1">
+<li><p><strong>Cobertura de saúde em Salvador:</strong> Baixe os dados do CNEFE para Salvador (código 2927408) e filtre os estabelecimentos de saúde (<code>COD_ESPECIE == 5</code>). Use <code>cnefe_counts()</code> com hexágonos para mapear a densidade desses estabelecimentos. Quais regiões da cidade apresentam menor concentração de equipamentos de saúde?</p></li>
+<li><p><strong>Expansão imobiliária em Porto Alegre:</strong> Usando <code>COD_ESPECIE == 7</code> (edificações em construção ou reforma), identifique as regiões de Porto Alegre com maior número de obras ativas. Filtre apenas as de finalidade residencial (<code>COD_INDICADOR_FINALIDADE_CONST == 1</code>) e mapeie sua distribuição. O padrão corresponde ao que você esperaria com base no conhecimento sobre a expansão urbana da cidade?</p></li>
+<li><p><strong>Comparação entre cidades:</strong> Compare a razão entre estabelecimentos religiosos e de ensino em Belo Horizonte (3106200), Recife (2611606) e Porto Alegre (4314902). Use <code>cnefe_counts()</code> com hexágonos e calcule, para cada cidade, a mediana da proporção <code>addr_type8 / (addr_type4 + addr_type8)</code> entre os hexágonos com ao menos um estabelecimento de cada tipo. Qual das três cidades apresenta a maior proporção relativa de templos religiosos?</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
