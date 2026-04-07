@@ -14,11 +14,12 @@ A **Parte 3** é dedicada à **Pesquisa Nacional por Amostra de Domicílios Cont
 
 A **Parte 4** explora dados de **Mobilidade Urbana**, com destaque para as pesquisas de origem e destino realizadas nas principais regiões metropolitanas brasileiras, obtenção de dados de redes viárias e sobre sistemas de transporte público no formato **General Transit Feed Specification** (GTFS).
 
-A **Parte 5** aborda fontes de dados sobre **Mercado de Trabalho**, com ênfase na Relação Anual de Informações Sociais (RAIS) e no Cadastro Geral de Empregados e Desempregados (CAGED), que juntos formam a base do registro administrativo do emprego formal no Brasil.
+A **Parte 5** apresenta fontes de dados de **Saúde**, incluindo os microdados do Sistema de Informações em Saúde do Ministério da Saúde (DataSUS) e a Pesquisa Nacional de Saúde (PNS) do IBGE.
 
-A **Parte 6** apresenta fontes de dados de **Saúde**, incluindo os microdados do Sistema de Informações em Saúde do Ministério da Saúde (DataSUS) e a Pesquisa Nacional de Saúde (PNS) do IBGE.
+A **Parte 6** aborda fontes de dados sobre **Mercado de Trabalho**, com ênfase na Relação Anual de Informações Sociais (RAIS) e no Cadastro Geral de Empregados e Desempregados (CAGED), que juntos formam a base do registro administrativo do emprego formal no Brasil.
 
-O livro é razoavelmente autossuficiente em termos de ferramentas. A Parte 1 cobre os fundamentos de R necessários para acompanhar os demais capítulos, de modo que não se exige experiência prévia com a linguagem. Ao longo do texto, são utilizados pacotes do ecossistema *tidyverse* e soluções especializados para acesso a dados brasileiros, como os pacotes `censobr`, `geobr`, `cnefetools`, `PNADcIBGE` e `microdatasus`.
+
+O livro é razoavelmente autossuficiente em termos de ferramentas. A Parte 1 cobre os fundamentos de R necessários para acompanhar os demais capítulos, de modo que não se exige experiência prévia com a linguagem. Ao longo do texto, são utilizados pacotes do ecossistema *tidyverse* e soluções especializados para acesso a dados brasileiros, como os pacotes `censobr`, `geobr`, `cnefetools`, `PNADcIBGE`, `PNSIBGE` e `microdatasus`.
 
 <!--Para quem deseja aprofundar o uso de R com dados brasileiros, recomendo o canal do YouTube [Rocha Data in R](https://www.youtube.com/@RochaDatainR), mantido pelo pesquisador [Fábio Rocha](https://sites.google.com/view/fabio-rocha-economista). O canal oferece tutoriais práticos e atualizados sobre análise de dados com R, com foco em fontes de dados públicas brasileiras, e constitui um excelente complemento a este livro.-->
 

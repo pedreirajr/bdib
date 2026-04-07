@@ -26,11 +26,25 @@ book:
 
     - part: "PARTE 2: CENSO DEMOGRÁFICO"
       chapters:
-        - 6-conceitos-e-metodos.qmd
+        - 6-conceitos-e-metodos-censo.qmd
         - 7-agregados.qmd
         - 8-microdados.qmd
         - 9-grade-estatistica.qmd
         - 10-cnefe.qmd
+        - 11-entorno.qmd
+
+    - part: "PARTE 3: PESQUISA NACIONAL POR AMOSTRA DE DOMICÍLIOS CONTÍNUA (PNAD-C)"
+      chapters:
+        - 12-conceitos-e-metodos-pnadc.qmd
+        - 13-microdados-anuais-pnadc.qmd
+        - 14-microdados-trimestrais-pnadc.qmd
+
+    - part: "PARTE 4: MOBILIDADE URBANA E REGIONAL"
+      chapters:
+        - 15-conceitos-e-metodos-mobilidade.qmd
+        - 16-redes-viarias.qmd
+        - 17-gtfs.qmd
+        - 18-pesquisas-od.qmd
 
     - references.qmd
 
