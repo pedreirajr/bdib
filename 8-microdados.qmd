@@ -53,7 +53,7 @@ tibble::tibble(
 ) |>
   knitr::kable(
     col.names = c("Porte do município (habitantes)","Nº Municípios (2010)",
-                  "Nº Municípios (2010)","Fração (2010 e 2022)"),
+                  "Nº Municípios (2022)","Fração (2010 e 2022)"),
     align = c("c", "c","c", "c"),
     table.attr = 'style="width:auto"'
   ) |>

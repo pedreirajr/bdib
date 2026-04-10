@@ -266,7 +266,7 @@ ggplot() +
 O campo `DSC_ESTABELECIMENTO` é texto livre coletado pelo recenseador. Isso significa que a mesma instituição pode aparecer grafada de formas diferentes em registros distintos (com abreviações, sem acentos ou com erros de digitação). Ao usar `grepl()` para filtrar por palavras-chave, vale testar variações da busca para não perder registros relevantes.
 :::
 
-### Agregando contagens com cnefe_counts() {#sec-cnefe-counts}
+### Agregando contagens espacialmente por tipo {#sec-cnefe-counts}
 
 Ao analisar a distribuição espacial de endereços, muitas vezes queremos trabalhar com recortes espaciais em vez de pontos individuais. A função `cnefe_counts()` resolve isso ao baixar os dados do CNEFE e agregá-los a células hexagonais H3 ou a polígonos fornecidos pelo usuário, retornando a contagem de registros por espécie em cada unidade espacial.
 

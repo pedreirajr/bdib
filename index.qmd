@@ -1,5 +1,10 @@
 # Prefácio {.unnumbered}
 
+<!--
+(1) Por que R: IBGE usa (calibração dos pesos e análises com a amostragem: ver arquivos das notas metodológicas dos microdados/áreas de ponderação); pacote PNADcIBGE; pacotes de institutos oficiais de pesquisa (os do IPEA: geobr, censobr).
+(2) Por que a capacitação inicial: explorar dados tabulares e geográficos com proficiência;
+-->
+
 Este livro nasceu de uma necessidade prática vivida ao longo de dez anos ministrando a disciplina [Levantamentos e Pesquisas em Engenharia de Transportes](https://alunoweb.ufba.br/SiacWWW/ExibirEmentaPublico.do?cdDisciplina=ENGR80&nuPerInicial=20251) (ENGR80, antiga [ENGJ66](https://alunoweb.ufba.br/SiacWWW/ExibirEmentaPublico.do?cdDisciplina=ENGJ66&nuPerInicial=20101)) na Universidade Federal da Bahia (UFBA). Ao longo desse período, ficou evidente a ausência de um material de referência em português que reunisse, de forma integrada, as principais bases de dados institucionais brasileiras e demonstrasse como acessá-las e analisá-las computacionalmente. Esta obra é a resposta a essa lacuna.
 
 O objetivo é oferecer um guia conceitualmente fundamentado e aplicado para estudantes e pesquisadores que precisam trabalhar com dados produzidos de forma institucional, seja para dissertações, relatórios técnicos, projetos de pesquisa ou análises de políticas públicas. Cada capítulo combina a apresentação conceitual da fonte de dados com exemplos reais de acesso, processamento e visualização em R.
