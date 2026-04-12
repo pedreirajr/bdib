@@ -323,7 +323,7 @@ poa_hex |>
 
 ```
 
-Com a contagem por hexágono, calculamos a proporção de estabelecimentos de ensino em relação ao total de estabelecimentos de ensino e religiosos em cada célula. Células com valores próximos a 1 indicam predominância de ensino; próximas a 0, predominância religiosa:
+Observem que diversas análises podem ser realizadas com esses dados. Podemos, por exemplo, produzir índices comparativos entre usos distintos em determinadas regiões. No caso abaixo, calculamos a proporção de estabelecimentos de ensino em relação ao total de estabelecimentos de ensino e religiosos em cada célula. Células com valores próximos a 1 indicam predominância de ensino, já aquelas próximas a 0, predominância religiosa:
 
 ```{r}
 #| label: fig-prop-ensino
