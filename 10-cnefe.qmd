@@ -295,6 +295,34 @@ poa_hex <- cnefe_counts(
 )
 ```
 
+Vamos visualizar nas figuras abaixo, por exemplo, as contagens de estabelecimentos de ensino (`addr_type1`) e estabelecimentos religiosos (`addr_type8`) geradas no código anterior e armazenadas em `poa_hex`:
+
+```{r}
+#| label: fig-ensino
+#| fig-cap: "Total de estabelecimentos de ensino por hexágono H3 (resolução 8)."
+
+poa_hex |> 
+  ggplot() +
+  geom_sf(aes(fill = addr_type4)) +
+  scale_fill_distiller(palette = "Blues", direction = 1) +
+  labs(fill = "# Estabelecimentos\nde Ensino") +
+  theme_minimal()
+
+```
+
+```{r}
+#| label: fig-religiao
+#| fig-cap: "Total de estabelecimentos religiosos por hexágono H3 (resolução 8)."
+
+poa_hex |> 
+  ggplot() + 
+  geom_sf(aes(fill = addr_type8)) +
+  scale_fill_distiller(palette = "Oranges", direction = 1) +
+  labs(fill = "# Estabelecimentos\nReligiosos") +
+  theme_minimal()
+
+```
+
 Com a contagem por hexágono, calculamos a proporção de estabelecimentos de ensino em relação ao total de estabelecimentos de ensino e religiosos em cada célula. Células com valores próximos a 1 indicam predominância de ensino; próximas a 0, predominância religiosa:
 
 ```{r}
