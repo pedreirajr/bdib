@@ -377,7 +377,7 @@ Até aqui, trabalhamos com a rede viária como um conjunto de linhas geográfica
 
 ### Grafos e redes geoespaciais
 
-Em teoria dos grafos, uma rede é formada por dois elementos básicos: um conjunto de **nós** (*nodes*) e um conjunto de **arestas** (*edges*), em que cada aresta conecta um par de nós. Matematicamente, a notação de um grafo qualquer $G$ é dado pela junção destes dois conjuntos de nós e arestas, $N$ e $A$, tal que $G={N,A}$, conforme a @fig-grafo. Em uma rede viária, as interseções entre ruas são os nós e os trechos de rua entre duas interseções consecutivas são as arestas. Essa estrutura de dados, simples na sua definição, abre uma classe de análises impossíveis de realizar apenas com geometrias de linha.
+Em teoria dos grafos, uma rede é formada por dois elementos básicos: um conjunto de **nós** (*nodes*) e um conjunto de **arestas** (*edges*), em que cada aresta conecta um par de nós. Matematicamente, a notação de um grafo qualquer $G$ é dado pela junção destes dois conjuntos de nós e arestas, $N$ e $A$, tal que $G=(N,A)$, conforme a @fig-grafo. Em uma rede viária, as interseções entre ruas são os nós e os trechos de rua entre duas interseções consecutivas são as arestas. Essa estrutura de dados, simples na sua definição, abre uma classe de análises impossíveis de realizar apenas com geometrias de linha.
 
 ![Representação visual e matemática de um grafo](img/16-redes-viarias/fig-grafo.png){#fig-grafo width="60%"}
 
