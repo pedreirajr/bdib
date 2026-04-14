@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -280,8 +364,32 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice do Capítulo</h2>
+   
+  <ul>
+  <li><a href="#informações-geográficas-voluntárias" id="toc-informações-geográficas-voluntárias" class="nav-link active" data-scroll-target="#informações-geográficas-voluntárias"><span class="header-section-number">16.1</span> Informações Geográficas Voluntárias</a></li>
+  <li><a href="#o-openstreetmap" id="toc-o-openstreetmap" class="nav-link" data-scroll-target="#o-openstreetmap"><span class="header-section-number">16.2</span> O OpenStreetMap</a></li>
+  <li><a href="#estrutura-de-dados-do-osm" id="toc-estrutura-de-dados-do-osm" class="nav-link" data-scroll-target="#estrutura-de-dados-do-osm"><span class="header-section-number">16.3</span> Estrutura de Dados do OSM</a></li>
+  <li><a href="#obtendo-rede-viária-do-osm" id="toc-obtendo-rede-viária-do-osm" class="nav-link" data-scroll-target="#obtendo-rede-viária-do-osm"><span class="header-section-number">16.4</span> Obtendo Rede Viária do OSM</a>
+  <ul>
+  <li><a href="#explorando-as-features-disponíveis" id="toc-explorando-as-features-disponíveis" class="nav-link" data-scroll-target="#explorando-as-features-disponíveis"><span class="header-section-number">16.4.1</span> Explorando as features disponíveis</a></li>
+  <li><a href="#definindo-a-área-de-estudo" id="toc-definindo-a-área-de-estudo" class="nav-link" data-scroll-target="#definindo-a-área-de-estudo"><span class="header-section-number">16.4.2</span> Definindo a área de estudo</a></li>
+  <li><a href="#construindo-e-executando-a-consulta-overpass" id="toc-construindo-e-executando-a-consulta-overpass" class="nav-link" data-scroll-target="#construindo-e-executando-a-consulta-overpass"><span class="header-section-number">16.4.3</span> Construindo e executando a consulta Overpass</a></li>
+  <li><a href="#mapeando-a-rede-viária-de-salvador" id="toc-mapeando-a-rede-viária-de-salvador" class="nav-link" data-scroll-target="#mapeando-a-rede-viária-de-salvador"><span class="header-section-number">16.4.4</span> Mapeando a rede viária de Salvador</a></li>
+  <li><a href="#outras-camadas-do-osm" id="toc-outras-camadas-do-osm" class="nav-link" data-scroll-target="#outras-camadas-do-osm"><span class="header-section-number">16.4.5</span> Outras camadas do OSM</a></li>
+  </ul></li>
+  <li><a href="#redes-viárias-como-grafos" id="toc-redes-viárias-como-grafos" class="nav-link" data-scroll-target="#redes-viárias-como-grafos"><span class="header-section-number">16.5</span> Redes Viárias como Grafos</a>
+  <ul>
+  <li><a href="#grafos-e-redes-geoespaciais" id="toc-grafos-e-redes-geoespaciais" class="nav-link" data-scroll-target="#grafos-e-redes-geoespaciais"><span class="header-section-number">16.5.1</span> Grafos e redes geoespaciais</a></li>
+  <li><a href="#pré-processamento-e-limpeza-da-rede" id="toc-pré-processamento-e-limpeza-da-rede" class="nav-link" data-scroll-target="#pré-processamento-e-limpeza-da-rede"><span class="header-section-number">16.5.2</span> Pré-processamento e limpeza da rede</a></li>
+  <li><a href="#convertendo-para-sfnetwork" id="toc-convertendo-para-sfnetwork" class="nav-link" data-scroll-target="#convertendo-para-sfnetwork"><span class="header-section-number">16.5.3</span> Convertendo para <code>sfnetwork</code></a></li>
+  <li><a href="#caminho-mais-curto" id="toc-caminho-mais-curto" class="nav-link" data-scroll-target="#caminho-mais-curto"><span class="header-section-number">16.5.4</span> Caminho mais curto</a></li>
+  </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">16.6</span> Exercícios</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -305,8 +413,548 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<!--Destoa da ideia do livro: nem institucional, nem brasileira, mas precisamos mencioná-la diante da sua importância e widespread use-->
+<p>A análise de mobilidade urbana depende, em grande medida, da capacidade de representar e processar redes viárias de forma computacional. Em primeiro lugar, precisamos saber onde as ruas estão, o que implica na necessidade de obter arquivos geográficos adequados sobre estes elementos. Entendendo sua distribuição espacial, podemos então compreender como as ruas se conectam e quais caminhos permitem. Consequentemente, podemos resolver problemas importantes como computar rotas entre origens e destinos, dimensionar áreas de cobertura de equipamentos públicos e calcular índices de acessibilidade.</p>
+<p>Ao contrário das bases institucionais exploradas nos capítulos anteriores, não é comum que órgãos institucionais oficiais disponibilizem dados de rede viária urbana. Apesar de o Departamento Nacional de Infraestrutura de Transportes (DNIT) publicar dados sobre o sistema nacional de viação na sua plataforma <a href="https://servicos.dnit.gov.br/vgeo/">VGeo</a>, por exemplo, estes compreendem somente a infraestrutura de transporte regional (não urbana).</p>
+<p>Essa lacuna sobre dados viários no espaço urbano foi preenchida, na prática, por um projeto colaborativo que tornou-se a maior base de dados geoespaciais aberta do mundo nas últimas duas décadas: o <a href="https://www.openstreetmap.org/#map=4/-15.13/-53.19">OpenStreetMap (OSM)</a>. Neste capítulo, vamos explorar aspectos conceituais e práticos sobre informações geográficas voluntárias, explorar a estrutura de dados do OSM e seu funcionamento do OpenStreetMap e mostrar como extrair, visualizar e analisar redes viárias desta base em R.</p>
+<section id="informações-geográficas-voluntárias" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="informações-geográficas-voluntárias"><span class="header-section-number">16.1</span> Informações Geográficas Voluntárias</h2>
+<p>A ascensão da Web 2.0, no início dos anos 2000, transformou usuários de internet em produtores de conteúdo. Blogs, wikis e redes sociais demonstraram que comunidades distribuídas podiam criar e manter acervos de informação com qualidade e escala consideráveis. No campo geoespacial, esse fenômeno ganhou um nome preciso em 2007, quando o geógrafo Michael Goodchild cunhou o termo <em>Volunteered Geographic Information</em> (VGI), traduzido para o português como Informação Geográfica Voluntária (IGV). Em seu artigo seminal <em>Citizens as sensors: the world of volunteered geography</em> <span class="citation" data-cites="goodchild2007">(<a href="references.html#ref-goodchild2007" role="doc-biblioref">Goodchild, 2007</a>)</span>, ele descreveu a explosão de plataformas em que cidadãos comuns passaram a mapear, etiquetar e compartilhar lugares, rotas e territórios de forma colaborativa e aberta.</p>
+<p>A IGV contrasta com o paradigma tradicional de produção de dados geográficos, centrado em órgãos especializados, com processos rigorosos de coleta, validação e publicação. Enquanto bases institucionais levam meses ou anos para ser atualizadas, plataformas de IGV podem incorporar uma nova rua ou um equipamento recém-construído em poucas horas. Isso não significa que a IGV seja necessariamente superior às bases institucionais. Em muitos casos, ela ocupa um papel complementar, especialmente em contextos em que a velocidade e a granularidade local são mais importantes do que a exatidão cartográfica formal.</p>
+<p>O OpenStreetMap é a maior e mais influente plataforma de IGV, e será o foco deste capítulo. Outras plataformas também merecem menção. O Wikimapia, lançado em maio de 2006, foi uma das primeiras iniciativas a combinar mapeamento colaborativo com conteúdo enciclopédico, permitindo que usuários delineassem polígonos sobre mapas e os descrevessem em mais de cem idiomas. Embora ainda esteja acessível, o Wikimapia perdeu relevância progressivamente após 2012, à medida que o OSM consolidou sua posição como referência global.</p>
+<p>Além dessas plataformas especializadas, grandes empresas de tecnologia também aceitam contribuições de usuários para enriquecer seus serviços de mapeamento. O Google Maps permite que usuários sugiram edições e adicionem novos estabelecimentos por meio do programa Local Guides. Já o Yandex Maps, da empresa russa Yandex, exerce papel análogo na Rússia e em países da antiga União Soviética, com um editor colaborativo que permite sugerir correções e adicionar informações ao mapa.</p>
+<p>Uma das vantagens mais frequentemente citadas da IGV é a capacidade de mapear rapidamente áreas ou fenômenos que bases institucionais não cobrem com a mesma velocidade. Após catástrofes naturais, por exemplo, comunidades de mapeamento como o <em>Humanitarian OpenStreetMap Team</em> (HOT) mobilizam voluntários para atualizar mapas de regiões afetadas em tempo quase real, apoiando operações de resposta a emergências. No contexto urbano cotidiano, o OSM frequentemente apresenta maior detalhamento de vias locais, ciclovias, calçadas e estabelecimentos do que produtos cartográficos oficiais.</p>
+<p>A IGV apresenta, ao mesmo tempo, limitações importantes que devem ser consideradas em qualquer análise rigorosa. A cobertura e a qualidade dos dados são geograficamente heterogêneas. Em geral, cidades grandes e capitais tendem a ser bem mapeadas, enquanto municípios menores e áreas rurais podem ter cobertura incompleta ou desatualizada. A ausência de um processo formal de validação também significa que erros podem persistir por longos períodos, especialmente em regiões com poucos colaboradores ativos. Por essas razões, é sempre recomendável verificar a cobertura local antes de usar dados do OSM em análises que demandem completude ou precisão cartográfica.</p>
+</section>
+<section id="o-openstreetmap" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="o-openstreetmap"><span class="header-section-number">16.2</span> O OpenStreetMap</h2>
+<p>O OpenStreetMap foi fundado em 2004 por Steve Coast, então estudante da University College London. A motivação inicial era prática, já que os mapas digitais disponíveis à época eram caros, restritos por direitos autorais ou imprecisos. Por isso, Coast quis criar uma alternativa aberta que qualquer pessoa pudesse usar e melhorar. Sua primeira contribuição, em dezembro de 2004, foi o rastreamento GPS de caminhos no Regent’s Park, em Londres. O projeto cresceu rapidamente, atraindo uma comunidade global de mapeadores que contribuíam com trajetórias GPS, imagens de satélite e conhecimento local.</p>
+<p>O funcionamento do OSM é descentralizado e baseado em consenso comunitário. Qualquer pessoa pode criar uma conta e começar a contribuir, seja editando diretamente pelo navegador com o editor iD, seja usando ferramentas mais avançadas como o JOSM. As contribuições seguem um código de conduta que privilegia a precisão geográfica e o mapeamento do que existe de fato, não do que deveria existir. A comunidade mantém uma <a href="https://wiki.openstreetmap.org/wiki/Main_Page">Wiki</a> detalhada com as convenções de mapeamento para centenas de tipos de objetos geográficos, desde rodovias e edifícios até hidrantes e caixas de correio.</p>
+<p>A escala do OSM hoje é impressionante. O projeto conta com aproximadamente 10 milhões de usuários registrados, dos quais cerca de 2,25 milhões contribuíram ativamente com dados de mapeamento até 2025 <span class="citation" data-cites="osm_wiki_stats">(<a href="references.html#ref-osm_wiki_stats" role="doc-biblioref">OpenStreetMap Wiki, 2025b</a>)</span>. Essa base de contribuidores cobre praticamente todos os países do mundo. No Brasil, a comunidade OSM é ativa e inclui parcerias com instituições públicas, a exemplo da Prefeitura de Fortaleza, que importou oficialmente edificações e endereços ao projeto, e o Instituto de Pesquisa e Estratégia Econômica do Ceará (IPECE), que colabora com a comunidade regional <span class="citation" data-cites="osm_brazil_wiki">(<a href="references.html#ref-osm_brazil_wiki" role="doc-biblioref">OpenStreetMap Wiki, 2025a</a>)</span>.</p>
+<p>Esse nível de adoção institucional evidencia que o OSM deixou de ser apenas um projeto de entusiastas para se tornar infraestrutura de dados relevante para planejamento e gestão públicos. É por isso que neste capítulo fazemos uma exceção ao termo <strong>Institucional</strong> do título deste livro, e nos dedicamos a um tipo de base não institucional, mas bastante relevante e utilizada em análises técnicas, trabalhos científicos, projetos de planejamento urbano e aplicações governamentais.</p>
+</section>
+<section id="estrutura-de-dados-do-osm" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="estrutura-de-dados-do-osm"><span class="header-section-number">16.3</span> Estrutura de Dados do OSM</h2>
+<p>Para usar os dados do OSM de forma eficiente, é preciso compreender como eles são organizados internamente. O OSM representa o mundo por meio de três tipos primitivos de elementos geográficos.</p>
+<p>Os <strong>nós</strong> (<em>nodes</em>) são pontos georreferenciados, definidos por um par de coordenadas geográficas (latitude e longitude). Um nó pode representar um objeto isolado, como um semáforo, uma lixeira ou uma parada de ônibus, ou pode ser apenas um ponto de passagem que integra uma via mais complexa.</p>
+<p>As <strong>vias</strong> (<em>ways</em>) são sequências ordenadas de nós que formam linhas ou polígonos. Uma via aberta, com nós de início e fim distintos, tipicamente representa um trecho de rua, uma trilha, uma linha de trem ou um rio. Uma via fechada, cujo nó final coincide com o inicial, representa um polígono e pode descrever o contorno de um parque, a planta de um edifício ou o limite de uma lagoa.</p>
+<p>As <strong>relações</strong> (<em>relations</em>) são agrupamentos de nós, vias e outras relações, cada um com um papel (<em>role</em>) definido. Relações são usadas para representar estruturas que não podem ser descritas por um único elemento, como a rota completa de uma linha de metrô (composta de vários trechos de via), os limites de um município (formados por vários segmentos de fronteira) ou um edifício com pátio interno.</p>
+<p>O significado de qualquer elemento, seja um nó, uma via ou uma relação, é definido por <strong>tags</strong>, pares de chave e valor (no formato <code>key=value</code>) que descrevem suas características. Uma rua pode ter a tag <code>highway=residential</code>, um restaurante pode ter <code>amenity=restaurant</code> e um rio pode ter <code>waterway=river</code>. A mesma lógica se aplica a atributos complementares, como <code>name=Avenida Sete de Setembro</code>, <code>lanes=4</code> (<em>4 faixas</em>) ou <code>oneway=yes</code> (<em>sentido único</em>). A <a href="https://wiki.openstreetmap.org/wiki/Main_Page">Wiki</a> do OSM documenta as tags aceitas para cada tipo de objeto, e a adesão a essas convenções é o que garante a consistência dos dados produzidos por milhões de colaboradores ao redor do mundo. Com a estrutura do OSM em mente, podemos passar à extração dos dados em R.</p>
+</section>
+<section id="obtendo-rede-viária-do-osm" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="obtendo-rede-viária-do-osm"><span class="header-section-number">16.4</span> Obtendo Rede Viária do OSM</h2>
+<p>O pacote <code>osmdata</code> <span class="citation" data-cites="padgham2017">(<a href="references.html#ref-padgham2017" role="doc-biblioref">Padgham et al., 2017</a>)</span> permite acessar os dados do OSM diretamente do R, sem necessidade de baixar arquivos de tamanho global. Ele faz isso por meio da <strong>API Overpass</strong>, um servidor de consultas especializado que disponibiliza os dados do OSM de forma filtrada. Em vez de receber o planeta inteiro, o usuário especifica uma área geográfica e os tipos de dados que deseja, e a Overpass devolve apenas o subconjunto relevante.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Limitações da API Overpass e alternativas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A API Overpass é um serviço público gratuito, mas opera com um sistema de <strong>cotas por endereço IP</strong>: cada IP dispõe de um número fixo de slots de consulta simultâneos. Cada requisição ocupa um slot durante toda a sua execução mais um período de <em>cooldown</em> que varia com a carga do servidor. Quanto mais sobrecarregado o servidor, maior o tempo de espera antes que o slot fique disponível novamente. Quando todos os slots estão em uso, novas requisições retornam erro de <em>timeout</em> ou HTTP 429.</p>
+<p>Uma solução imediata é redirecionar as consultas para um servidor espelho com <code>set_overpass_url()</code>, executada uma única vez antes das consultas:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_overpass_url</span>(<span class="st">"https://overpass.kumi.systems/api/interpreter"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A lista atualizada de instâncias públicas está em <code>https://wiki.openstreetmap.org/wiki/Overpass_API#Public_Overpass_API_instances</code>.</p>
+<p>Para quem precisa de mais robustez, duas alternativas eliminam a dependência da Overpass por completo. O pacote <code>osmextract</code> baixa extratos PBF pré-compilados de provedores como Geofabrik (512 zonas geográficas, atualização diária), BBBike (238 cidades) e OpenStreetMap.fr (1.190 zonas), sem limites de API. Para Salvador, o extrato correspondente pelo Geofabrik seria o da região Nordeste (~378 MB), que depois pode ser recortado ao município de interesse. O pacote <code>r5r</code>, desenvolvido pelo IPEA para análises de acessibilidade, oferece a função <code>street_network_to_sf()</code>, que extrai a rede viária em formato <code>sf</code> a partir de uma rede roteável construída com <code>build_network()</code>, a partir de um arquivo <code>.pbf</code> de entrada que pode ser obtido pelos mesmos provedores citados acima.</p>
+</div>
+</div>
+<section id="explorando-as-features-disponíveis" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="explorando-as-features-disponíveis"><span class="header-section-number">16.4.1</span> Explorando as features disponíveis</h3>
+<p>A primeira função útil do pacote é <code>available_features()</code>, que retorna um vetor com todas as chaves (<em>keys</em>) de tags reconhecidas pelo OSM. O objetivo é dar ao usuário uma visão geral do que pode ser consultado.</p>
+<p>O código abaixo carrega o pacote e exibe as primeiras cinquenta chaves disponíveis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(osmdata)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#head(available_features(), 50)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Limitamos para as cinquenta primeiras, pois a lista é extensa, com centenas de chaves. o OSM mapeia aeroportos, edificações, estabelecimentos comerciais, barreiras, ciclovias, fronteiras administrativas, iluminação pública, vegetação e muito mais. Vias de circulação são apenas uma das categorias disponíveis. Para este capítulo, o interesse recai sobre a chave <code>highway</code>, que engloba todos os tipos de vias terrestres, desde autoestradas até trilhas.</p>
+<p>Para ver todas as tags associadas a uma chave específica, usa-se <code>available_tags()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. A chamada abaixo retorna os tipos de vias reconhecidos pelo OSM, que também podem ser consultados pela <a href="https://wiki.openstreetmap.org/wiki/Key:highway">Wiki</a> do OSM.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">available_tags</span>(<span class="st">"highway"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O resultado mostra uma hierarquia que reflete a importância funcional de cada tipo. No topo, <code>motorway</code> designa rodovias de acesso controlado, sem cruzamentos em nível, equivalentes às rodovias federais duplicadas do Brasil, similar ao conceito de <em>autoestrada</em>. Na sequência, <code>trunk</code> cobre vias de importância regional de alta capacidade, e <code>primary</code>, <code>secondary</code> e <code>tertiary</code> descrevem respectivamente as redes principal, secundária e terciária de rodovias e vias urbanas. Na base da hierarquia, <code>residential</code> cobre a imensa maioria das ruas de bairros.</p>
+</section>
+<section id="definindo-a-área-de-estudo" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="definindo-a-área-de-estudo"><span class="header-section-number">16.4.2</span> Definindo a área de estudo</h3>
+<p>Toda consulta à API Overpass precisa de uma área de interesse, definida por uma caixa delimitadora (<em>bounding box</em>). A função <code>getbb()</code> recupera automaticamente as coordenadas de um lugar pelo nome, consultando o serviço de geocodificação Nominatim.</p>
+<p>O código a seguir obtém a caixa delimitadora de Salvador, estado da Bahia. O resultado é uma matriz com as coordenadas mínimas e máximas de longitude e latitude:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bb_ssa <span class="ot">&lt;-</span> <span class="fu">getbb</span>(<span class="st">"Salvador Brazil"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bb_ssa</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        min       max
+x -38.69943 -38.30341
+y -13.01739 -12.73356</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Usando limites do geobr como caixa delimitadora
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pode ser que o nome do lugar não garanta uma boa correspondência via Nominatim. Deste modo, você pode delimitar a consulta pela <em>bounding box</em> de um município obtido com o <code>geobr</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geobr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>salvador_mun <span class="ot">&lt;-</span> <span class="fu">read_municipality</span>(<span class="at">code_muni =</span> <span class="dv">2927408</span>, <span class="at">year =</span> <span class="dv">2022</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">showProgress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>bb_geobr <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(salvador_mun)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>bb_geobr</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     xmin      ymin      xmax      ymax 
+-38.69896 -13.01727 -38.30433 -12.73356 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="construindo-e-executando-a-consulta-overpass" class="level3" data-number="16.4.3">
+<h3 data-number="16.4.3" class="anchored" data-anchor-id="construindo-e-executando-a-consulta-overpass"><span class="header-section-number">16.4.3</span> Construindo e executando a consulta Overpass</h3>
+<p>Com a caixa delimitadora em mãos, o próximo passo é construir a consulta. A função <code>opq()</code> cria um objeto de consulta Overpass. O argumento <code>timeout</code> define, em segundos, o limite de espera pela resposta do servidor. Valores maiores são necessários para áreas extensas ou consultas complexas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>query <span class="ot">&lt;-</span> <span class="fu">opq</span>(bb_ssa, <span class="at">timeout =</span> <span class="dv">1000</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>query</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$bbox
+[1] "-13.0173949,-38.6994346,-12.7335624,-38.3034141"
+
+$prefix
+[1] "[out:xml][timeout:1000];\n(\n"
+
+$suffix
+[1] ");\n(._;&gt;;);\nout body;"
+
+$features
+NULL
+
+$osm_types
+[1] "node"     "way"      "relation"
+
+attr(,"class")
+[1] "list"           "overpass_query"
+attr(,"nodes_only")
+[1] FALSE</code></pre>
+</div>
+</div>
+<p>O objeto criado ainda não contém nenhum filtro de tipo de dado. Para especificar o que queremos extrair, usamos <code>add_osm_feature()</code>, que adiciona um filtro por chave e valor. Quando passamos um vetor de valores, a função recupera todos os elementos que tenham qualquer um deles, o que equivale a uma condição “OU” lógica.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query_hw <span class="ot">&lt;-</span> <span class="fu">add_osm_feature</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  query,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">key   =</span> <span class="st">"highway"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="st">"motorway"</span>, <span class="st">"trunk"</span>, <span class="st">"primary"</span>, <span class="st">"secondary"</span>, <span class="st">"tertiary"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Com a consulta filtrada, <code>osmdata_sf()</code> a envia ao servidor Overpass e converte a resposta para objetos do pacote <code>sf</code>. O resultado é armazenado abaixo e inspecionado conforme o código abaixo:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ssa_streets <span class="ot">&lt;-</span> <span class="fu">osmdata_sf</span>(query_hw)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ssa_streets</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O objeto retornado é uma lista da classe <code>osmdata</code>. Inspecionando sua estrutura, encontramos os seguintes componentes: <code>$bbox</code> armazena as coordenadas da área consultada; <code>$overpass_call</code> registra a consulta enviada ao servidor; <code>$osm_points</code> contém os nós (interseções viárias) extraídos como geometrias de ponto; <code>$osm_lines</code> contém as vias abertas como geometrias de linha; e <code>$osm_polygons</code>, <code>$osm_multilines</code> e <code>$osm_multipolygons</code> armazenam, respectivamente, polígonos e geometrias compostas. Para redes viárias, o componente de interesse é quase sempre <code>$osm_lines</code>.</p>
+<p>Na prática, é comum encadear todas essas etapas em um único pipeline com o operador <code>|&gt;</code>. A versão abaixo produz o mesmo resultado que os três passos anteriores<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ssa_streets <span class="ot">&lt;-</span> <span class="fu">getbb</span>(<span class="st">"Salvador Brazil"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opq</span>(<span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">key   =</span> <span class="st">"highway"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> <span class="fu">c</span>(<span class="st">"motorway"</span>, <span class="st">"trunk"</span>, <span class="st">"primary"</span>, <span class="st">"secondary"</span>, <span class="st">"tertiary"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A versão com pipeline é mais concisa e será usada de agora em diante, mas é importante conhecer os objetos intermediários para entender o que cada função realiza.</p>
+</section>
+<section id="mapeando-a-rede-viária-de-salvador" class="level3" data-number="16.4.4">
+<h3 data-number="16.4.4" class="anchored" data-anchor-id="mapeando-a-rede-viária-de-salvador"><span class="header-section-number">16.4.4</span> Mapeando a rede viária de Salvador</h3>
+<p>O componente <code>$osm_lines</code> do objeto <code>ssa_streets</code> é um objeto <code>sf</code> com uma linha para cada trecho de via. Entre as colunas disponíveis, a coluna <code>highway</code> registra o tipo de cada via, exatamente as tags que filtramos na consulta. Antes de prosseguirmos, lembre-se que as vias obtidas na operação anterior são as contidas no <em>bounding box</em> do município, não as vias <em>somente do município</em>. Isso acaba gerando vias além daquelas que existem na região de estudo. Deste modo, é possível antes fazer uma filtragem com base no polígono de Salvador para trabalharmos somente com eles de agora em diante em um objeto <code>ssa_vias</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ssa_vias <span class="ot">&lt;-</span> ssa_streets<span class="sc">$</span>osm_lines <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_filter</span>(<span class="fu">st_transform</span>(salvador_mun, <span class="fu">st_crs</span>(ssa_streets<span class="sc">$</span>osm_lines)), <span class="co"># Ajuste de SRC</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.predicate =</span> st_intersects)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A partir do código abaixo, podemos ver que se trata de uma base de dados de linhas de tamanho razoável com mais de 5 mil linhas representando vias e pouco mais de cem colunas com propriedades a respeito destas vias:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(ssa_vias)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5187</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(ssa_vias)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 119</code></pre>
+</div>
+</div>
+<p>Selecionando algumas colunas mais interessantes, podemos, inclusive, observar seus primeiros resultados. Propositalmente, vamos selecionar algumas das mais relevantes, como o identificador único das linhas do OSM (<code>osmid</code>), além do nome da via que aquela linha representa (<code>name</code>), a quantidade de faixas (<code>lanes</code>) e a velocidade máxima permitida (<code>maxspeed</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ssa_vias <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(osm_id, name, lanes, maxspeed) <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,187 × 5
+   osm_id   name                        lanes maxspeed                  geometry
+   &lt;chr&gt;    &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;             &lt;LINESTRING [°]&gt;
+ 1 29200089 Avenida Luís Viana Filho    5     80       (-38.36964 -12.92389, -3…
+ 2 29200651 Rua Guedes Cabral           2     40       (-38.49188 -13.01183, -3…
+ 3 29200654 Avenida Carybé              5     80       (-38.35225 -12.92126, -3…
+ 4 29200821 Estrada CIA Aeroporto       2     80       (-38.39231 -12.82394, -3…
+ 5 29201389 Avenida Luís Eduardo Magal… 3     70       (-38.45142 -12.97218, -3…
+ 6 29201401 Avenida Luís Eduardo Magal… 3     &lt;NA&gt;     (-38.45168 -12.97214, -3…
+ 7 29201440 Avenida Luís Viana Filho    4     80       (-38.45523 -12.9761, -38…
+ 8 29201441 Avenida Luís Viana Filho    4     70       (-38.46025 -12.9761, -38…
+ 9 29201443 Avenida Luís Viana Filho    4     80       (-38.4549 -12.97609, -38…
+10 29201461 Avenida Luís Eduardo Magal… 2     &lt;NA&gt;     (-38.4488 -12.97358, -38…
+# ℹ 5,177 more rows</code></pre>
+</div>
+</div>
+<p>Para produzir um mapa básico, passamos <code>ssa_streets$osm_lines</code> ao <code>geom_sf()</code> do ggplot2, podemos então executar o seguinte código:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ssa_vias) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mapa-basico-salvador" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mapa-basico-salvador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.1: Rede viária de Salvador com vias de hierarquia primária e acima, extraídas do OpenStreetMap.
+</figcaption>
+<div aria-describedby="fig-mapa-basico-salvador-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-redes-viarias_files/figure-html/fig-mapa-basico-salvador-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>Um mapa mais informativo pode utilzar, por exemplo, a coluna <code>highway</code> para variar a espessura e a cor das linhas conforme a hierarquia viária. Vias de maior importância aparecem mais espessas e em cores de destaque, enquanto vias locais ficam mais sutis.</p>
+<p>O código abaixo define a ordem hierárquica como uma variável <code>factor</code> antes de passar os dados ao ggplot2, garantindo que <code>scale_linewidth_manual()</code> e <code>scale_color_manual()</code> apliquem os valores visuais na ordem correta:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>hierarquia <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"motorway"</span>, <span class="st">"trunk"</span>, <span class="st">"primary"</span>, <span class="st">"secondary"</span>, <span class="st">"tertiary"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ssa_vias <span class="sc">|&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(highway <span class="sc">%in%</span> hierarquia) <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">highway =</span> <span class="fu">factor</span>(highway, <span class="at">levels =</span> hierarquia)) <span class="sc">|&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">color =</span> highway, <span class="at">linewidth =</span> highway)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#f46d43"</span>, <span class="st">"#fdae61"</span>, <span class="st">"#74add1"</span>, <span class="st">"#4575b4"</span>),</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Autoestrada"</span>, <span class="st">"Expressa"</span>, <span class="st">"Primária"</span>, <span class="st">"Secundária"</span>, <span class="st">"Terciária"</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_manual</span>(</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">1.0</span>, <span class="fl">0.7</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>),</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Autoestrada"</span>, <span class="st">"Expressa"</span>, <span class="st">"Primária"</span>, <span class="st">"Secundária"</span>, <span class="st">"Terciária"</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">color     =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Tipo de via"</span>),</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Tipo de via"</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mapa-hierarquia" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mapa-hierarquia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.2: Hierarquia viária de Salvador segundo o OpenStreetMap. A espessura e a cor de cada segmento correspondem ao tipo de via.
+</figcaption>
+<div aria-describedby="fig-mapa-hierarquia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-redes-viarias_files/figure-html/fig-mapa-hierarquia-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>O mapa revela a estrutura viária de Salvador com clareza, com as vias primárias formam os eixos estruturantes da cidade, enquanto as terciárias distribuem o tráfego internamente nos bairros. As autoestradas e expressas, em vermelho (BR324) e laranja (Av. Luís Viana Filho, Av. Mário Leal Ferreira e a Via Expressa Baía de Todos os Santos), correspondem às rodovias de acesso controlado que cortam o tecido urbano.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Obtendo <em>toda</em> a rede viária
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Observe que solicitamos explicitamente baixar somente certos tipos de via na Overpass, ocultando todas as demais da cidade. Podemos obter todas as vias simplesmente omitindo o argumento <code>value</code> em <code>add_osm_feature()</code>, fazendo com que a consulta retorne todos os elementos que possuem a chave <code>highway</code>, independentemente do valor<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ssa_osm_tot <span class="ot">&lt;-</span> <span class="fu">opq</span>(bb_ssa, <span class="at">timeout =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ssa_osm_tot<span class="sc">$</span>osm_lines) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"gray30"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mapa-rede-completa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mapa-rede-completa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.3: Rede viária completa da caixa delimitadora de Salvador extraída do OpenStreetMap, sem filtro de hierarquia.
+</figcaption>
+<div aria-describedby="fig-mapa-rede-completa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-redes-viarias_files/figure-html/fig-mapa-rede-completa-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>Vale atenção ao volume de dados retornado. Sem filtro de valor, a consulta pode ser significativamente maior e mais demorada, especialmente em cidades extensas. O risco de ultrapassar os limites de tempo e memória da API Overpass é maior nessa situação.</p>
+</div>
+</div>
+</section>
+<section id="outras-camadas-do-osm" class="level3" data-number="16.4.5">
+<h3 data-number="16.4.5" class="anchored" data-anchor-id="outras-camadas-do-osm"><span class="header-section-number">16.4.5</span> Outras camadas do OSM</h3>
+<p>A mesma lógica de consulta se aplica a outras chaves de features. A <em>key</em> <code>railway</code> cobre todo o sistema ferroviário, incluindo trens de subúrbio, metrô e bondes. As tags mais relevantes para contextos urbanos são <code>subway</code> (metrô), <code>light_rail</code> (veículo leve sobre trilhos) e <code>tram</code> (bonde). A tag <code>rail</code> cobre ferrovias de carga e passageiros de longa distância e, por se estender além dos limites municipais, é mais adequada para análises regionais ou interestaduais do que para o recorte de uma cidade. É possível consultar a lista completa com <code>available_tags("railway")</code> ou consultar a <a href="https://wiki.openstreetmap.org/wiki/Key:railway">Wiki específica da chave <code>railway</code> OSM</a>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">available_tags</span>(<span class="st">"railway"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em Salvador, extraímos as linhas de metrô com o valor <code>subway</code> para a chave <code>railway</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ssa_railway <span class="ot">&lt;-</span> <span class="fu">getbb</span>(<span class="st">"Salvador Brazil"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opq</span>(<span class="at">timeout =</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key   =</span> <span class="st">"railway"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="st">"subway"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Deste modo, podemos mapear conjuntamente a rede viária (sem a hierarquia <code>tertiary</code>) com a rede metroviária de Salvador utilizando ggplot2:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> ssa_vias <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(highway <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"motorway"</span>, <span class="st">"trunk"</span>, <span class="st">"primary"</span>, <span class="st">"secondary"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">highway =</span> <span class="fu">factor</span>(highway,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"motorway"</span>, <span class="st">"trunk"</span>, <span class="st">"primary"</span>, <span class="st">"secondary"</span>))),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">linewidth =</span> highway),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"gray30"</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_manual</span>(</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>),</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Autoestrada"</span>, <span class="st">"Expressa"</span>, <span class="st">"Primária"</span>, <span class="st">"Secundária"</span>),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Tipo de via"</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ssa_railway<span class="sc">$</span>osm_lines,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"#e31a1c"</span>, <span class="at">linewidth =</span> <span class="fl">1.1</span>,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Vias e transporte: © OpenStreetMap contributors"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mapa-integrado" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mapa-integrado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.4: Mapa integrado de Salvador com rede viária e sistema ferroviário. Vias e transporte: © OpenStreetMap contributors.
+</figcaption>
+<div aria-describedby="fig-mapa-integrado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-redes-viarias_files/figure-html/fig-mapa-integrado-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Dados colaborativos requerem verificação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lembre-se que os dados do OSM são produzidos e mantidos por voluntários, com cobertura e precisão variando geograficamente. Capitais e cidades grandes costumam ser bem mapeadas, enquanto municípios menores podem apresentar lacunas. Ao usar dados do OSM em análises técnicas ou publicações, é obrigatório citar a fonte com a expressão “© OpenStreetMap contributors” e recomendável verificar a completude local antes de tirar conclusões sobre regiões específicas.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="redes-viárias-como-grafos" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="redes-viárias-como-grafos"><span class="header-section-number">16.5</span> Redes Viárias como Grafos</h2>
+<p>Até aqui, trabalhamos com a rede viária como um conjunto de linhas geográficas, onde cada trecho de rua é uma feição <code>LINESTRING</code> com atributos, e podemos visualizá-las e filtrá-las com as ferramentas habituais do <code>sf</code>. Esse tipo de representação é suficiente para mapas e análises descritivas, mas não captura algo fundamental sobre as vias urbanas: a forma como elas se conectam.</p>
+<section id="grafos-e-redes-geoespaciais" class="level3" data-number="16.5.1">
+<h3 data-number="16.5.1" class="anchored" data-anchor-id="grafos-e-redes-geoespaciais"><span class="header-section-number">16.5.1</span> Grafos e redes geoespaciais</h3>
+<p>Em teoria dos grafos, uma rede é formada por dois elementos básicos: um conjunto de <strong>nós</strong> (<em>nodes</em>) e um conjunto de <strong>arestas</strong> (<em>edges</em>), em que cada aresta conecta um par de nós. Matematicamente, a notação de um grafo qualquer <span class="math inline">\(G\)</span> é dado pela junção destes dois conjuntos de nós e arestas, <span class="math inline">\(N\)</span> e <span class="math inline">\(A\)</span>, tal que <span class="math inline">\(G={N,A}\)</span>, conforme a <a href="#fig-grafo" class="quarto-xref">Figura&nbsp;<span>16.5</span></a>. Em uma rede viária, as interseções entre ruas são os nós e os trechos de rua entre duas interseções consecutivas são as arestas. Essa estrutura de dados, simples na sua definição, abre uma classe de análises impossíveis de realizar apenas com geometrias de linha.</p>
+<div id="fig-grafo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-grafo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.5: Representação visual e matemática de um grafo
+</figcaption>
+<div aria-describedby="fig-grafo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/16-redes-viarias/fig-grafo.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+</figure>
+</div>
+<p>O algoritmo que orienta os aplicativos de navegação opera, por exemplo, sobre uma representação em grafo da rede viária. Dado um ponto de origem e um destino, o algoritmo percorre o grafo buscando o caminho de menor custo, considerando distâncias, velocidades e restrições de circulação. Outros indicadores derivados da teoria dos grafos, como medidas de centralidade, permitem identificar quais trechos de via são mais críticos para a conectividade da rede, informação valiosa para o planejamento de intervenções viárias e para a avaliação de vulnerabilidades em situações de bloqueio ou desastre.</p>
+<p>A diferença entre um arquivo de linhas e uma rede em grafo pode ser ilustrada com uma analogia simples. Um mapa em papel mostra as ruas desenhadas, mas não diz nada sobre como você passa de uma rua para outra. Um grafo faz exatamente isso ao codificar não apenas onde cada via está, mas com quais outras vias ela se conecta, em que pontos e em que sentidos.</p>
+</section>
+<section id="pré-processamento-e-limpeza-da-rede" class="level3" data-number="16.5.2">
+<h3 data-number="16.5.2" class="anchored" data-anchor-id="pré-processamento-e-limpeza-da-rede"><span class="header-section-number">16.5.2</span> Pré-processamento e limpeza da rede</h3>
+<p>Converter um conjunto de linhas geográficas em um grafo topológico raramente é uma operação imediata. Os dados brutos do OSM, assim como os de outras fontes, frequentemente apresentam inconsistências que comprometem a integridade da rede. Podem existir trechos desconectados que deveriam se tocar, nós intermediários desnecessários que fragmentam arestas contínuas e interseções complexas representadas por vários nós quando um único seria suficiente. O pacote <code>sfnetworks</code> <span class="citation" data-cites="sfnetworks2024">(<a href="references.html#ref-sfnetworks2024" role="doc-biblioref">van der Meer et al., 2024</a>)</span> oferece um conjunto de funções de pré-processamento que tratam essas situações, cada uma voltada a um tipo específico de problema.</p>
+<p>Um primeiro problema frequente é a precisão excessiva de coordenadas. Quando dois trechos de via deveriam se conectar, mas seus extremos diferem por uma fração mínima de grau, os pontos não coincidem matematicamente e o algoritmo os trata como nós distintos, gerando uma rede fragmentada. A solução é reduzir a precisão das coordenadas antes da conversão, de modo que pontos próximos passem a ocupar posições idênticas e sejam fundidos em um único nó.</p>
+<p>Depois da precisão, é comum encontrar redes com <em>arestas múltiplas</em>, situação em que dois nós são conectados por mais de uma aresta. Isso ocorre quando diferentes colaboradores mapearam o mesmo trecho de via com atributos distintos, ou quando uma rua de mão dupla foi representada por dois segmentos sobrepostos. Podem existir também <em>loops</em>, arestas cujo nó de origem e de destino são o mesmo, geralmente resultado de erros de digitalização. A função <code>to_spatial_simple()</code> remove essas redundâncias, produzindo um <em>grafo simples</em> sem arestas múltiplas nem loops.</p>
+<p>Outro problema comum é a ausência de conectividade em pontos de cruzamento. Imagine que dois trechos de via se cruzam geograficamente, mas nenhum deles foi digitalizado com um vértice exatamente no ponto de intersecção. O grafo resultante terá as duas arestas se sobrepondo visualmente, sem que exista um nó conectando-as. A função <code>to_spatial_subdivision()</code> detecta esses casos, em que um ponto interior de uma aresta coincide com um ponto interior ou extremidade de outra, e subdivide as arestas afetadas, inserindo os nós de conexão necessários. O resultado é uma rede em que toda intersecção geográfica corresponde a uma conexão topológica real.</p>
+<p>Em outros casos, pode haver nós de uma rede que não configuram interseção real. Um <em>pseudo-nó</em> é um nó com apenas duas arestas incidentes, sem bifurcação ou mudança relevante de atributo. Isso acontece quando uma via contínua foi dividida em múltiplos segmentos por razões de mapeamento, como uma mudança de nome de rua que não implica descontinuidade física. Esses nós intermediários aumentam o tamanho do grafo sem acrescentar informação estrutural. A função <code>to_spatial_smooth()</code> os detecta e os remove, fundindo as duas arestas incidentes em uma única com geometria concatenada. É possível proteger determinados nós da remoção, como paradas de transporte público que coincidem com vértices da rede viária.</p>
+<p>Por fim, interseções complexas como rotatórias e cruzamentos amplos são frequentemente representadas no OSM por um conjunto de nós próximos em vez de um único ponto. Para análises em escala de cidade, essa granularidade pode ser desnecessária. A função <code>to_spatial_contracted()</code> agrupa nós geograficamente próximos, usando critérios de distância máxima ou algoritmos de clusterização. Ao final, são substituídos por um único nó representativo, reposicionando as arestas incidentes de acordo.</p>
+<p>Essas operações podem ser aplicadas isoladamente ou em sequência, conforme as características dos dados e os requisitos da análise. Um fluxo típico de preparação combina, nessa ordem, a redução de precisão, a simplificação, a subdivisão, a suavização e a contração, produzindo uma rede topologicamente consistente e pronta para algoritmos de roteamento e análise espacial.</p>
+</section>
+<section id="convertendo-para-sfnetwork" class="level3" data-number="16.5.3">
+<h3 data-number="16.5.3" class="anchored" data-anchor-id="convertendo-para-sfnetwork"><span class="header-section-number">16.5.3</span> Convertendo para <code>sfnetwork</code></h3>
+<p>A função central do pacote é <code>as_sfnetwork()</code>, que recebe um objeto <code>sf</code> de linhas e o converte em uma rede geoespacial. O argumento <code>directed = FALSE</code> indica que o tráfego pode fluir em qualquer sentido pelas arestas, simplificação adequada para uma análise introdutória.</p>
+<p>O código abaixo cria a rede a partir das vias extraídas de Salvador. Como as ruas residenciais e locais não foram incluídas na consulta original, a rede representa a malha de vias de hierarquia superior da cidade.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sfnetworks)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>net_salvador <span class="ot">&lt;-</span> <span class="fu">as_sfnetwork</span>(ssa_vias, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>net_salvador</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A sfnetwork with 5033 nodes and 5187 edges
+#
+# CRS:  EPSG:4326 
+#
+# An undirected multigraph with 187 components with spatially explicit edges
+#
+# Node data: 5,033 × 1 (active)
+               geometry
+            &lt;POINT [°]&gt;
+1 (-38.36964 -12.92389)
+2 (-38.35772 -12.92168)
+3 (-38.49188 -13.01183)
+4 (-38.49071 -13.01319)
+5 (-38.35225 -12.92126)
+6 (-38.35368 -12.92072)
+# ℹ 5,027 more rows
+#
+# Edge data: 5,187 × 121
+   from    to osm_id   name     access `addr:city` `addr:county` `addr:postcode`
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;          
+1     1     2 29200089 Avenida… &lt;NA&gt;   &lt;NA&gt;        &lt;NA&gt;          &lt;NA&gt;           
+2     3     4 29200651 Rua Gue… &lt;NA&gt;   &lt;NA&gt;        &lt;NA&gt;          &lt;NA&gt;           
+3     5     6 29200654 Avenida… &lt;NA&gt;   &lt;NA&gt;        &lt;NA&gt;          &lt;NA&gt;           
+# ℹ 5,184 more rows
+# ℹ 113 more variables: `addr:state` &lt;chr&gt;, admin_level &lt;chr&gt;, alt_name &lt;chr&gt;,
+#   bicycle &lt;chr&gt;, `bicycle:conditional` &lt;chr&gt;, boundary &lt;chr&gt;, bridge &lt;chr&gt;,
+#   `bridge:name` &lt;chr&gt;, check_date &lt;chr&gt;, covered &lt;chr&gt;, cutting &lt;chr&gt;,
+#   cycleway &lt;chr&gt;, `cycleway:both` &lt;chr&gt;, `cycleway:left` &lt;chr&gt;,
+#   `cycleway:left:conditional` &lt;chr&gt;, `cycleway:left:oneway` &lt;chr&gt;,
+#   `cycleway:right` &lt;chr&gt;, `cycleway:right:conditional` &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>Ao inspecionar o objeto, vemos que ele contém duas tabelas: uma de nós, com geometrias <code>POINT</code> para cada interseção, e uma de arestas, com geometrias <code>LINESTRING</code> para cada trecho de via. A função <code>activate()</code> permite alternar o foco das operações entre nós e arestas.</p>
+<p>Para análises de caminho mínimo, é preciso definir um peso para cada aresta. O peso mais natural para redes viárias é o comprimento geométrico de cada trecho, calculado pela função <code>edge_length()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>net_salvador <span class="ot">&lt;-</span> net_salvador <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(<span class="st">"edges"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fu">edge_length</span>())</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="caminho-mais-curto" class="level3" data-number="16.5.4">
+<h3 data-number="16.5.4" class="anchored" data-anchor-id="caminho-mais-curto"><span class="header-section-number">16.5.4</span> Caminho mais curto</h3>
+<p>Com a rede construída e os pesos definidos, é possível calcular o caminho mais curto entre qualquer par de pontos da cidade. O algoritmo de Dijkstra, implementado na função <code>st_network_paths()</code>, percorre o grafo identificando a sequência de arestas de menor custo acumulado entre a origem e o destino.</p>
+<p>Para conectar pontos geográficos arbitrários à rede, primeiro identificamos os nós mais próximos a cada localização de interesse com <code>st_nearest_feature()</code>. O exemplo a seguir define dois pontos de referência conhecidos em Salvador: o Pelourinho, no Centro Histórico, e o Farol da Barra, na entrada da Baía de Todos-os-Santos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pontos de origem e destino</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pelourinho  <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">38.5094</span>, <span class="sc">-</span><span class="fl">12.9714</span>)), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>farol_barra <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">38.5354</span>, <span class="sc">-</span><span class="fl">13.0098</span>)), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pontos como sf para plotagem posterior</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>pontos_ref <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">local    =</span> <span class="fu">c</span>(<span class="st">"Pelourinho"</span>, <span class="st">"Farol da Barra"</span>),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">geometry =</span> <span class="fu">c</span>(pelourinho, farol_barra)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Nós da rede</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>nos <span class="ot">&lt;-</span> net_salvador <span class="sc">|&gt;</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(<span class="st">"nodes"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Nós mais próximos a cada ponto</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>no_origem  <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(pelourinho, nos)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>no_destino <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(farol_barra, nos)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Com os índices dos nós identificados, calculamos o caminho e extraímos as arestas que o compõem para visualização:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>caminho <span class="ot">&lt;-</span> <span class="fu">st_network_paths</span>(net_salvador,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">from    =</span> no_origem,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">to      =</span> no_destino,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">weights =</span> <span class="st">"weight"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extrair arestas do caminho</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>arestas_caminho <span class="ot">&lt;-</span> net_salvador <span class="sc">|&gt;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(<span class="st">"edges"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(caminho<span class="sc">$</span>edge_paths[[<span class="dv">1</span>]]) <span class="sc">|&gt;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Distância total em quilômetros</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>dist_km <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">as.numeric</span>(<span class="fu">sum</span>(arestas_caminho<span class="sc">$</span>weight)) <span class="sc">/</span> <span class="dv">1000</span>, <span class="dv">2</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data      =</span> ssa_vias,</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">color     =</span> <span class="st">"gray80"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data      =</span> arestas_caminho,</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">color     =</span> <span class="st">"#d73027"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data      =</span> pontos_ref,</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">color     =</span> <span class="st">"#1a9850"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">"Distância: "</span>, dist_km,</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>                        <span class="st">" km  |  © OpenStreetMap contributors"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-shortest-path" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-shortest-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.6: Caminho mais curto na rede viária de Salvador entre o Pelourinho e o Farol da Barra, calculado pelo algoritmo de Dijkstra com base em dados do OpenStreetMap.
+</figcaption>
+<div aria-describedby="fig-shortest-path-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="16-redes-viarias_files/figure-html/fig-shortest-path-1.png" class="img-fluid figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>O mapa mostra o trajeto calculado em vermelho sobre a rede completa em cinza. A análise, que levou frações de segundo, é o mesmo tipo de cálculo que fundamenta aplicativos de navegação. A diferença está na escala e na incorporação de velocidades reais e restrições de circulação que sistemas comerciais adicionam à rede básica. Com os conceitos e ferramentas apresentados neste capítulo, você está preparado para construir análises de acessibilidade, tempo de deslocamento e cobertura espacial sobre qualquer rede viária extraída do OpenStreetMap.</p>
+</section>
+</section>
+<section id="exercícios" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">16.6</span> Exercícios</h2>
+<ol type="1">
+<li><p><strong>Rede viária de Feira de Santana.</strong> Extraia a rede viária de Feira de Santana (BA) usando <code>osmdata</code>, incluindo as categorias <code>motorway</code>, <code>trunk</code>, <code>primary</code>, <code>secondary</code> e <code>tertiary</code>. Produza um mapa com espessura de linha proporcional à hierarquia viária e compare visualmente a estrutura da rede com a de Salvador.</p></li>
+<li><p><strong>Mapa integrado de transporte.</strong> Para uma cidade brasileira à sua escolha, sobreponha em um único mapa as seguintes camadas do OSM: rede viária principal (primary e acima), sistema ferroviário (railway) e corpos d’água (natural=water). Inclua uma legenda clara e a atribuição “© OpenStreetMap contributors”.</p></li>
+<li><p><strong>Caminho mais curto em outra cidade.</strong> Escolha dois pontos de referência reconhecíveis em uma cidade brasileira (pode ser a mesma cidade do exercício anterior ou outra). Construa a rede viária com <code>sfnetworks</code>, calcule o caminho mais curto entre os dois pontos e visualize o trajeto sobre o mapa da rede.</p></li>
+<li><p><strong>Comparação de extensão viária.</strong> Usando dados do OSM, calcule e compare o comprimento total (em quilômetros) de vias <code>primary</code>, <code>secondary</code> e <code>tertiary</code> em dois municípios de portes muito diferentes, como uma capital e um município de pequeno porte. O que as diferenças revelam sobre a estrutura das redes viárias nos dois contextos?</p></li>
+</ol>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-goodchild2007" class="csl-entry" role="listitem">
+Goodchild, M. F. (2007). Citizens as sensors: the world of volunteered geography. <em>GeoJournal</em>, <em>69</em>, 211–221. <a href="https://doi.org/10.1007/s10708-007-9111-y">https://doi.org/10.1007/s10708-007-9111-y</a>
+</div>
+<div id="ref-osm_brazil_wiki" class="csl-entry" role="listitem">
+OpenStreetMap Wiki. (2025a). <em>Brazil</em>. <a href="https://wiki.openstreetmap.org/wiki/Brazil">https://wiki.openstreetmap.org/wiki/Brazil</a>
+</div>
+<div id="ref-osm_wiki_stats" class="csl-entry" role="listitem">
+OpenStreetMap Wiki. (2025b). <em>Stats</em>. <a href="https://wiki.openstreetmap.org/wiki/Stats">https://wiki.openstreetmap.org/wiki/Stats</a>
+</div>
+<div id="ref-padgham2017" class="csl-entry" role="listitem">
+Padgham, M., Rudis, B., Lovelace, R., &amp; Salmon, M. (2017). osmdata. <em>Journal of Open Source Software</em>, <em>2</em>(14), 305. <a href="https://doi.org/10.21105/joss.00305">https://doi.org/10.21105/joss.00305</a>
+</div>
+<div id="ref-sfnetworks2024" class="csl-entry" role="listitem">
+van der Meer, L., Abad, L., Gilardi, A., &amp; Lovelace, R. (2024). <em>sfnetworks: <span>T</span>idy <span>G</span>eospatial <span>N</span>etworks</em>. <a href="https://luukvdmeer.github.io/sfnetworks/">https://luukvdmeer.github.io/sfnetworks/</a>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Eventualmente, esta função pode apresentar problemas para gerar resultados, então recomendo visualizar na própria Wiki do OSM<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Não execute o código muitas vezes para não estourar o limite de consultas do Overpass em um determinado período de tempo<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Lembre-se que o tamanho do arquivo abaixo pode te levar ao limite de consulta da API<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

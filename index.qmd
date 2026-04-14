@@ -32,5 +32,8 @@ O livro é razoavelmente autossuficiente em termos de ferramentas. A Parte 1 cob
 
 Este material está em permanente construção. Bases de dados institucionais mudam, metodologias são revisadas, plataformas de acesso são reformuladas e novos pacotes surgem. O leitor é encorajado a verificar sempre a documentação oficial de cada fonte e a reportar eventuais desatualizações.
 
+<!--Agradecimentos:
+Patrícia, Vivian e Mauro: dados geográficos
+-->
 Jorge Ubirajara Pedreira Junior
 Salvador, 2026
