@@ -89,7 +89,7 @@ O código abaixo carrega o pacote e exibe as primeiras cinquenta chaves disponí
 #| message: false
 library(osmdata)
 
-#head(available_features(), 50)
+head(available_features(), 50)
 ```
 
 Limitamos para as cinquenta primeiras, pois a lista é extensa, com centenas de chaves. o OSM mapeia aeroportos, edificações, estabelecimentos comerciais, barreiras, ciclovias, fronteiras administrativas, iluminação pública, vegetação e muito mais. Vias de circulação são apenas uma das categorias disponíveis. Para este capítulo, o interesse recai sobre a chave `highway`, que engloba todos os tipos de vias terrestres, desde autoestradas até trilhas.
